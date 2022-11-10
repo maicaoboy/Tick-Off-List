@@ -26,7 +26,7 @@ public class HabitRecordStorage : IHabitRecordStorage {
     }
 
     public async Task<IEnumerable<HabitRecord>> ListAsync()
-    {
+{
         return await Connection.Table<HabitRecord>().ToListAsync();
     }
 
