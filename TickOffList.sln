@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TickOffList", "TickOffList\TickOffList.csproj", "{6604C5A3-0F33-4EC6-83D2-7122BB00EE70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TickOffListLibrary", "TickOffListLibrary\TickOffListLibrary.csproj", "{BF20A891-DC99-4C02-887B-FACB665CDAA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TickOffListLibrary", "TickOffListLibrary\TickOffListLibrary.csproj", "{BF20A891-DC99-4C02-887B-FACB665CDAA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TickOffListTest", "TickOffListTest\TickOffListTest.csproj", "{BFEE4E65-6B9F-40B7-BD7C-8805BA37FDC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{BF20A891-DC99-4C02-887B-FACB665CDAA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF20A891-DC99-4C02-887B-FACB665CDAA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF20A891-DC99-4C02-887B-FACB665CDAA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFEE4E65-6B9F-40B7-BD7C-8805BA37FDC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFEE4E65-6B9F-40B7-BD7C-8805BA37FDC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFEE4E65-6B9F-40B7-BD7C-8805BA37FDC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFEE4E65-6B9F-40B7-BD7C-8805BA37FDC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

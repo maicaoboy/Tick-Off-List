@@ -1,9 +1,11 @@
 ﻿using System.Data.SqlTypes;
+using SQLite;
 
-namespace TickOffListLibrary.Models; 
+namespace TickOffListLibrary.Models;
 
+[SQLite.Table("habit")]
 public class Habit {
-    [SQLite.Column("id")]
+    [Column("id"), PrimaryKey, AutoIncrement]
     public int Id { get; set; }
 
     [SQLite.Column("title")]

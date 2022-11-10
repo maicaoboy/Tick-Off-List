@@ -55,4 +55,8 @@
 	  <Folder Include="Services\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\TickOffListLibrary\TickOffListLibrary.csproj" />
+	</ItemGroup>
+
 </Project>
