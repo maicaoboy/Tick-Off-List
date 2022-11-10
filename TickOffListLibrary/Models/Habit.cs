@@ -1,7 +1,8 @@
 ﻿using System.Data.SqlTypes;
 
-namespace TickOffListLibrary.Models; 
+namespace TickOffListLibrary.Models;
 
+[SQLite.Table("habit")]
 public class Habit {
     [SQLite.Column("id")]
     public int Id { get; set; }
