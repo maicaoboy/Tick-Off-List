@@ -49,14 +49,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Pages\" />
-	  <Folder Include="Services\" />
-	  <Folder Include="Pages\" />
-	  <Folder Include="Services\" />
+	  <ProjectReference Include="..\TickOffListLibrary\TickOffListLibrary.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\TickOffListLibrary\TickOffListLibrary.csproj" />
+	  <MauiXaml Update="Pages\HabitPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

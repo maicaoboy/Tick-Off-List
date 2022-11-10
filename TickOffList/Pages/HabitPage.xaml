@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TickOffList.Pages.HabitPage"
+             BindingContext="{Binding HabitViewModel, Source={StaticResource ServiceLocator}}"
+             Title="HabitPage">
+
+    <!-- <FlexLayout Direction="Column" -->
+    <!--             AlignItems="Center" -->
+    <!--             JustifyContent="SpaceEvenly"> -->
+    <!--     <Button Text="{Binding DateToday7}" /> -->
+    <!--     <Button Text="{Binding DateToday6}" /> -->
+    <!--     <Button Text="{Binding DateToday5}" /> -->
+    <!--     <Button Text="{Binding DateToday4}" /> -->
+    <!--     <Button Text="{Binding DateToday3}" /> -->
+    <!--     <Button Text="{Binding DateToday2}" /> -->
+    <!--     <Button Text="{Binding DateToday1}" /> -->
+    <!-- </FlexLayout> -->
+    <VerticalStackLayout>
+        <Label 
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
