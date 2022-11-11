@@ -1,28 +1,23 @@
-using Refit;
-using TickOffList.Services;
-
 namespace TickOffList;
 
 public partial class MainPage : ContentPage
 {
+    int count = 0;
+
     public MainPage()
     {
         InitializeComponent();
-        button_gethitokoto.Clicked += Button_gethitokoto_Clicked;
     }
 
-    private async void Button_gethitokoto_Clicked(object sender, EventArgs e) {
-        try
-        {
-            var apiClient =
-                RestService.For<IDailySentenceService>(DailySentenceService
-                    .BaseUrl);
-            var dailySentence = apiClient.GetDailySentenceAsync();
-            StackLayoutDailySentence.ItemsSource = dailySentence;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("Oups " + e);
-        }
+    private void OnCounterClicked(object sender, EventArgs e)
+    {
+        count++;
+
+        if (count == 1)
+            CounterBtn.Text = $"Clicked {count} time";
+        else
+            CounterBtn.Text = $"Clicked {count} times";
+
+        SemanticScreenReader.Announce(CounterBtn.Text);
     }
 }
