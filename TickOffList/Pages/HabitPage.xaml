@@ -3,23 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TickOffList.Pages.HabitPage"
              BindingContext="{Binding HabitViewModel, Source={StaticResource ServiceLocator}}"
-             Title="HabitPage">
+             Title="打卡">
 
-    <!-- <FlexLayout Direction="Column" -->
-    <!--             AlignItems="Center" -->
-    <!--             JustifyContent="SpaceEvenly"> -->
-    <!--     <Button Text="{Binding DateToday7}" /> -->
-    <!--     <Button Text="{Binding DateToday6}" /> -->
-    <!--     <Button Text="{Binding DateToday5}" /> -->
-    <!--     <Button Text="{Binding DateToday4}" /> -->
-    <!--     <Button Text="{Binding DateToday3}" /> -->
-    <!--     <Button Text="{Binding DateToday2}" /> -->
-    <!--     <Button Text="{Binding DateToday1}" /> -->
-    <!-- </FlexLayout> -->
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <!-- <RowDefinition Height="*" /> -->
+                <!-- <RowDefinition Height="100" /> -->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Text="{Binding DateToday7}" ImageSource="btn_circle_empty.png" BackgroundColor="White" TextColor="Black" ContentLayout="Top"  Grid.Row="0" Grid.Column="0"></Button>
+            <Button Text="{Binding DateToday6}" ImageSource="btn_circle_empty.png"  Grid.Row="0" Grid.Column="1"></Button>
+            <Button Text="{Binding DateToday5}" ImageSource="btn_circle_empty.png"  Grid.Row="0" Grid.Column="2"></Button>
+            <Button Text="{Binding DateToday4}" ImageSource="btn_circle_empty.png"  Grid.Row="0" Grid.Column="3"></Button>
+            <Button Text="{Binding DateToday3}" ImageSource="btn_circle_empty.png"  Grid.Row="0" Grid.Column="4"></Button>
+            <Button Text="{Binding DateToday2}" ImageSource="btn_circle_empty.png"  Grid.Row="0" Grid.Column="5"></Button>
+            <Button Text="{Binding DateToday1}" ImageSource="btn_circle.png"  Grid.Row="0" Grid.Column="6"></Button>
+        </Grid>
+
+        <!-- <FlexLayout Direction="Column" -->
+        <!--             AlignItems="Center" -->
+        <!--             JustifyContent="SpaceEvenly"> -->
+        <!--     <Button Text="{Binding DateToday7}" /> -->
+        <!--     <Button Text="{Binding DateToday6}" /> -->
+        <!--     <Button Text="{Binding DateToday5}" /> -->
+        <!--     <Button Text="{Binding DateToday4}" /> -->
+        <!--     <Button Text="{Binding DateToday3}" /> -->
+        <!--     <Button Text="{Binding DateToday2}" /> -->
+        <!--     <Button Text="{Binding DateToday1}" /> -->
+        <!-- </FlexLayout> -->
+        <!-- <VerticalStackLayout> -->
+        <!--     <Label -->
+        <!--         Text="Welcome to .NET MAUI!" -->
+        <!--         VerticalOptions="Center" -->
+        <!--         HorizontalOptions="Center" /> -->
+        <!-- </VerticalStackLayout> -->
+
+    </ContentPage.Content>
+
+        
+
 </ContentPage>
