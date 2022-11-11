@@ -14,6 +14,7 @@ public class ServiceLocator {
 
         serviceCollection.AddTransient<IDailySentenceService, DailySentenceService>();
         serviceCollection.AddSingleton<DailySentenceViewModel>();
+        serviceCollection.AddSingleton<IAlertService, AlertService>();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }

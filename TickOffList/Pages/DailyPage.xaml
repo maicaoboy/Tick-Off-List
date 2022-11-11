@@ -6,6 +6,14 @@
              BindingContext="{Binding DailySentenceViewModel, Source={StaticResource ServiceLocator}}"
              x:Class="TickOffList.Pages.DailyPage"
              Title="DailyPage">
+    <ContentPage.Behaviors>
+        <b:MauiEventHandlerBehavior EventName="Loaded">
+            <b:MauiActionCollection>
+                <b:MauiInvokeCommandAction Command="{Binding LoadedCommand}"></b:MauiInvokeCommandAction>
+            </b:MauiActionCollection>
+        </b:MauiEventHandlerBehavior>
+    </ContentPage.Behaviors>
+
     <Grid BackgroundColor="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -19,7 +27,26 @@
                      VerticalOptions="End">
             <StackLayout Padding="8"
                          IsVisible="{Binding IsLoading}">
+                <ActivityIndicator Color="White"
+                                   IsRunning="{Binding IsLoading}" />
+                <Label TextColor="White"
+                       Text="正在载入"
+                       HorizontalOptions="Center" />
+            </StackLayout>
 
+            <StackLayout Padding="8">
+                <Label FontSize="28"
+                       TextColor="White"
+                       Margin="0,0,0,8"
+                       Text="{Binding DailySentence.Snippet}" />
+                <Label FontSize="18"
+                       TextColor="White"
+                       Margin="0,0,0,8"
+                       Text="{Binding DailySentence.From}" />
+                <Label FontSize="18"
+                       TextColor="White"
+                       Margin="0,0,0,8"
+                       Text="{Binding DailySentence.Creator}" />
             </StackLayout>
         </StackLayout>
     </Grid>
