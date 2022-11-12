@@ -3,8 +3,9 @@ using CommunityToolkit.Mvvm.Input;
 using TickOffList.Models;
 using TickOffList.Services;
 
-namespace TickOffList.ViewModels; 
+namespace TickOffList.ViewModels;
 
+// author: 朱怡达
 public class DailySentenceViewModel : ObservableObject
 {
     private readonly IDailySentenceService _dailySentenceService;
