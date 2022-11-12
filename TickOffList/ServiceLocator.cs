@@ -19,14 +19,14 @@ public class ServiceLocator {
         serviceCollection
             .AddSingleton<IHabitRecordStorage, HabitRecordStorage>();
 
-        serviceCollection.AddSingleton<HabitViewModel>();
-
         serviceCollection.AddSingleton<IRouteService, RouteService>();
         serviceCollection
             .AddSingleton<IContentNavigationService,
                 ContentNavigationService>();
         serviceCollection
             .AddSingleton<IRootNavigationService, RootNavigationService>();
+
+        serviceCollection.AddSingleton<HabitViewModel>();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }

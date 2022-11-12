@@ -7,6 +7,11 @@ using TickOffList.Services;
 
 namespace TickOffList.ViewModels;
 
+/* ==============================================================================
+* 创建人：李宏彬
+* 创建时间：2022-11-10
+* @version 1.0
+* ==============================================================================*/
 public class
     HabitViewModel : ObservableObject {
    
@@ -20,10 +25,10 @@ public class
     //     await _poetryStorage.InitializeAsync();
     //
     //     Poetries.Clear();
-    //     await Poetries.LoadMoreAsync();
+    ////     await Poetries.LoadMoreAsync();
     // }
 
-    public HabitViewModel(HabitStorage habitStorage) {
+    public HabitViewModel(IHabitStorage habitStorage) {
         _habitStorage = habitStorage;
         string[] Day = new string[] { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
 
@@ -45,28 +50,45 @@ public class
         _dayOfWeek6 = Day[Convert.ToInt32(today.AddDays(-5).DayOfWeek.ToString("d"))].ToString();
         _dayOfWeek7 = Day[Convert.ToInt32(today.AddDays(-6).DayOfWeek.ToString("d"))].ToString();
 
-        _habits = _habitStorage.ListAsync().Result;
+        Init();
+        // _habits = _habitStorage.ListAsync().Result;
+        // _habits = null;
+        // Habits = _habitStorage.ListAsync().Result.ToList();
+        // Habits = new List<Habit>();
+        // var element = new Habit();
+        // element.title = "jid";
+        // var element1 = new Habit();
+        // element.title = "jidfe";
+        // var element2 = new Habit();
+        // element.title = "jidfefs";
+        // Habits.Append(element);
+        // Habits.Append(element1);
+        // Habits.Append(element2);
     }
 
-
-    public HabitViewModel() {
-        string[] Day = new string[] { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
-        DateTime today = DateTime.Now;
-        DateToday1 = "今天";
-        DateToday2 = Convert.ToString(today.AddDays(-1).Day);
-        DateToday3 = Convert.ToString(today.AddDays(-2).Day);
-        DateToday4 = Convert.ToString(today.AddDays(-3).Day);
-        DateToday5 = Convert.ToString(today.AddDays(-4).Day);
-        DateToday6 = Convert.ToString(today.AddDays(-5).Day);
-        DateToday7 = Convert.ToString(today.AddDays(-6).Day);
-        _dayOfWeek1 = Day[Convert.ToInt32(today.DayOfWeek.ToString("d"))].ToString();
-        _dayOfWeek2 = Day[Convert.ToInt32(today.AddDays(-1).DayOfWeek.ToString("d"))].ToString();
-        _dayOfWeek3 = Day[Convert.ToInt32(today.AddDays(-2).DayOfWeek.ToString("d"))].ToString();
-        _dayOfWeek4 = Day[Convert.ToInt32(today.AddDays(-3).DayOfWeek.ToString("d"))].ToString();
-        _dayOfWeek5 = Day[Convert.ToInt32(today.AddDays(-4).DayOfWeek.ToString("d"))].ToString();
-        _dayOfWeek6 = Day[Convert.ToInt32(today.AddDays(-5).DayOfWeek.ToString("d"))].ToString();
-        _dayOfWeek7 = Day[Convert.ToInt32(today.AddDays(-6).DayOfWeek.ToString("d"))].ToString();
+    public async void Init() {
+        var listAsync = await _habitStorage.ListAsync();
+        Habits = listAsync.ToList();
     }
+
+    // public HabitViewModel() {
+    //     string[] Day = new string[] { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
+    //     DateTime today = DateTime.Now;
+    //     DateToday1 = "今天";
+    //     DateToday2 = Convert.ToString(today.AddDays(-1).Day);
+    //     DateToday3 = Convert.ToString(today.AddDays(-2).Day);
+    //     DateToday4 = Convert.ToString(today.AddDays(-3).Day);
+    //     DateToday5 = Convert.ToString(today.AddDays(-4).Day);
+    //     DateToday6 = Convert.ToString(today.AddDays(-5).Day);
+    //     DateToday7 = Convert.ToString(today.AddDays(-6).Day);
+    //     _dayOfWeek1 = Day[Convert.ToInt32(today.DayOfWeek.ToString("d"))].ToString();
+    //     _dayOfWeek2 = Day[Convert.ToInt32(today.AddDays(-1).DayOfWeek.ToString("d"))].ToString();
+    //     _dayOfWeek3 = Day[Convert.ToInt32(today.AddDays(-2).DayOfWeek.ToString("d"))].ToString();
+    //     _dayOfWeek4 = Day[Convert.ToInt32(today.AddDays(-3).DayOfWeek.ToString("d"))].ToString();
+    //     _dayOfWeek5 = Day[Convert.ToInt32(today.AddDays(-4).DayOfWeek.ToString("d"))].ToString();
+    //     _dayOfWeek6 = Day[Convert.ToInt32(today.AddDays(-5).DayOfWeek.ToString("d"))].ToString();
+    //     _dayOfWeek7 = Day[Convert.ToInt32(today.AddDays(-6).DayOfWeek.ToString("d"))].ToString();
+    // }
 
     // 日期显示
     private string _dateToday1;
@@ -87,10 +109,10 @@ public class
     private string _dayOfWeek7;
 
     //习惯数据库
-    private HabitStorage _habitStorage;
+    private IHabitStorage _habitStorage;
 
     //ListView显示的Habit
-    private IEnumerable<Habit> _habits;
+    private List<Habit> _habits;
 
 
 
@@ -171,7 +193,7 @@ public class
         set => _dayOfWeek7 = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public IEnumerable<Habit> Habits {
+    public List<Habit> Habits {
         get => _habits;
         set => SetProperty(ref _habits, value);
     }

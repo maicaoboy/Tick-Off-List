@@ -3,8 +3,12 @@ using TickOffList.Services;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace TickOffListTest.Service; 
-
+namespace TickOffListTest.Service;
+/* ==============================================================================
+* 创建人：李宏彬
+* 创建时间：2022-11-10
+* @version 1.0
+* ==============================================================================*/
 public class HabitStorageTest {
     private HabitStorage habitStorage;
     private readonly ITestOutputHelper output;
@@ -28,7 +32,18 @@ public class HabitStorageTest {
         var iter = listAsync.Result.GetEnumerator();
         iter.MoveNext();
         var habitGet = iter.Current;
-        Assert.Equal("haha", habitGet.title);
+        Assert.Equal("背单词", habitGet.title);
+    }
+
+    [Fact]
+    public async void testList()
+    {
+        var storage = new HabitStorage();
+        var listAsync = await habitStorage.ListAsync();
+        var habits = listAsync.ToList();
+        for (var i = 0; i < habits.Count; i++) {
+            output.WriteLine(habits[i].title);
+        }
     }
 
     [Fact]
@@ -54,11 +69,5 @@ public class HabitStorageTest {
         Assert.Equal(true, isFinish2.Result);
     }
 
-    [Fact]
-    public void testList() {
-        var storage = new HabitStorage();
-        var listAsync = storage.ListAsync();
-        listAsync.Result.GetEnumerator().MoveNext();
-        output.WriteLine(listAsync.Result.GetEnumerator().Current.ToString());
-    }
+
 }

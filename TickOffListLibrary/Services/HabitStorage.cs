@@ -4,8 +4,13 @@ using TickOffList.Constant;
 using TickOffList.Models;
 using TickOffList.Services;
 
-namespace TickOffList.Services; 
+namespace TickOffList.Services;
 
+/* ==============================================================================
+* 创建人：李宏彬
+* 创建时间：2022-11-10
+* @version 1.0
+* ==============================================================================*/
 public class HabitStorage : IHabitStorage{
     private static SQLiteAsyncConnection Database;
 
@@ -32,12 +37,10 @@ public class HabitStorage : IHabitStorage{
         await Connection.InsertAsync(poetry);
     }
 
-    public async Task<IEnumerable<Habit>> ListAsync()
-    {
-        return await Connection.Table<Habit>().ToListAsync();
-    }
+    public async Task<IEnumerable<Habit>> ListAsync() =>
+        await Connection.Table<Habit>().ToListAsync();
 
-    public async Task<List<Habit>> getHabitByWeekDay(string dayOfWeek) {
+        public async Task<List<Habit>> getHabitByWeekDay(string dayOfWeek) {
         return await Connection.Table<Habit>().Where(h => h.days.Contains(dayOfWeek)).ToListAsync();
     }
 

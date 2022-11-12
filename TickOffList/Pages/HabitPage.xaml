@@ -4,7 +4,11 @@
              x:Class="TickOffList.Pages.HabitPage"
              BindingContext="{Binding HabitViewModel, Source={StaticResource ServiceLocator}}"
              Title="打卡">
-
+    <!-- /* ============================================================================== -->
+    <!-- * 创建人：李宏彬 -->
+    <!-- * 创建时间：2022-11-10 -->
+    <!-- * @version 1.0 -->
+    <!-- * ==============================================================================*/ -->
     <ContentPage.Content>
         
         
@@ -40,18 +44,15 @@
             <ListView Grid.Row="2" ItemsSource="{Binding Habits}" Margin="20" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell Height="50">
                             <Grid RowDefinitions="*"
-                                  ColumnDefinitions="2*,6*,2*">
-                                <Image Grid.Row="0" Grid.Column="0" HeightRequest="20" Source="{Binding iconName}"></Image>
-                                <Label FontSize="20" Grid.Column="1" Grid.Row="0" HorizontalOptions="Start" Text="{Binding title}"></Label>
-                                <!-- <Label FontSize="20" Grid.Row="0" Grid.Column="1" HorizontalOptions="End" Text="{Binding Name}" BackgroundColor="Red"></Label> -->
-                                <Label Grid.Row="0" Grid.Column="2" HeightRequest="20"  Text="{Binding describe}"></Label>
+                                  ColumnDefinitions="*,*,3*,3*,2*,*">
+                                <Image Grid.Row="0" Grid.Column="1" HeightRequest="50" Source="{Binding iconName}"></Image>
+                                <Label FontSize="20" Grid.Column="2" Grid.Row="0" HorizontalOptions="Start" Text="{Binding title}"></Label>
+                                <Label Grid.Row="0" Grid.Column="3" HeightRequest="30"  Text="{Binding describe}"></Label>
+                                <Label Grid.Row="0" Grid.Column="4" HeightRequest="30"  Text="已打卡x天"></Label>
+
                             </Grid>
-                            <!-- <StackLayout Margin="20,0,0,0" HorizontalOptions="FillAndExpand" Orientation="Horizontal"> -->
-                            <!--     <Label HorizontalOptions="Start" Text="{Binding Name}"></Label> -->
-                            <!--     <Image HorizontalOptions="End" IsVisible="{Binding Done}" Source="check.png"></Image> -->
-                            <!-- </StackLayout> -->
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -51,6 +51,34 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\btn_circle.png" />
 	  <None Remove="Resources\Images\btn_circle_empty.png" />
+	  <None Remove="Resources\Images\changge.png" />
+	  <None Remove="Resources\Images\chenxi.png" />
+	  <None Remove="Resources\Images\chishucai.png" />
+	  <None Remove="Resources\Images\chishuiguo.png" />
+	  <None Remove="Resources\Images\chizaocan.png" />
+	  <None Remove="Resources\Images\chouyan.png" />
+	  <None Remove="Resources\Images\dadianhua.png" />
+	  <None Remove="Resources\Images\hejiu.png" />
+	  <None Remove="Resources\Images\heshui.png" />
+	  <None Remove="Resources\Images\huahua.png" />
+	  <None Remove="Resources\Images\jianfei.png" />
+	  <None Remove="Resources\Images\jianshen.png" />
+	  <None Remove="Resources\Images\jiejiu.png" />
+	  <None Remove="Resources\Images\jieyan.png" />
+	  <None Remove="Resources\Images\kanshu.png" />
+	  <None Remove="Resources\Images\kaoyan.png" />
+	  <None Remove="Resources\Images\lianzi.png" />
+	  <None Remove="Resources\Images\licai.png" />
+	  <None Remove="Resources\Images\paobu.png" />
+	  <None Remove="Resources\Images\peihaizi.png" />
+	  <None Remove="Resources\Images\sheying.png" />
+	  <None Remove="Resources\Images\shuaya.png" />
+	  <None Remove="Resources\Images\tingge.png" />
+	  <None Remove="Resources\Images\weixiao.png" />
+	  <None Remove="Resources\Images\yingyu.png" />
+	  <None Remove="Resources\Images\zaoqi.png" />
+	  <None Remove="Resources\Images\zaoshui.png" />
+	  <None Remove="Resources\Images\zuofan.png" />
 	</ItemGroup>
 
 	<ItemGroup>
