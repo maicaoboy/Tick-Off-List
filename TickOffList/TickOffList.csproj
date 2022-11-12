@@ -49,8 +49,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Pages\" />
-	  <Folder Include="Services\" />
+	  <None Remove="Resources\Images\reset.svg" />
+	  <None Remove="Resources\Images\start.svg" />
+	  <None Remove="Resources\Images\stop.svg" />
+	  <None Remove="Resources\Raw\y1201.wav" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0-preview1" />
+	  <PackageReference Include="TheSalLab.MauiBehaviors" Version="1.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\TickOffList.Library\TickOffList.Library.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\CountdownPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>
