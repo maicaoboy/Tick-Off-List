@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>TickOffList.UnitTest</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TickOffListLibrary\TickOffListLibrary.csproj" />
+    <ProjectReference Include="..\TickOffListLibrary\TickOffList.Library.csproj" />
   </ItemGroup>
 
 </Project>

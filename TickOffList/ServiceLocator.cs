@@ -1,6 +1,5 @@
 ﻿using TickOffList.Services;
-using TickOffListLibrary.Services;
-using TickOffListLibrary.ViewModels;
+using TickOffList.ViewModels;
 
 namespace TickOffList; 
 

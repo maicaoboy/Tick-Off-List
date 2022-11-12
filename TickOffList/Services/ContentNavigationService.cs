@@ -1,4 +1,4 @@
-﻿using TickOffListLibrary.Services;
+﻿using TickOffList.Services;
 namespace TickOffList.Services;
 
 public class ContentNavigationService : IContentNavigationService

@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace TickOffListLibrary.Models;
+namespace TickOffList.Models;
 
 [SQLite.Table("habit_record")]
 public class HabitRecord

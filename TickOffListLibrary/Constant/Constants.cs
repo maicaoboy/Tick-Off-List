@@ -1,4 +1,4 @@
-﻿namespace TickOffListLibrary.Constant;
+﻿namespace TickOffList.Constant;
 
 public static class Constants
 {

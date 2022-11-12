@@ -1,6 +1,6 @@
-﻿using TickOffListLibrary.Models;
+﻿using TickOffList.Models;
 
-namespace TickOffListLibrary.Services;
+namespace TickOffList.Services;
 
 public interface IHabitRecordStorage
 {

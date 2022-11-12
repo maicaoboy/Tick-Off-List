@@ -1,8 +1,8 @@
 ﻿using SQLite;
-using TickOffListLibrary.Constant;
-using TickOffListLibrary.Models;
+using TickOffList.Constant;
+using TickOffList.Models;
 
-namespace TickOffListLibrary.Services;
+namespace TickOffList.Services;
 
 public class HabitRecordStorage : IHabitRecordStorage {
     private static SQLiteAsyncConnection Database;

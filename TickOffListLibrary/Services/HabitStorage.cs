@@ -1,9 +1,10 @@
 ﻿using Microsoft.VisualBasic.CompilerServices;
 using SQLite;
-using TickOffListLibrary.Constant;
-using TickOffListLibrary.Models;
+using TickOffList.Constant;
+using TickOffList.Models;
+using TickOffList.Services;
 
-namespace TickOffListLibrary.Services; 
+namespace TickOffList.Services; 
 
 public class HabitStorage : IHabitStorage{
     private static SQLiteAsyncConnection Database;

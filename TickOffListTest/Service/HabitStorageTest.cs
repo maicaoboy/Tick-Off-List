@@ -1,5 +1,5 @@
-﻿using TickOffListLibrary.Models;
-using TickOffListLibrary.Services;
+﻿using TickOffList.Models;
+using TickOffList.Services;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -52,5 +52,13 @@ public class HabitStorageTest {
         // Assert.Equal(true, isFinish);
         var isFinish2 = habitStorage.isFinish(2, DateTime.Now);
         Assert.Equal(true, isFinish2.Result);
+    }
+
+    [Fact]
+    public void testList() {
+        var storage = new HabitStorage();
+        var listAsync = storage.ListAsync();
+        listAsync.Result.GetEnumerator().MoveNext();
+        output.WriteLine(listAsync.Result.GetEnumerator().Current.ToString());
     }
 }

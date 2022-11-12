@@ -1,4 +1,4 @@
-﻿namespace TickOffListLibrary.Services; 
+﻿namespace TickOffList.Services; 
 
 public interface IPreferenceStorage {
     void Set(string key, int value);

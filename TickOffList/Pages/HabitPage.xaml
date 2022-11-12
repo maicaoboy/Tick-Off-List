@@ -6,28 +6,57 @@
              Title="打卡">
 
     <ContentPage.Content>
+        
+        
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
                 <!-- <RowDefinition Height="*" /> -->
                 <!-- <RowDefinition Height="100" /> -->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Text="{Binding DateToday7}" ImageSource="btn_circle_empty.png" BackgroundColor="White" TextColor="Black" ContentLayout="Top"  Grid.Row="0" Grid.Column="0"></Button>
-            <Button Text="{Binding DateToday6}" ImageSource="btn_circle_empty.png"  Grid.Row="0" Grid.Column="1"></Button>
-            <Button Text="{Binding DateToday5}" ImageSource="btn_circle_empty.png"  Grid.Row="0" Grid.Column="2"></Button>
-            <Button Text="{Binding DateToday4}" ImageSource="btn_circle_empty.png"  Grid.Row="0" Grid.Column="3"></Button>
-            <Button Text="{Binding DateToday3}" ImageSource="btn_circle_empty.png"  Grid.Row="0" Grid.Column="4"></Button>
-            <Button Text="{Binding DateToday2}" ImageSource="btn_circle_empty.png"  Grid.Row="0" Grid.Column="5"></Button>
-            <Button Text="{Binding DateToday1}" ImageSource="btn_circle.png"  Grid.Row="0" Grid.Column="6"></Button>
+            <FlexLayout Grid.Row="0" JustifyContent="SpaceAround">
+                <Label Text="{Binding DayOfWeek7}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                <Label Text="{Binding DayOfWeek6}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                <Label Text="{Binding DayOfWeek5}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                <Label Text="{Binding DayOfWeek4}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                <Label Text="{Binding DayOfWeek3}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                <Label Text="{Binding DayOfWeek2}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                <Label Text="{Binding DayOfWeek1}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+            </FlexLayout>
+            <FlexLayout Grid.Row="1" JustifyContent="SpaceAround">
+                <Button WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday7}" CornerRadius="27"  BackgroundColor="White" TextColor="Black"></Button>
+                <Button WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday6}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
+                <Button WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday5}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
+                <Button WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday4}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
+                <Button WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday3}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
+                <Button WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday2}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
+                <Button WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday1}" CornerRadius="27" BackgroundColor="SkyBlue" TextColor="Black"></Button>
+            </FlexLayout>
+            <ListView Grid.Row="2" ItemsSource="{Binding Habits}" Margin="20" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid RowDefinitions="*"
+                                  ColumnDefinitions="2*,6*,2*">
+                                <Image Grid.Row="0" Grid.Column="0" HeightRequest="20" Source="{Binding iconName}"></Image>
+                                <Label FontSize="20" Grid.Column="1" Grid.Row="0" HorizontalOptions="Start" Text="{Binding title}"></Label>
+                                <!-- <Label FontSize="20" Grid.Row="0" Grid.Column="1" HorizontalOptions="End" Text="{Binding Name}" BackgroundColor="Red"></Label> -->
+                                <Label Grid.Row="0" Grid.Column="2" HeightRequest="20"  Text="{Binding describe}"></Label>
+                            </Grid>
+                            <!-- <StackLayout Margin="20,0,0,0" HorizontalOptions="FillAndExpand" Orientation="Horizontal"> -->
+                            <!--     <Label HorizontalOptions="Start" Text="{Binding Name}"></Label> -->
+                            <!--     <Image HorizontalOptions="End" IsVisible="{Binding Done}" Source="check.png"></Image> -->
+                            <!-- </StackLayout> -->
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
         </Grid>
 
         <!-- <FlexLayout Direction="Column" -->

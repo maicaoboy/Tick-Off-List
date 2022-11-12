@@ -1,4 +1,4 @@
-﻿namespace TickOffListLibrary.Services;
+﻿namespace TickOffList.Services;
 
 public interface IContentNavigationService
 {

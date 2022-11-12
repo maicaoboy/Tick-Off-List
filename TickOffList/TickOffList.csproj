@@ -54,7 +54,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\TickOffListLibrary\TickOffListLibrary.csproj" />
+	  <ProjectReference Include="..\TickOffListLibrary\TickOffList.Library.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -70,6 +70,28 @@
 	  <MauiXaml Update="Pages\MainPages.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-android'">
+	  <PackageReference Include="Microsoft.Maui.Graphics.Controls">
+	    <Version>6.0.101-nightly.294</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-ios'">
+	  <PackageReference Include="Microsoft.Maui.Graphics.Controls">
+	    <Version>6.0.101-nightly.294</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">
+	  <PackageReference Include="Microsoft.Maui.Graphics.Controls">
+	    <Version>6.0.101-nightly.294</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="MyCotroller\" />
 	</ItemGroup>
 
 </Project>
