@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TickOffList.Services;
 using Timer = System.Timers.Timer;
 
 namespace TickOffList.ViewModels;
 
+// Author: 陶静龙
 public class CountdownPageViewModel : ObservableObject {
     // private ICountdownService _countdownService;
 
@@ -78,7 +80,11 @@ public class CountdownPageViewModel : ObservableObject {
         set => SetProperty(ref _selectedSecond, value);
     }
 
-    public CountdownPageViewModel() {
+    private IAudioPlayService _audioPlayService;
+
+    public CountdownPageViewModel(IAudioPlayService audioPlayService) {
+        _audioPlayService = audioPlayService;
+
         _timer = new Timer(1000);
         Hour = "00";
         Minute = "00";
@@ -129,7 +135,7 @@ public class CountdownPageViewModel : ObservableObject {
             decimal tempNumSecond = Convert.ToDecimal(Second);
 
             _timer.Start();
-            _timer.Elapsed += (sender, args) => {
+            _timer.Elapsed += async (sender, args) => {
                 if (tempNumSecond > 0) {
                     tempNumSecond--;
 
@@ -154,6 +160,7 @@ public class CountdownPageViewModel : ObservableObject {
                             SelectedMinute = "00";
                             SelectedSecond = "00";
                             IsEnabled = true;
+                            await _audioPlayService.PlayAudio();
                             return;
                         } else if (tempNumHour > 0) {
                             tempNumHour--;

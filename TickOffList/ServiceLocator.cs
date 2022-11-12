@@ -20,6 +20,8 @@ public class ServiceLocator {
 
         serviceCollection.AddSingleton<IRouteService, RouteService>();
 
+        serviceCollection.AddSingleton<IAudioPlayService, AudioPlayService>();
+
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }
 }

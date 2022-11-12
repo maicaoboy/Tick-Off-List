@@ -5,7 +5,7 @@
              x:Class="TickOffList.Pages.CountdownPage"
              BindingContext="{Binding CountdownPageViewModel , Source={StaticResource ServiceLocator}}"
              Title="CountdownPage">
-    
+    <!--Author: 陶静龙 -->
     <StackLayout
         VerticalOptions="Center">
         <!--time-->

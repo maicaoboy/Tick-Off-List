@@ -9,6 +9,7 @@ public partial class CountdownPage : ContentPage
         InitializePickers();
     }
      
+    // Author: ÌÕ¾²Áú
     private void InitializePickers() {
         for (int i = 0; i <= 99; i++) {
             if (i <= 9) {

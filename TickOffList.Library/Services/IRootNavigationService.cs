@@ -1,5 +1,6 @@
 ﻿namespace TickOffList.Services;
 
+// Author: 陶静龙
 public interface IRootNavigationService
 {
     Task NavigateToAsync(string pageKey);

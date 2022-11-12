@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="finish.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="finish.wav">
+	    <LogicalName>finish.wav</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
