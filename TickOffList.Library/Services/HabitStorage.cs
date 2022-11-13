@@ -37,6 +37,7 @@ public class HabitStorage : IHabitStorage
         await Connection.InsertAsync(poetry);
     }
 
+    // 如果运行过程中该方法出现异常，请移步至TickOffList.Library.Constant.Constants.cs修改路径
     public async Task<IEnumerable<Habit>> ListAsync() =>
         await Connection.Table<Habit>().ToListAsync();
 
