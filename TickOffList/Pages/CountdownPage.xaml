@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:TheSalLab.MauiBehaviors;assembly=TheSalLab.MauiBehaviors"
+             x:Class="TickOffList.Pages.CountdownPage"
+             BindingContext="{Binding CountdownPageViewModel , Source={StaticResource ServiceLocator}}"
+             Title="专注倒计时">
+    <!--Author: 陶静龙 -->
+    <StackLayout
+        VerticalOptions="Center">
+        <!--time-->
+        <Label
+            x:Name="timeLabel"
+            Text="{Binding LastTime}"
+            FontSize="Header"
+            TextColor="Black"
+            HorizontalTextAlignment="Center">
+        </Label>
+
+        <!--Picker-->
+        <StackLayout
+            Orientation="Horizontal"
+            HorizontalOptions="Center"
+            Spacing="60"
+            Margin="0,60,0,0">
+
+            <Picker x:Name="HourPicker"
+                    Title="时"
+                    SelectedItem="{Binding SelectedHour}"
+                    ItemDisplayBinding="{Binding SelectedHour}"
+                    IsEnabled="{Binding IsEnabled}">
+                <Picker.Behaviors>
+                    <b:MauiEventHandlerBehavior EventName="SelectedIndexChanged">
+                        <b:MauiActionCollection>
+                            <b:MauiInvokeCommandAction
+                                Command="{Binding SelectedIndexChangedCommand}">
+                            </b:MauiInvokeCommandAction>
+                        </b:MauiActionCollection>
+                    </b:MauiEventHandlerBehavior>
+                </Picker.Behaviors>
+            </Picker>
+
+            <Picker x:Name="MinutePicker"
+                    Title="分"
+                    SelectedItem="{Binding SelectedMinute}"
+                    ItemDisplayBinding="{Binding SelectedMinute}"
+                    IsEnabled="{Binding IsEnabled}">
+                <Picker.Behaviors>
+                    <b:MauiEventHandlerBehavior EventName="SelectedIndexChanged">
+                        <b:MauiActionCollection>
+                            <b:MauiInvokeCommandAction
+                                Command="{Binding SelectedIndexChangedCommand}">
+                            </b:MauiInvokeCommandAction>
+                        </b:MauiActionCollection>
+                    </b:MauiEventHandlerBehavior>
+                </Picker.Behaviors>
+            </Picker>
+
+            <Picker x:Name="SecondPicker"
+                    Title="秒"
+                    SelectedItem="{Binding SelectedSecond}"
+                    ItemDisplayBinding="{Binding SelectedSecond}"
+                    IsEnabled="{Binding IsEnabled}">
+                <Picker.Behaviors>
+                    <b:MauiEventHandlerBehavior EventName="SelectedIndexChanged">
+                        <b:MauiActionCollection>
+                            <b:MauiInvokeCommandAction
+                                Command="{Binding SelectedIndexChangedCommand}">
+                            </b:MauiInvokeCommandAction>
+                        </b:MauiActionCollection>
+                    </b:MauiEventHandlerBehavior>
+                </Picker.Behaviors>
+            </Picker>
+        </StackLayout>
+
+        <StackLayout
+            Orientation="Horizontal"
+            HorizontalOptions="Center"
+            Spacing="60"
+            Margin="0,60,0,0">
+
+            <!--start stop-->
+            <ImageButton
+                x:Name="startStopButton"
+                Source="{Binding StartStopButtonImage}"
+                HeightRequest="30"
+                WidthRequest="30"
+                Command="{Binding StartStopCommand}">
+            </ImageButton>
+
+            <!--reset-->
+            <ImageButton
+                x:Name="resetButton"
+                Source="reset.png"
+                HeightRequest="30"
+                WidthRequest="30"
+                Command="{Binding ResetCommand}">
+            </ImageButton>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
