@@ -49,8 +49,65 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Pages\" />
+	  <None Remove="Resources\Images\btn_circle.png" />
+	  <None Remove="Resources\Images\btn_circle_empty.png" />
+	  <None Remove="Resources\Images\changge.png" />
+	  <None Remove="Resources\Images\chenxi.png" />
+	  <None Remove="Resources\Images\chishucai.png" />
+	  <None Remove="Resources\Images\chishuiguo.png" />
+	  <None Remove="Resources\Images\chizaocan.png" />
+	  <None Remove="Resources\Images\chouyan.png" />
+	  <None Remove="Resources\Images\dadianhua.png" />
+	  <None Remove="Resources\Images\hejiu.png" />
+	  <None Remove="Resources\Images\heshui.png" />
+	  <None Remove="Resources\Images\huahua.png" />
+	  <None Remove="Resources\Images\jianfei.png" />
+	  <None Remove="Resources\Images\jianshen.png" />
+	  <None Remove="Resources\Images\jiejiu.png" />
+	  <None Remove="Resources\Images\jieyan.png" />
+	  <None Remove="Resources\Images\kanshu.png" />
+	  <None Remove="Resources\Images\kaoyan.png" />
+	  <None Remove="Resources\Images\lianzi.png" />
+	  <None Remove="Resources\Images\licai.png" />
+	  <None Remove="Resources\Images\paobu.png" />
+	  <None Remove="Resources\Images\peihaizi.png" />
+	  <None Remove="Resources\Images\sheying.png" />
+	  <None Remove="Resources\Images\shuaya.png" />
+	  <None Remove="Resources\Images\tingge.png" />
+	  <None Remove="Resources\Images\weixiao.png" />
+	  <None Remove="Resources\Images\yingyu.png" />
+	  <None Remove="Resources\Images\zaoqi.png" />
+	  <None Remove="Resources\Images\zaoshui.png" />
+	  <None Remove="Resources\Images\zuofan.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Folder Include="Services\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+	  <PackageReference Include="TheSalLab.MauiBehaviors" Version="1.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\TickOffList.Library\TickOffList.Library.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="MainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\CountdownPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\DailyPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\HabitPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

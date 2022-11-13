@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:TheSalLab.MauiBehaviors;assembly=TheSalLab.MauiBehaviors"
+             xmlns:lls="clr-namespace:TickOffList.Services;assembly=TickOffList.Library"
+             BindingContext="{Binding DailySentenceViewModel, Source={StaticResource ServiceLocator}}"
+             x:Class="TickOffList.Pages.DailyPage"
+             Title="一言">
+    <!-- author: 朱怡达 -->
+    <ContentPage.Behaviors>
+        <b:MauiEventHandlerBehavior EventName="Loaded">
+            <b:MauiActionCollection>
+                <b:MauiInvokeCommandAction Command="{Binding LoadedCommand}"></b:MauiInvokeCommandAction>
+            </b:MauiActionCollection>
+        </b:MauiEventHandlerBehavior>
+    </ContentPage.Behaviors>
+
+    <Grid BackgroundColor="Bisque">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label TextColor="Black"
+               FontSize="32"
+               Text="一言"
+               HorizontalOptions="Center"></Label>
+
+        <StackLayout BackgroundColor="#66000000"
+                     VerticalOptions="End">
+            <StackLayout Padding="8"
+                         IsVisible="{Binding IsLoading}">
+                <ActivityIndicator Color="White"
+                                   IsRunning="{Binding IsLoading}" />
+                <Label TextColor="White"
+                       Text="正在载入"
+                       HorizontalOptions="Center" />
+            </StackLayout>
+
+            <StackLayout Padding="8">
+                <Label FontSize="40"
+                       TextColor="White"
+                       Margin="0,0,0,20"
+                       HorizontalOptions="Center"
+                       Text="{Binding DailySentence.Hitokoto}" />
+                <Label FontSize="32"
+                       TextColor="White"
+                       Margin="0,0,0,20"
+                       HorizontalOptions="End"
+                       Text="{Binding DailySentence.From}" />
+                <Label FontSize="32"
+                       TextColor="White"
+                       Margin="0,0,0,20"
+                       HorizontalOptions="End"
+                       Text="{Binding DailySentence.FromWho}" />
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>
