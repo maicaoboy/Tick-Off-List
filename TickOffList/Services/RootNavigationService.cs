@@ -16,6 +16,6 @@ public class RootNavigationService : IRootNavigationService
 
     public async Task NavigateToAsync(string pageKey, object parameter)
     {
-         throw new NotImplementedException();
+        throw new NotImplementedException();
     }
 }

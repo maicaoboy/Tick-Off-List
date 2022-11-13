@@ -6,7 +6,8 @@ using Timer = System.Timers.Timer;
 namespace TickOffList.ViewModels;
 
 // Author: 陶静龙
-public class CountdownPageViewModel : ObservableObject {
+public class CountdownPageViewModel : ObservableObject
+{
     // private ICountdownService _countdownService;
 
     private Timer _timer;
@@ -17,12 +18,14 @@ public class CountdownPageViewModel : ObservableObject {
 
     private bool _isEnabled = true;
 
-    public bool IsEnabled {
+    public bool IsEnabled
+    {
         get => _isEnabled;
         set => SetProperty(ref _isEnabled, value);
     }
 
-    public string StartStopButtonImage {
+    public string StartStopButtonImage
+    {
         get => _startStopButtonImage;
         set => SetProperty(ref _startStopButtonImage, value);
     }
@@ -31,35 +34,40 @@ public class CountdownPageViewModel : ObservableObject {
 
     private string _hour;
 
-    public string Hour {
+    public string Hour
+    {
         get => _hour;
         set => SetProperty(ref _hour, value);
     }
 
     private string _minute;
 
-    public string Minute {
+    public string Minute
+    {
         get => _minute;
         set => SetProperty(ref _minute, value);
     }
 
     private string _second;
 
-    public string Second {
+    public string Second
+    {
         get => _second;
         set => SetProperty(ref _second, value);
     }
 
     private string _lastTime;
 
-    public string LastTime {
+    public string LastTime
+    {
         get => _lastTime;
         set => SetProperty(ref _lastTime, value);
     }
 
     private string _selectedHour;
 
-    public string SelectedHour {
+    public string SelectedHour
+    {
         get => _selectedHour;
         set => SetProperty(ref _selectedHour, value);
     }
@@ -82,7 +90,8 @@ public class CountdownPageViewModel : ObservableObject {
 
     private IAudioPlayService _audioPlayService;
 
-    public CountdownPageViewModel(IAudioPlayService audioPlayService) {
+    public CountdownPageViewModel(IAudioPlayService audioPlayService)
+    {
         _audioPlayService = audioPlayService;
 
         _timer = new Timer(1000);
@@ -101,7 +110,7 @@ public class CountdownPageViewModel : ObservableObject {
         _resetCommand = new Lazy<AsyncRelayCommand>(() =>
             new AsyncRelayCommand(ResetCommandFunction));
 
-        _selectedIndexChangedCommand = new Lazy<AsyncRelayCommand>(()=>
+        _selectedIndexChangedCommand = new Lazy<AsyncRelayCommand>(() =>
             new AsyncRelayCommand(SelectedIndexChangedCommandFunction));
     }
 
@@ -117,10 +126,12 @@ public class CountdownPageViewModel : ObservableObject {
 
     public AsyncRelayCommand SelectedIndexChangedCommand => _selectedIndexChangedCommand.Value;
 
-    private async Task CountdownTime() {
+    private async Task CountdownTime()
+    {
         IsEnabled = false;
 
-        if (Hour == "00" && Minute == "00" && Second == "00") {
+        if (Hour == "00" && Minute == "00" && Second == "00")
+        {
             return;
         }
 
@@ -129,26 +140,35 @@ public class CountdownPageViewModel : ObservableObject {
             ? CountdownPageSource.StopButtonImage
             : CountdownPageSource.StartButtonImage;
 
-        if (_isRunning == true) {
+        if (_isRunning == true)
+        {
             decimal tempNumHour = Convert.ToDecimal(Hour);
             decimal tempNumMinute = Convert.ToDecimal(Minute);
             decimal tempNumSecond = Convert.ToDecimal(Second);
 
             _timer.Start();
             _timer.Elapsed += async (sender, args) => {
-                if (tempNumSecond > 0) {
+                if (tempNumSecond > 0)
+                {
                     tempNumSecond--;
 
-                    if (tempNumSecond > 9) {
+                    if (tempNumSecond > 9)
+                    {
                         Second = Convert.ToString(tempNumSecond);
-                    } else {
+                    }
+                    else
+                    {
                         Second = "0" + Convert.ToString(tempNumSecond);
                     }
                     LastTime = Hour + " : " + Minute + " : " + Second;
 
-                } else if (tempNumSecond == 0) {
-                    if (tempNumMinute == 0) {
-                        if (tempNumHour == 0) {
+                }
+                else if (tempNumSecond == 0)
+                {
+                    if (tempNumMinute == 0)
+                    {
+                        if (tempNumHour == 0)
+                        {
                             _timer.Stop();
                             _timer.Close();
                             _timer = new Timer(1000);
@@ -162,12 +182,17 @@ public class CountdownPageViewModel : ObservableObject {
                             IsEnabled = true;
                             await _audioPlayService.PlayAudio();
                             return;
-                        } else if (tempNumHour > 0) {
+                        }
+                        else if (tempNumHour > 0)
+                        {
                             tempNumHour--;
 
-                            if (tempNumHour > 9) {
+                            if (tempNumHour > 9)
+                            {
                                 Hour = Convert.ToString(tempNumHour);
-                            } else {
+                            }
+                            else
+                            {
                                 Hour = "0" + Convert.ToString(tempNumHour);
                             }
                             LastTime = Hour + " : " + Minute + " : " + Second;
@@ -176,12 +201,17 @@ public class CountdownPageViewModel : ObservableObject {
                         tempNumMinute = 59;
                         Minute = Convert.ToString(tempNumMinute);
                         LastTime = Hour + " : " + Minute + " : " + Second;
-                    } else if (tempNumMinute > 0) {
+                    }
+                    else if (tempNumMinute > 0)
+                    {
                         tempNumMinute--;
 
-                        if (tempNumMinute > 9) {
+                        if (tempNumMinute > 9)
+                        {
                             Minute = Convert.ToString(tempNumMinute);
-                        } else {
+                        }
+                        else
+                        {
                             Minute = "0" + Convert.ToString(tempNumMinute);
                         }
                         LastTime = Hour + " : " + Minute + " : " + Second;
@@ -192,12 +222,15 @@ public class CountdownPageViewModel : ObservableObject {
                     LastTime = Hour + " : " + Minute + " : " + Second;
                 }
             };
-        } else {
+        }
+        else
+        {
             _timer.Stop();
         }
     }
 
-    private async Task ResetCommandFunction() {
+    private async Task ResetCommandFunction()
+    {
         _timer.Stop();
         _timer.Close();
         _timer = new Timer(1000);
@@ -215,7 +248,8 @@ public class CountdownPageViewModel : ObservableObject {
         IsEnabled = true;
     }
 
-    public async Task SelectedIndexChangedCommandFunction() {
+    public async Task SelectedIndexChangedCommandFunction()
+    {
         Hour = SelectedHour;
         Minute = SelectedMinute;
         Second = SelectedSecond;
@@ -223,7 +257,8 @@ public class CountdownPageViewModel : ObservableObject {
     }
 }
 
-public static class CountdownPageSource {
+public static class CountdownPageSource
+{
     public const string StartButtonImage = "start.png";
     public const string StopButtonImage = "stop.png";
     public const string ResetButtonImage = "reset.png";

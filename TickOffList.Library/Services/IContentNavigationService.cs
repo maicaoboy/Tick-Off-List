@@ -10,5 +10,5 @@ public interface IContentNavigationService
 
 public static class ContentNavigationConstant
 {
-    
+
 }

@@ -4,7 +4,7 @@
              xmlns:b="clr-namespace:TheSalLab.MauiBehaviors;assembly=TheSalLab.MauiBehaviors"
              x:Class="TickOffList.Pages.CountdownPage"
              BindingContext="{Binding CountdownPageViewModel , Source={StaticResource ServiceLocator}}"
-             Title="CountdownPage">
+             Title="专注倒计时">
     <!--Author: 陶静龙 -->
     <StackLayout
         VerticalOptions="Center">

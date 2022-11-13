@@ -1,7 +1,8 @@
-﻿namespace TickOffList.Services; 
+﻿namespace TickOffList.Services;
 
-// Author: 陶静龙
-public class ContentNavigationService : IContentNavigationService{
+// Author: 陶静龙、李宏彬
+public class ContentNavigationService : IContentNavigationService
+{
     private IRouteService _routeService;
 
     public ContentNavigationService(IRouteService routeService)

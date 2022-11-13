@@ -14,6 +14,18 @@ public partial class AppShell : Shell
             (ServiceLocator)Application.Current.Resources.MergedDictionaries
                 .First(p => p.ContainsKey(serviceLocatorName))[
                     serviceLocatorName];
+
+        Items.Add(new FlyoutItem
+        {
+            Title = nameof(DailyPage),
+            Route = nameof(DailyPage),
+            Items = {
+                new ShellContent {
+                    ContentTemplate = new DataTemplate(typeof(DailyPage))
+                }
+            }
+        });
+
         var routeService = serviceLocator.RouteService;
 
         Items.Add(new FlyoutItem
@@ -23,6 +35,17 @@ public partial class AppShell : Shell
             Items = {
                 new ShellContent {
                     ContentTemplate = new DataTemplate(typeof(CountdownPage))
+                }
+            }
+        });
+
+        Items.Add(new FlyoutItem
+        {
+            Title = nameof(HabitPage),
+            Route = routeService.GetRoute(RootNavigationConstant.HabitPage),
+            Items = {
+                new ShellContent {
+                    ContentTemplate = new DataTemplate(typeof(HabitPage))
                 }
             }
         });
