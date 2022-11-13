@@ -18,7 +18,7 @@ public static class Constants
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             return Path.Combine(basePath, DatabaseFilename);
             // 如果程序无法获取到目标路径，请将上面三行注释掉，使用下面的方法：
-            // return Path.Combine("C:\\Users\\用户名\\AppData\\Local", DatabaseFilename);
+            //return Path.Combine("C:\\Users\\用户名\\AppData\\Local", DatabaseFilename);
         }
     }
 }
