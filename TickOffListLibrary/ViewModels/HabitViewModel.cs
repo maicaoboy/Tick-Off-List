@@ -15,18 +15,15 @@ namespace TickOffList.ViewModels;
 public class
     HabitViewModel : ObservableObject {
    
-    // private Lazy<AsyncRelayCommand> _lazySelectCommand;
-    //
-    // public AsyncRelayCommand NavigatedToCommand =>
-    //     _lazyNavigatedToCommand.Value;
-    //
-    // public async Task NavigatedToCommandFunction()
-    // {
-    //     await _poetryStorage.InitializeAsync();
-    //
-    //     Poetries.Clear();
-    ////     await Poetries.LoadMoreAsync();
-    // }
+     // private Lazy<AsyncRelayCommand> _lazySelectDateCommand;
+     //
+     // public AsyncRelayCommand NavigatedToCommand =>
+     //     _lazySelectDateCommand.Value;
+     //
+     // public async Task NavigatedToCommandFunction()
+     // {
+     //    
+     // }
 
     public HabitViewModel(IHabitStorage habitStorage) {
         _habitStorage = habitStorage;

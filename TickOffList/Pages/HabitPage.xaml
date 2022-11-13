@@ -33,13 +33,13 @@
                 <Label Text="{Binding DayOfWeek1}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
             </FlexLayout>
             <FlexLayout Grid.Row="1" JustifyContent="SpaceAround">
-                <Button WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday7}" CornerRadius="27"  BackgroundColor="White" TextColor="Black"></Button>
-                <Button WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday6}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
-                <Button WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday5}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
-                <Button WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday4}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
-                <Button WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday3}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
-                <Button WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday2}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
-                <Button WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday1}" CornerRadius="27" BackgroundColor="SkyBlue" TextColor="Black"></Button>
+                <Button  WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday7}" CornerRadius="27"  BackgroundColor="White" TextColor="Black"></Button>
+                <Button  WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday6}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
+                <Button  WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday5}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
+                <Button  WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday4}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
+                <Button  WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday3}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
+                <Button  WidthRequest="60" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday2}" CornerRadius="27" BackgroundColor="White" TextColor="Black"></Button>
+                <Button  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DateToday1}" CornerRadius="27" BackgroundColor="SkyBlue" TextColor="Black"></Button>
             </FlexLayout>
             <ListView Grid.Row="2" ItemsSource="{Binding Habits}" Margin="20" >
                 <ListView.ItemTemplate>
