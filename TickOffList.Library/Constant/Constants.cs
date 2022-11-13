@@ -3,7 +3,7 @@
 // author: 李宏彬
 public static class Constants
 {
-    public const string DatabaseFilename = "TickOffListDB.db3";
+    public const string DatabaseFilename = "TickOffLisDB.db3";
 
     public const SQLite.SQLiteOpenFlags Flags =
         SQLite.SQLiteOpenFlags.ReadWrite |
@@ -14,10 +14,11 @@ public static class Constants
     {
         get
         {
-            var basePath =
-                Environment.GetFolderPath(Environment.SpecialFolder
-                    .LocalApplicationData);
-            return Path.Combine(basePath, DatabaseFilename);
+            //var basePath =
+            //    Environment.GetFolderPath(Environment.SpecialFolder
+            //        .LocalApplicationData);
+            //return Path.Combine(basePath, DatabaseFilename);
+            return Path.Combine("C:\\Users\\Patrick Zhu\\AppData\\Local", DatabaseFilename);
         }
     }
 }

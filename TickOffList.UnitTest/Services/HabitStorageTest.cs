@@ -26,7 +26,7 @@ public class HabitStorageTest
     public void StorageAndReadTest()
     {
         var habitStorage = new HabitStorage();
-        // habitStorage.InitializeAsync();
+        habitStorage.InitializeAsync();
         var habit = new Habit();
         habit.title = "haha";
         habitStorage.AddAsync(habit);
@@ -62,7 +62,7 @@ public class HabitStorageTest
         // var isFinish = habitStorage.isFinish(1);
         // Assert.Equal(true, isFinish);
         var isFinish2 = habitStorage.isFinish(2);
-        Assert.Equal(true, isFinish2.Result);
+        Assert.Equal(false, isFinish2.Result);
     }
 
     [Fact]
@@ -71,6 +71,6 @@ public class HabitStorageTest
         // var isFinish = habitStorage.isFinish(1);
         // Assert.Equal(true, isFinish);
         var isFinish2 = habitStorage.isFinish(2, DateTime.Now);
-        Assert.Equal(true, isFinish2.Result);
+        Assert.Equal(false, isFinish2.Result);
     }
 }
