@@ -14,6 +14,11 @@ public class CountdownPageViewModel : ObservableObject
 
     private bool _isRunning = false;
 
+    public bool IsRunning {
+        get => _isRunning;
+        set => SetProperty(ref _isRunning, value);
+    }
+
     private string _startStopButtonImage = CountdownPageSource.StartButtonImage;
 
     private bool _isEnabled = true;
@@ -126,7 +131,7 @@ public class CountdownPageViewModel : ObservableObject
 
     public AsyncRelayCommand SelectedIndexChangedCommand => _selectedIndexChangedCommand.Value;
 
-    private async Task CountdownTime()
+    public async Task CountdownTime()
     {
         IsEnabled = false;
 
@@ -229,7 +234,7 @@ public class CountdownPageViewModel : ObservableObject
         }
     }
 
-    private async Task ResetCommandFunction()
+    public async Task ResetCommandFunction()
     {
         _timer.Stop();
         _timer.Close();
