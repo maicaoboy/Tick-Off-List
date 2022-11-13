@@ -14,6 +14,17 @@ namespace TickOffList.ViewModels;
 * ==============================================================================*/
 public class HabitViewModel : ObservableObject
 {
+
+    // private Lazy<AsyncRelayCommand> _lazySelectDateCommand;
+    //
+    // public AsyncRelayCommand NavigatedToCommand =>
+    //     _lazySelectDateCommand.Value;
+    //
+    // public async Task NavigatedToCommandFunction()
+    // {
+    //    
+    // }
+
     public HabitViewModel(IHabitStorage habitStorage)
     {
         _habitStorage = habitStorage;
@@ -27,6 +38,7 @@ public class HabitViewModel : ObservableObject
         DateToday5 = Convert.ToString(today.AddDays(-4).Day);
         DateToday6 = Convert.ToString(today.AddDays(-5).Day);
         DateToday7 = Convert.ToString(today.AddDays(-6).Day);
+
 
         _dayOfWeek1 = Day[Convert.ToInt32(today.DayOfWeek.ToString("d"))].ToString();
         _dayOfWeek2 = Day[Convert.ToInt32(today.AddDays(-1).DayOfWeek.ToString("d"))].ToString();
