@@ -2,7 +2,7 @@
 
 public static class Constants
 {
-    public const string DatabaseFilename = "TickOffListDB1.db3";
+    public const string DatabaseFilename = "TickOffListDB.db3";
 
     public const SQLite.SQLiteOpenFlags Flags =
         SQLite.SQLiteOpenFlags.ReadWrite |

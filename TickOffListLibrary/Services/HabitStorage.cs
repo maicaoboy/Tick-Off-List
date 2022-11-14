@@ -21,22 +21,26 @@ public class HabitStorage : IHabitStorage {
 
     public HabitStorage()
     {
+
         Database = new SQLiteAsyncConnection(Constants.DatabasePath);
         InitializeAsync();
     }
 
     public async Task InitializeAsync()
     {
-        //spath：文件夹路径名
-        await Connection.CreateTableAsync<Habit>();
-        await Connection.CreateTableAsync<HabitRecord>();
-        var habit = new Habit();
-        habit.title = "开始你的第一个习惯吧";
-        habit.iconName = "paobu.png";
-        habit.days = "12345";
-        habit.describe = "第一个习惯";
-        habit.quantity = 1;
-        AddAsync(habit);
+        if (!File.Exists(Constants.DatabasePath)) {
+            await Connection.CreateTableAsync<Habit>();
+            await Connection.CreateTableAsync<HabitRecord>();
+            var habit = new Habit {
+                title = "开始你的第一个习惯吧",
+                describe = "第一个习惯",
+                iconName = "paobu.png",
+                days = "12345",
+                quantity = 1,
+                recordCount = 0
+            };
+            await AddAsync(habit);
+        }
     }
 
     public async Task AddAsync(Habit poetry)

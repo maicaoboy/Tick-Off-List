@@ -22,4 +22,7 @@ public class Habit {
 
     [SQLite.Column("quantity")]
     public int quantity { get; set; }
+
+    [SQLite.Column("recordCount")]
+    public int recordCount { get; set; } = 0;
 }
