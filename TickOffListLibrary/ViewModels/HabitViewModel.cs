@@ -1,7 +1,10 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.VisualBasic;
+using TickOffList.Commands;
 using TickOffList.Models;
 using TickOffList.Services;
 
@@ -14,19 +17,24 @@ namespace TickOffList.ViewModels;
 * ==============================================================================*/
 public class
     HabitViewModel : ObservableObject {
-   
-     // private Lazy<AsyncRelayCommand> _lazySelectDateCommand;
-     //
-     // public AsyncRelayCommand NavigatedToCommand =>
-     //     _lazySelectDateCommand.Value;
-     //
-     // public async Task NavigatedToCommandFunction()
-     // {
-     //    
-     // }
+
+    ICommand changeDateCommand = null;
+
+    public ICommand ChangeDateCommand
+    {
+        get { return changeDateCommand; }
+        set
+        {
+            if (changeDateCommand != value)
+            {
+                changeDateCommand = value;
+                OnPropertyChanged("ChangeDateCommand");
+            }
+        }
+    }
 
     public HabitViewModel(IHabitStorage habitStorage) {
-        _habitStorage = habitStorage;
+        HabitStorage = habitStorage;
         string[] Day = new string[] { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
 
         DateTime today = DateTime.Now;
@@ -48,6 +56,9 @@ public class
         _dayOfWeek7 = Day[Convert.ToInt32(today.AddDays(-6).DayOfWeek.ToString("d"))].ToString();
 
         Init();
+
+        changeDateCommand = new ChangeDateCommand(this);
+
         // _habits = _habitStorage.ListAsync().Result;
         // _habits = null;
         // Habits = _habitStorage.ListAsync().Result.ToList();
@@ -64,28 +75,9 @@ public class
     }
 
     public async void Init() {
-        var listAsync = await _habitStorage.ListAsync();
-        Habits = listAsync.ToList();
+        var listAsync = await HabitStorage.ListAsync();
+        Habits = new ObservableCollection<Habit>(listAsync);
     }
-
-    // public HabitViewModel() {
-    //     string[] Day = new string[] { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
-    //     DateTime today = DateTime.Now;
-    //     DateToday1 = "今天";
-    //     DateToday2 = Convert.ToString(today.AddDays(-1).Day);
-    //     DateToday3 = Convert.ToString(today.AddDays(-2).Day);
-    //     DateToday4 = Convert.ToString(today.AddDays(-3).Day);
-    //     DateToday5 = Convert.ToString(today.AddDays(-4).Day);
-    //     DateToday6 = Convert.ToString(today.AddDays(-5).Day);
-    //     DateToday7 = Convert.ToString(today.AddDays(-6).Day);
-    //     _dayOfWeek1 = Day[Convert.ToInt32(today.DayOfWeek.ToString("d"))].ToString();
-    //     _dayOfWeek2 = Day[Convert.ToInt32(today.AddDays(-1).DayOfWeek.ToString("d"))].ToString();
-    //     _dayOfWeek3 = Day[Convert.ToInt32(today.AddDays(-2).DayOfWeek.ToString("d"))].ToString();
-    //     _dayOfWeek4 = Day[Convert.ToInt32(today.AddDays(-3).DayOfWeek.ToString("d"))].ToString();
-    //     _dayOfWeek5 = Day[Convert.ToInt32(today.AddDays(-4).DayOfWeek.ToString("d"))].ToString();
-    //     _dayOfWeek6 = Day[Convert.ToInt32(today.AddDays(-5).DayOfWeek.ToString("d"))].ToString();
-    //     _dayOfWeek7 = Day[Convert.ToInt32(today.AddDays(-6).DayOfWeek.ToString("d"))].ToString();
-    // }
 
     // 日期显示
     private string _dateToday1;
@@ -106,10 +98,10 @@ public class
     private string _dayOfWeek7;
 
     //习惯数据库
-    private IHabitStorage _habitStorage;
+    public IHabitStorage HabitStorage;
 
     //ListView显示的Habit
-    private List<Habit> _habits;
+    private ObservableCollection<Habit> _habits;
 
 
 
@@ -190,7 +182,7 @@ public class
         set => _dayOfWeek7 = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public List<Habit> Habits {
+    public ObservableCollection<Habit> Habits {
         get => _habits;
         set => SetProperty(ref _habits, value);
     }

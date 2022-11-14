@@ -11,6 +11,7 @@
   <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="Constant\" />
+    <Folder Include="Commands\" />
   </ItemGroup>
 
   <ItemGroup>

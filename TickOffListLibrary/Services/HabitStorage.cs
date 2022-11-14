@@ -11,25 +11,32 @@ namespace TickOffList.Services;
 * 创建时间：2022-11-10
 * @version 1.0
 * ==============================================================================*/
-public class HabitStorage : IHabitStorage{
+public class HabitStorage : IHabitStorage {
     private static SQLiteAsyncConnection Database;
 
     private SQLiteAsyncConnection? _connection;
 
     private SQLiteAsyncConnection Connection =>
-        _connection ??= new SQLiteAsyncConnection(Constants.DatabasePath);
+        _connection ??= new SQLiteAsyncConnection(Constants.DatabasePath,Constants.Flags);
 
     public HabitStorage()
     {
-        Database =
-            new SQLiteAsyncConnection(Constants.DatabasePath,
-                Constants.Flags);
+        Database = new SQLiteAsyncConnection(Constants.DatabasePath);
         InitializeAsync();
     }
 
     public async Task InitializeAsync()
     {
+        //spath：文件夹路径名
         await Connection.CreateTableAsync<Habit>();
+        await Connection.CreateTableAsync<HabitRecord>();
+        var habit = new Habit();
+        habit.title = "开始你的第一个习惯吧";
+        habit.iconName = "paobu.png";
+        habit.days = "12345";
+        habit.describe = "第一个习惯";
+        habit.quantity = 1;
+        AddAsync(habit);
     }
 
     public async Task AddAsync(Habit poetry)
