@@ -1,9 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Graphics;
-using TickOffList.Commands;
 using TickOffList.Models;
 using TickOffList.Services;
 using Color = Microsoft.Maui.Graphics.Color;
@@ -21,6 +19,7 @@ public class HabitViewModel : ObservableObject {
     private string[] _dayOfWeekArray;
     private string[] _dayOfMonthArray;
     private Color[] _dayColorsArray;
+    private Color[] _dayTextColorsArray;
 
 
     private RelayCommand<string> _changeDateCommand;
@@ -48,6 +47,18 @@ public class HabitViewModel : ObservableObject {
             };
             colors[dateNum] = Color.FromRgb(81, 42, 212);
             DayColorsArray = colors;
+
+            Color[] textColors = new Color[] {
+                Colors.Black,
+                Colors.Black,
+                Colors.Black,
+                Colors.Black,
+                Colors.Black,
+                Colors.Black,
+                Colors.Black
+            };
+            textColors[dateNum] = Colors.White;
+            DayTextColorsArray = textColors;
         });
 
     public HabitViewModel(IHabitStorage habitStorage) {
@@ -85,6 +96,16 @@ public class HabitViewModel : ObservableObject {
             Colors.White
         };
 
+        _dayTextColorsArray = new Color[] {
+            Colors.White,
+            Colors.Black,
+            Colors.Black,
+            Colors.Black,
+            Colors.Black,
+            Colors.Black,
+            Colors.Black
+        };
+
         Init();
     }
 
@@ -120,5 +141,11 @@ public class HabitViewModel : ObservableObject {
     public Color[] DayColorsArray {
         get => _dayColorsArray;
         set => SetProperty(ref _dayColorsArray, value);
+    }
+
+    public Color[] DayTextColorsArray
+    {
+        get => _dayTextColorsArray;
+        set => SetProperty(ref _dayTextColorsArray, value);
     }
 }

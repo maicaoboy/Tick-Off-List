@@ -16,56 +16,75 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        
-        
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25" />
-                <RowDefinition Height="60" />
-                <RowDefinition Height="*" />
-                <!-- <RowDefinition Height="*" /> -->
-                <!-- <RowDefinition Height="100" /> -->
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <FlexLayout Grid.Row="0" JustifyContent="SpaceAround">
-                <Label Text="{Binding DayOfWeekArray[6]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                <Label Text="{Binding DayOfWeekArray[5]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                <Label Text="{Binding DayOfWeekArray[4]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                <Label Text="{Binding DayOfWeekArray[3]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                <Label Text="{Binding DayOfWeekArray[2]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                <Label Text="{Binding DayOfWeekArray[1]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-                <Label Text="{Binding DayOfWeekArray[0]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-            </FlexLayout>
-            <FlexLayout Grid.Row="1" JustifyContent="SpaceAround">
-                <Button Command="{Binding ChangeDateCommand}" CommandParameter="6" WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[6]}" CornerRadius="27"  BackgroundColor="{Binding DayColorsArray[6]}" TextColor="Black"></Button>
-                <Button Command="{Binding ChangeDateCommand}" CommandParameter="5"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[5]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[5]}" TextColor="Black"></Button>
-                <Button Command="{Binding ChangeDateCommand}" CommandParameter="4"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[4]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[4]}" TextColor="Black"></Button>
-                <Button Command="{Binding ChangeDateCommand}" CommandParameter="3"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[3]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[3]}" TextColor="Black"></Button>
-                <Button Command="{Binding ChangeDateCommand}" CommandParameter="2"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[2]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[2]}" TextColor="Black"></Button>
-                <Button Command="{Binding ChangeDateCommand}" CommandParameter="1"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[1]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[1]}" TextColor="Black"></Button>
-                <Button Command="{Binding ChangeDateCommand}" CommandParameter="0"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[0]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[0]}" TextColor="Black"></Button>
-            </FlexLayout>
-            <ListView Grid.Row="2" ItemsSource="{Binding Habits}" Margin="20" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell Height="50">
-                            <Grid RowDefinitions="*"
+
+        <AbsoluteLayout>
+
+            <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                    <!-- <RowDefinition Height="*" /> -->
+                    <!-- <RowDefinition Height="100" /> -->
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <FlexLayout Grid.Row="0" JustifyContent="SpaceAround">
+                    <Label Text="{Binding DayOfWeekArray[6]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Text="{Binding DayOfWeekArray[5]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Text="{Binding DayOfWeekArray[4]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Text="{Binding DayOfWeekArray[3]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Text="{Binding DayOfWeekArray[2]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Text="{Binding DayOfWeekArray[1]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Text="{Binding DayOfWeekArray[0]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                </FlexLayout>
+                <FlexLayout Grid.Row="1" JustifyContent="SpaceAround">
+                    <Button Command="{Binding ChangeDateCommand}" CommandParameter="6" WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[6]}" CornerRadius="27"  BackgroundColor="{Binding DayColorsArray[6]}" TextColor="{Binding DayTextColorsArray[6]}"></Button>
+                    <Button Command="{Binding ChangeDateCommand}" CommandParameter="5"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[5]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[5]}" TextColor="{Binding DayTextColorsArray[5]}"></Button>
+                    <Button Command="{Binding ChangeDateCommand}" CommandParameter="4"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[4]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[4]}" TextColor="{Binding DayTextColorsArray[4]}"></Button>
+                    <Button Command="{Binding ChangeDateCommand}" CommandParameter="3"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[3]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[3]}" TextColor="{Binding DayTextColorsArray[3]}"></Button>
+                    <Button Command="{Binding ChangeDateCommand}" CommandParameter="2"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[2]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[2]}" TextColor="{Binding DayTextColorsArray[2]}"></Button>
+                    <Button Command="{Binding ChangeDateCommand}" CommandParameter="1"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[1]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[1]}" TextColor="{Binding DayTextColorsArray[1]}"></Button>
+                    <Button Command="{Binding ChangeDateCommand}" CommandParameter="0"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[0]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[0]}" TextColor="{Binding DayTextColorsArray[0]}"></Button>
+                </FlexLayout>
+                <ListView Grid.Row="2" ItemsSource="{Binding Habits}" Margin="20" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="80">
+                                <Grid RowDefinitions="*"
                                   ColumnDefinitions="*,*,3*,3*,2*,*">
-                                <Image Grid.Row="0" Grid.Column="1" HeightRequest="50"  Source="{Binding iconName}"></Image>
-                                <Label Grid.Row="0" Grid.Column="2" HeightRequest="30"  Text="{Binding title}"></Label>
-                                <Label Grid.Row="0" Grid.Column="3" HeightRequest="30"  Text="{Binding describe}"></Label>
-                                <Label Grid.Row="0" Grid.Column="4" HeightRequest="30"  Text="{Binding recordCount,Converter={StaticResource RecordCountToString} 
-                                       }"></Label>
+                                    <Image Grid.Row="0" Grid.Column="1" HeightRequest="70" VerticalOptions="Center" Source="{Binding iconName}"></Image>
+                                    <Label Grid.Row="0" Grid.Column="2" HeightRequest="70" VerticalTextAlignment="Center" FontSize="15" Text="{Binding title}"></Label>
+                                    <Label Grid.Row="0" Grid.Column="3" HeightRequest="70" VerticalTextAlignment="Center" Text="{Binding describe}"></Label>
+                                    <Label Grid.Row="0" Grid.Column="4" HeightRequest="70" VerticalTextAlignment="Center" FontSize="15" Text="{Binding recordCount,Converter={StaticResource RecordCountToString} }"></Label>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            </Grid>
+            <!-- <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"> -->
+            <!--     <VerticalStackLayout x:Name="vsl" Padding="10" Spacing="10"/> -->
+            <!-- </ScrollView> -->
 
-        </Grid>
+            <ImageButton
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AbsoluteLayout.LayoutBounds="1,1"
+                BackgroundColor="#512BD4"
+                WidthRequest="56"
+                HeightRequest="56"
+                CornerRadius="28" 
+                Padding="16"
+                Margin="16"       
+                Source="plus.png"     
+            >
+            </ImageButton>
+        </AbsoluteLayout>
+
+
+        
 
         <!-- <FlexLayout Direction="Column" -->
         <!--             AlignItems="Center" -->

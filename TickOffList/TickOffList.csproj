@@ -58,6 +58,7 @@
 	  <None Remove="Resources\Images\chizaocan.png" />
 	  <None Remove="Resources\Images\chouyan.png" />
 	  <None Remove="Resources\Images\dadianhua.png" />
+	  <None Remove="Resources\Images\finish.png" />
 	  <None Remove="Resources\Images\hejiu.png" />
 	  <None Remove="Resources\Images\heshui.png" />
 	  <None Remove="Resources\Images\huahua.png" />
@@ -71,6 +72,7 @@
 	  <None Remove="Resources\Images\licai.png" />
 	  <None Remove="Resources\Images\paobu.png" />
 	  <None Remove="Resources\Images\peihaizi.png" />
+	  <None Remove="Resources\Images\plus.png" />
 	  <None Remove="Resources\Images\sheying.png" />
 	  <None Remove="Resources\Images\shuaya.png" />
 	  <None Remove="Resources\Images\tingge.png" />
