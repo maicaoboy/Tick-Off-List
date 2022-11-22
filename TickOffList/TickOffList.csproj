@@ -100,6 +100,18 @@
 	  <MauiXaml Update="Pages\MainPages.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\TickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ViewModels\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="TheSalLab.MauiBehaviors" Version="1.0.2" />
+	  <PackageReference Include="TheSalLab.MauiInfiniteScrolling" Version="1.0.1" />
 	</ItemGroup>
 
 

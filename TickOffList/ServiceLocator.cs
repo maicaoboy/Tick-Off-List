@@ -6,6 +6,10 @@ namespace TickOffList;
 public class ServiceLocator {
     private IServiceProvider _serviceProvider;
 
+    public TickViewModelProxy TickViewModelProxy =>
+        _serviceProvider.GetService<TickViewModelProxy>();
+        
+
     public HabitViewModel HabitViewModel =>
         _serviceProvider.GetService<HabitViewModel>();
 
@@ -27,6 +31,8 @@ public class ServiceLocator {
             .AddSingleton<IRootNavigationService, RootNavigationService>();
 
         serviceCollection.AddSingleton<HabitViewModel>();
+
+        serviceCollection.AddSingleton<TickViewModelProxy>();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }

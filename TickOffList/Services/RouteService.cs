@@ -8,14 +8,8 @@ public class RouteService : IRouteService
     private readonly Dictionary<string, string> _routeDictionary = new()
     {
         [RootNavigationConstant.HabitPage] = RootNavigationConstant.HabitPage,
-        // pageKey "TodayPage" -> route "TodayPage"
-        // [ContentNavigationConstant.TodayDetailPage] =
-        //     $"{RootNavigationConstant.TodayPage}/{ContentNavigationConstant.TodayDetailPage}",
-        // pageKey "TodayDetailPage" -> "TodayPage/TodayDetailPage"
-        // TODO 待修改
-        // [ContentNavigationConstant.ResultPage] =
-        //     ContentNavigationConstant.ResultPage,
-        // TODO
+        [ContentNavigationConstant.TickPage] = 
+            $"{RootNavigationConstant.HabitPage}/{ContentNavigationConstant.TickPage}",
     };
 
     public string GetRoute(string pageKey) => _routeDictionary[pageKey];

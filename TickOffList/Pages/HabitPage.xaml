@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:TickOffList.Converters"
+             xmlns:mauiInfiniteScrolling="clr-namespace:TheSalLab.MauiInfiniteScrolling;assembly=MauiInfiniteScrolling"
+             xmlns:mauiBehaviors="clr-namespace:TheSalLab.MauiBehaviors;assembly=TheSalLab.MauiBehaviors"
              x:Class="TickOffList.Pages.HabitPage"
              BindingContext="{Binding HabitViewModel, Source={StaticResource ServiceLocator}}"
              Title="打卡">
@@ -13,6 +15,8 @@
 
     <ContentPage.Resources>
         <converters:RecordCountConverter x:Key="RecordCountToString" />
+        <converters:HabitIconStateConverter x:Key="HabitStateConverter" />
+        <converters:HabitPageItemTappedConverter x:Key="HabitTappedConverter" />
     </ContentPage.Resources>
 
     <ContentPage.Content>
@@ -48,16 +52,25 @@
                     <Button Command="{Binding ChangeDateCommand}" CommandParameter="1"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[1]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[1]}" TextColor="{Binding DayTextColorsArray[1]}"></Button>
                     <Button Command="{Binding ChangeDateCommand}" CommandParameter="0"  WidthRequest="54" HeightRequest="54" HorizontalOptions="Center" VerticalOptions="Center"  Text="{Binding DayOfMonthArray[0]}" CornerRadius="27" BackgroundColor="{Binding DayColorsArray[0]}" TextColor="{Binding DayTextColorsArray[0]}"></Button>
                 </FlexLayout>
-                <ListView Grid.Row="2" ItemsSource="{Binding Habits}" Margin="20" >
+                <ListView Grid.Row="2" ItemsSource="{Binding Habits}" Margin="20">
+                    <ListView.Behaviors>
+                        <mauiBehaviors:MauiEventHandlerBehavior EventName="ItemTapped">
+                            <mauiBehaviors:MauiActionCollection>
+                                <mauiBehaviors:MauiInvokeCommandAction
+                                    Command="{Binding TickCommand}"
+                                    Converter="{StaticResource HabitTappedConverter}" />
+                            </mauiBehaviors:MauiActionCollection>
+                        </mauiBehaviors:MauiEventHandlerBehavior>
+                    </ListView.Behaviors>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell Height="80">
                                 <Grid RowDefinitions="*"
                                   ColumnDefinitions="*,*,3*,3*,2*,*">
-                                    <Image Grid.Row="0" Grid.Column="1" HeightRequest="70" VerticalOptions="Center" Source="{Binding iconName}"></Image>
-                                    <Label Grid.Row="0" Grid.Column="2" HeightRequest="70" VerticalTextAlignment="Center" FontSize="15" Text="{Binding title}"></Label>
-                                    <Label Grid.Row="0" Grid.Column="3" HeightRequest="70" VerticalTextAlignment="Center" Text="{Binding describe}"></Label>
-                                    <Label Grid.Row="0" Grid.Column="4" HeightRequest="70" VerticalTextAlignment="Center" FontSize="15" Text="{Binding recordCount,Converter={StaticResource RecordCountToString} }"></Label>
+                                    <Image Grid.Row="0" Grid.Column="1" HeightRequest="70" VerticalOptions="Center" Source="{Binding ., Converter={StaticResource HabitStateConverter}}"></Image>
+                                    <Label Grid.Row="0" Grid.Column="2" HeightRequest="70" VerticalTextAlignment="Center" FontSize="15" Text="{Binding Title}"></Label>
+                                    <Label Grid.Row="0" Grid.Column="3" HeightRequest="70" VerticalTextAlignment="Center" Text="{Binding Describe}"></Label>
+                                    <Label Grid.Row="0" Grid.Column="4" HeightRequest="70" VerticalTextAlignment="Center" FontSize="15" Text="{Binding RecordCount,Converter={StaticResource RecordCountToString} }"></Label>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
@@ -65,9 +78,6 @@
                 </ListView>
 
             </Grid>
-            <!-- <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"> -->
-            <!--     <VerticalStackLayout x:Name="vsl" Padding="10" Spacing="10"/> -->
-            <!-- </ScrollView> -->
 
             <ImageButton
                 AbsoluteLayout.LayoutFlags="PositionProportional"
@@ -82,27 +92,6 @@
             >
             </ImageButton>
         </AbsoluteLayout>
-
-
-        
-
-        <!-- <FlexLayout Direction="Column" -->
-        <!--             AlignItems="Center" -->
-        <!--             JustifyContent="SpaceEvenly"> -->
-        <!--     <Button Text="{Binding DateToday7}" /> -->
-        <!--     <Button Text="{Binding DateToday6}" /> -->
-        <!--     <Button Text="{Binding DateToday5}" /> -->
-        <!--     <Button Text="{Binding DateToday4}" /> -->
-        <!--     <Button Text="{Binding DateToday3}" /> -->
-        <!--     <Button Text="{Binding DateToday2}" /> -->
-        <!--     <Button Text="{Binding DateToday1}" /> -->
-        <!-- </FlexLayout> -->
-        <!-- <VerticalStackLayout> -->
-        <!--     <Label -->
-        <!--         Text="Welcome to .NET MAUI!" -->
-        <!--         VerticalOptions="Center" -->
-        <!--         HorizontalOptions="Center" /> -->
-        <!-- </VerticalStackLayout> -->
 
     </ContentPage.Content>
 

@@ -32,12 +32,12 @@ public class HabitStorage : IHabitStorage {
             await Connection.CreateTableAsync<Habit>();
             await Connection.CreateTableAsync<HabitRecord>();
             var habit = new Habit {
-                title = "开始你的第一个习惯吧",
-                describe = "第一个习惯",
-                iconName = "paobu.png",
-                days = "12345",
-                quantity = 1,
-                recordCount = 0
+                Title = "开始你的第一个习惯吧",
+                Describe = "第一个习惯",
+                IconName = "paobu.png",
+                Days = "12345",
+                Quantity = 1,
+                RecordCount = 0
             };
             await AddAsync(habit);
         }
@@ -51,8 +51,8 @@ public class HabitStorage : IHabitStorage {
     public async Task<IEnumerable<Habit>> ListAsync() =>
         await Connection.Table<Habit>().ToListAsync();
 
-        public async Task<List<Habit>> getHabitByWeekDay(string dayOfWeek) {
-        return await Connection.Table<Habit>().Where(h => h.days.Contains(dayOfWeek)).ToListAsync();
+    public async Task<List<Habit>> getHabitByWeekDay(string dayOfWeek) {
+        return await Connection.Table<Habit>().Where(h => h.Days.Contains(dayOfWeek)).ToListAsync();
     }
 
     public async Task<bool> isFinish(int hid) {
@@ -60,7 +60,7 @@ public class HabitStorage : IHabitStorage {
         var todayEnd = todayBegin.AddMilliseconds(86400000);
         var countAsync = await Connection.Table<HabitRecord>().Where(hr => hr.Hid == hid && todayBegin <= hr.RecordDate && hr.RecordDate < todayEnd).CountAsync();
         var result = await Connection.Table<Habit>()
-            .Where(h => h.Id == hid && h.quantity == countAsync).CountAsync();
+            .Where(h => h.Id == hid && h.Quantity == countAsync).CountAsync();
         bool flag = result != 0;
         return flag;
     }
@@ -71,7 +71,7 @@ public class HabitStorage : IHabitStorage {
         var todayEnd = todayBegin.AddMilliseconds(86400000);
         var countAsync = await Connection.Table<HabitRecord>().Where(hr => hr.Hid == hid && todayBegin <= hr.RecordDate && hr.RecordDate < todayEnd).CountAsync();
         var result = await Connection.Table<Habit>()
-            .Where(h => h.Id == hid && h.quantity == countAsync).CountAsync();
+            .Where(h => h.Id == hid && h.Quantity == countAsync).CountAsync();
         bool flag = result != 0;
         return flag;
     }

@@ -21,6 +21,8 @@ public class HabitViewModel : ObservableObject {
     private Color[] _dayColorsArray;
     private Color[] _dayTextColorsArray;
 
+    private readonly IContentNavigationService _contentNavigationService;
+
 
     private RelayCommand<string> _changeDateCommand;
 
@@ -33,6 +35,7 @@ public class HabitViewModel : ObservableObject {
                 .ToInt32(dateTime.DayOfWeek.ToString("d")).ToString());
             Habits.Clear();
             foreach (var habit in habitByWeekDay) {
+                habit.Finish = await HabitStorage.isFinish(habit.Id, DateTime.Now.AddDays(-dateNum));
                 Habits.Add(habit);
             }
 
@@ -61,8 +64,17 @@ public class HabitViewModel : ObservableObject {
             DayTextColorsArray = textColors;
         });
 
-    public HabitViewModel(IHabitStorage habitStorage) {
+    private RelayCommand<Habit> _tickCommand;
+
+    public RelayCommand<Habit> TickCommand =>
+        _tickCommand ??= new RelayCommand<Habit>(async habit => {
+            await _contentNavigationService.NavigateToAsync(
+                ContentNavigationConstant.TickPage, habit);
+        });
+
+    public HabitViewModel(IHabitStorage habitStorage, IContentNavigationService contentNavigationService) {
         HabitStorage = habitStorage;
+        _contentNavigationService = contentNavigationService;
         string[] Day = new string[] { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
 
         DateTime today = DateTime.Now;
@@ -111,6 +123,9 @@ public class HabitViewModel : ObservableObject {
 
     public async void Init() {
         var listAsync = await HabitStorage.ListAsync();
+        foreach (var habit in listAsync) {
+            habit.Finish = await HabitStorage.isFinish(habit.Id, DateTime.Now);
+        }
         Habits = new ObservableCollection<Habit>(listAsync);
     }
 

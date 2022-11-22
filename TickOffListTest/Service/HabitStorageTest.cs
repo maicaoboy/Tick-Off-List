@@ -26,13 +26,13 @@ public class HabitStorageTest {
         var habitStorage = new HabitStorage();
         // habitStorage.InitializeAsync();
         var habit = new Habit();
-        habit.title = "haha";
+        habit.Title = "haha";
         habitStorage.AddAsync(habit);
         var listAsync = habitStorage.ListAsync();
         var iter = listAsync.Result.GetEnumerator();
         iter.MoveNext();
         var habitGet = iter.Current;
-        Assert.Equal("背单词", habitGet.title);
+        Assert.Equal("背单词", habitGet.Title);
     }
 
     [Fact]
@@ -42,14 +42,14 @@ public class HabitStorageTest {
         var listAsync = await habitStorage.ListAsync();
         var habits = listAsync.ToList();
         for (var i = 0; i < habits.Count; i++) {
-            output.WriteLine(habits[i].title);
+            output.WriteLine(habits[i].Title);
         }
     }
 
     [Fact]
     public void GetHabitByDayOfWeekTest() {
         var habitByWeekDay = habitStorage.getHabitByWeekDay("6").Result;
-        output.WriteLine("{0}-{1}", habitByWeekDay[0].title, habitByWeekDay[1].title);
+        output.WriteLine("{0}-{1}", habitByWeekDay[0].Title, habitByWeekDay[1].Title);
     }
 
     [Fact]

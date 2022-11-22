@@ -9,20 +9,23 @@ public class Habit {
     public int Id { get; set; }
 
     [SQLite.Column("title")]
-    public string title { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
 
     [SQLite.Column("describe")]
-    public string describe { get; set; } = string.Empty;
+    public string Describe { get; set; } = string.Empty;
 
     [SQLite.Column("iconName")]
-    public string iconName { get; set; } = string.Empty;
+    public string IconName { get; set; } = string.Empty;
 
     [SQLite.Column("days")]
-    public string days { get; set; } = string.Empty;
+    public string Days { get; set; } = string.Empty;
 
     [SQLite.Column("quantity")]
-    public int quantity { get; set; }
+    public int Quantity { get; set; }
 
     [SQLite.Column("recordCount")]
-    public int recordCount { get; set; } = 0;
+    public int RecordCount { get; set; } = 0;
+
+    [SQLite.Ignore]
+    public bool Finish { get; set; } = false;
 }

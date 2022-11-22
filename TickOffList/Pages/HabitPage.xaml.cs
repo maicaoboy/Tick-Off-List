@@ -1,3 +1,5 @@
+using TickOffList.Models;
+
 namespace TickOffList.Pages;
 
 public partial class HabitPage : ContentPage
