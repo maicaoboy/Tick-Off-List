@@ -64,6 +64,15 @@ public class HabitViewModel : ObservableObject {
             DayTextColorsArray = textColors;
         });
 
+
+    private RelayCommand _testCommand;
+
+    public RelayCommand TestCommand =>
+        _testCommand ??= new RelayCommand(async () => {
+            await _contentNavigationService.NavigateToAsync(
+                ContentNavigationConstant.TickPage, Habits[0]);
+        });
+
     private RelayCommand<Habit> _tickCommand;
 
     public RelayCommand<Habit> TickCommand =>

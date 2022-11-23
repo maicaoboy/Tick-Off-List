@@ -8,9 +8,9 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		// MainPage = new AppShell();
-        MainPage = new NavigationPage(new HabitPage()) {
-            BarTextColor = Color.FromRgb(255, 255, 255)
-        }; ;
+		MainPage = new AppShell();
+        // MainPage = new NavigationPage(new HabitPage()) {
+        //     BarTextColor = Color.FromRgb(255, 255, 255)
+        // }; ;
     }
 }

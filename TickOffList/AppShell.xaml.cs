@@ -17,6 +17,18 @@ public partial class AppShell : Shell
                     serviceLocatorName];
         var routeService = serviceLocator.RouteService;
 
+        // Items.Add(new FlyoutItem
+        // {
+        //     Title = nameof(MainPage),
+        //     Route = routeService.GetRoute(RootNavigationConstant.MainPage),
+        //     Items = {
+        //         new ShellContent {
+        //             ContentTemplate = new DataTemplate(typeof(MainPage))
+        //         }
+        //     }
+        // });
+
+
         Items.Add(new FlyoutItem
         {
             Title = nameof(HabitPage),

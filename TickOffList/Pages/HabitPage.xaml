@@ -75,6 +75,14 @@
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+
+                    <ListView.Footer>
+                        <StackLayout>
+                            <Button Command="{Binding TestCommand}"
+                                    Text="走">
+                            </Button>
+                        </StackLayout>
+                    </ListView.Footer>
                 </ListView>
 
             </Grid>

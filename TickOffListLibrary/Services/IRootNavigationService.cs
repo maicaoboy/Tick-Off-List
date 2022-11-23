@@ -7,7 +7,7 @@ public interface IRootNavigationService
     Task NavigateToAsync(string pageKey, object parameter);
 }
 
-public static class RootNavigationConstant
-{
+public static class RootNavigationConstant {
+    public const string MainPage = nameof(MainPage);
     public const string HabitPage = nameof(HabitPage);
 }
