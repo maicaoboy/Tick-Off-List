@@ -8,67 +8,6 @@ namespace TickOffList.ViewModels;
 // Author: 陶静龙
 public class CountdownPageViewModel : ObservableObject
 {
-    // private ICountdownService _countdownService;
-
-    private Timer _timer;
-
-    private bool _isRunning = false;
-
-    public bool IsRunning {
-        get => _isRunning;
-        set => SetProperty(ref _isRunning, value);
-    }
-
-    private string _startStopButtonImage = CountdownPageSource.StartButtonImage;
-
-    private bool _isEnabled = true;
-
-    public bool IsEnabled
-    {
-        get => _isEnabled;
-        set => SetProperty(ref _isEnabled, value);
-    }
-
-    public string StartStopButtonImage
-    {
-        get => _startStopButtonImage;
-        set => SetProperty(ref _startStopButtonImage, value);
-    }
-
-    private string _resetButtonImage = CountdownPageSource.ResetButtonImage;
-
-    private string _hour;
-
-    public string Hour
-    {
-        get => _hour;
-        set => SetProperty(ref _hour, value);
-    }
-
-    private string _minute;
-
-    public string Minute
-    {
-        get => _minute;
-        set => SetProperty(ref _minute, value);
-    }
-
-    private string _second;
-
-    public string Second
-    {
-        get => _second;
-        set => SetProperty(ref _second, value);
-    }
-
-    private string _lastTime;
-
-    public string LastTime
-    {
-        get => _lastTime;
-        set => SetProperty(ref _lastTime, value);
-    }
-
     private string _selectedHour;
 
     public string SelectedHour
@@ -93,24 +32,62 @@ public class CountdownPageViewModel : ObservableObject
         set => SetProperty(ref _selectedSecond, value);
     }
 
+    private string _time;
+
+    public string Time
+    {
+        get => _time;
+        set => SetProperty(ref _time, value);
+    }
+
+    private bool _isRunning;
+
+    public bool IsRunning {
+        get => _isRunning;
+        set => SetProperty(ref _isRunning, value);
+    }
+
+    private bool _isEnabled;
+
+    public bool IsEnabled
+    {
+        get => _isEnabled;
+        set => SetProperty(ref _isEnabled, value);
+    }
+
+    private string _startStopButtonImage;
+
+    public string StartStopButtonImage
+    {
+        get => _startStopButtonImage;
+        set => SetProperty(ref _startStopButtonImage, value);
+    }
+
+    private string _resetButtonImage;
+
+    public string ResetButtonImage
+    {
+        get => _resetButtonImage;
+        set => SetProperty(ref _resetButtonImage, value);
+    }
+
+    private ICountdownService _countdownService;
+
     private IAudioPlayService _audioPlayService;
 
-    public CountdownPageViewModel(IAudioPlayService audioPlayService)
+
+    public CountdownPageViewModel(ICountdownService countdownService)
     {
-        _audioPlayService = audioPlayService;
+        _countdownService = countdownService;
 
-        _timer = new Timer(1000);
-        Hour = "00";
-        Minute = "00";
-        Second = "00";
-        LastTime = Hour + " : " + Minute + " : " + Second;
-        SelectedHour = "00";
-        SelectedMinute = "00";
-        SelectedSecond = "00";
-
-
+        Time = "00 : 00 : 00";
+        IsRunning = false;
+        IsEnabled = true;
+        StartStopButtonImage = CountdownPageSource.StartButtonImage;
+        ResetButtonImage = CountdownPageSource.ResetButtonImage;
+        
         _startStopCommand = new Lazy<AsyncRelayCommand>(() =>
-            new AsyncRelayCommand(CountdownTime));
+            new AsyncRelayCommand(StartStopCommandFunction));
 
         _resetCommand = new Lazy<AsyncRelayCommand>(() =>
             new AsyncRelayCommand(ResetCommandFunction));
@@ -131,134 +108,45 @@ public class CountdownPageViewModel : ObservableObject
 
     public AsyncRelayCommand SelectedIndexChangedCommand => _selectedIndexChangedCommand.Value;
 
-    public async Task CountdownTime()
+    public async Task StartStopCommandFunction()
     {
-        IsEnabled = false;
-
-        if (Hour == "00" && Minute == "00" && Second == "00")
+        // 注册委托
+        _countdownService.Ticked += (sender, args) =>
         {
-            return;
-        }
+            Time = $"{args.Hour} : {args.Minute} : {args.Second}";
+            IsRunning = args.IsRunning;
+            IsEnabled = args.IsEnabled;
+            StartStopButtonImage =
+                IsRunning ? CountdownPageSource.StopButtonImage : CountdownPageSource.StartButtonImage;
 
-        _isRunning = !_isRunning;
-        StartStopButtonImage = _isRunning
-            ? CountdownPageSource.StopButtonImage
-            : CountdownPageSource.StartButtonImage;
+            if (IsEnabled == true)
+            {
+                ClearSelections();
+            }
+        };
 
-        if (_isRunning == true)
-        {
-            decimal tempNumHour = Convert.ToDecimal(Hour);
-            decimal tempNumMinute = Convert.ToDecimal(Minute);
-            decimal tempNumSecond = Convert.ToDecimal(Second);
+        string command = IsRunning ? "stop" : "start";
 
-            _timer.Start();
-            _timer.Elapsed += async (sender, args) => {
-                if (tempNumSecond > 0)
-                {
-                    tempNumSecond--;
-
-                    if (tempNumSecond > 9)
-                    {
-                        Second = Convert.ToString(tempNumSecond);
-                    }
-                    else
-                    {
-                        Second = "0" + Convert.ToString(tempNumSecond);
-                    }
-                    LastTime = Hour + " : " + Minute + " : " + Second;
-
-                }
-                else if (tempNumSecond == 0)
-                {
-                    if (tempNumMinute == 0)
-                    {
-                        if (tempNumHour == 0)
-                        {
-                            _timer.Stop();
-                            _timer.Close();
-                            _timer = new Timer(1000);
-                            _isRunning = false;
-                            StartStopButtonImage = _isRunning
-                                ? CountdownPageSource.StopButtonImage
-                                : CountdownPageSource.StartButtonImage;
-                            SelectedHour = "00";
-                            SelectedMinute = "00";
-                            SelectedSecond = "00";
-                            IsEnabled = true;
-                            await _audioPlayService.PlayAudio();
-                            return;
-                        }
-                        else if (tempNumHour > 0)
-                        {
-                            tempNumHour--;
-
-                            if (tempNumHour > 9)
-                            {
-                                Hour = Convert.ToString(tempNumHour);
-                            }
-                            else
-                            {
-                                Hour = "0" + Convert.ToString(tempNumHour);
-                            }
-                            LastTime = Hour + " : " + Minute + " : " + Second;
-                        }
-
-                        tempNumMinute = 59;
-                        Minute = Convert.ToString(tempNumMinute);
-                        LastTime = Hour + " : " + Minute + " : " + Second;
-                    }
-                    else if (tempNumMinute > 0)
-                    {
-                        tempNumMinute--;
-
-                        if (tempNumMinute > 9)
-                        {
-                            Minute = Convert.ToString(tempNumMinute);
-                        }
-                        else
-                        {
-                            Minute = "0" + Convert.ToString(tempNumMinute);
-                        }
-                        LastTime = Hour + " : " + Minute + " : " + Second;
-                    }
-
-                    tempNumSecond = 59;
-                    Second = Convert.ToString(tempNumSecond);
-                    LastTime = Hour + " : " + Minute + " : " + Second;
-                }
-            };
-        }
-        else
-        {
-            _timer.Stop();
-        }
+        _countdownService.StartOrStop(command);
     }
 
     public async Task ResetCommandFunction()
     {
-        _timer.Stop();
-        _timer.Close();
-        _timer = new Timer(1000);
-        _isRunning = false;
-        StartStopButtonImage = _isRunning
-            ? CountdownPageSource.StopButtonImage
-            : CountdownPageSource.StartButtonImage;
-        Hour = "00";
-        Minute = "00";
-        Second = "00";
-        LastTime = Hour + " : " + Minute + " : " + Second;
-        SelectedHour = "00";
-        SelectedMinute = "00";
-        SelectedSecond = "00";
-        IsEnabled = true;
+        _countdownService.Reset();
+        ClearSelections();
     }
 
     public async Task SelectedIndexChangedCommandFunction()
     {
-        Hour = SelectedHour;
-        Minute = SelectedMinute;
-        Second = SelectedSecond;
-        LastTime = Hour + " : " + Minute + " : " + Second;
+        Time = $"{SelectedHour} : {SelectedMinute} : {SelectedSecond}";
+        _countdownService.SetTime(SelectedHour, SelectedMinute, SelectedSecond);
+    }
+
+    private void ClearSelections()
+    {
+        SelectedHour = "00";
+        SelectedMinute = "00";
+        SelectedSecond = "00";
     }
 }
 

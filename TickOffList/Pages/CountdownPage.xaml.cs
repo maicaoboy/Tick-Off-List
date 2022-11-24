@@ -16,18 +16,18 @@ public partial class CountdownPage : ContentPage
         {
             if (i <= 9)
             {
-                HourPicker.Items.Add("0" + Convert.ToString(i));
-                MinutePicker.Items.Add("0" + Convert.ToString(i));
-                SecondPicker.Items.Add("0" + Convert.ToString(i));
+                HourPicker.Items.Add($"0{i}");
+                MinutePicker.Items.Add($"0{i}");
+                SecondPicker.Items.Add($"0{i}");
             }
             else if (i <= 59)
             {
-                MinutePicker.Items.Add(Convert.ToString(i));
-                SecondPicker.Items.Add(Convert.ToString(i));
+                MinutePicker.Items.Add($"{i}");
+                SecondPicker.Items.Add($"{i}");
             }
             else
             {
-                HourPicker.Items.Add(Convert.ToString(i));
+                HourPicker.Items.Add($"{i}");
             }
         }
 

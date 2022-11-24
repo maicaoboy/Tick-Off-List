@@ -23,8 +23,6 @@ public class ServiceLocator {
     public ServiceLocator() {
         var serviceCollection = new ServiceCollection();
 
-        serviceCollection.AddSingleton<CountdownPageViewModel>();
-
         serviceCollection.AddSingleton<IRouteService, RouteService>();
         serviceCollection.AddSingleton<IContentNavigationService, ContentNavigationService>();
         serviceCollection.AddSingleton<IRootNavigationService, RootNavigationService>();
@@ -34,6 +32,7 @@ public class ServiceLocator {
         serviceCollection.AddSingleton<IAlertService, AlertService>();
 
         serviceCollection.AddSingleton<CountdownPageViewModel>();
+        serviceCollection.AddSingleton<ICountdownService, CountdownService>();
         serviceCollection.AddSingleton<IAudioPlayService, AudioPlayService>();
 
         serviceCollection.AddSingleton<IHabitStorage, HabitStorage>();

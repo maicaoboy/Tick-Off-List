@@ -11,7 +11,7 @@
         <!--time-->
         <Label
             x:Name="timeLabel"
-            Text="{Binding LastTime}"
+            Text="{Binding Time}"
             FontSize="Header"
             TextColor="Black"
             HorizontalTextAlignment="Center">
@@ -92,7 +92,7 @@
             <!--reset-->
             <ImageButton
                 x:Name="resetButton"
-                Source="reset.png"
+                Source="{Binding ResetButtonImage}"
                 HeightRequest="30"
                 WidthRequest="30"
                 Command="{Binding ResetCommand}">
