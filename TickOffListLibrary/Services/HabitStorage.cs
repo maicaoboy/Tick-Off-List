@@ -1,8 +1,6 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
-using SQLite;
+﻿using SQLite;
 using TickOffList.Constant;
 using TickOffList.Models;
-using TickOffList.Services;
 
 namespace TickOffList.Services;
 

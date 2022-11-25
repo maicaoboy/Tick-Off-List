@@ -1,5 +1,4 @@
-﻿using System.Data.SqlTypes;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SQLite;
 
 namespace TickOffList.Models;

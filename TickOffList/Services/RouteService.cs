@@ -1,6 +1,4 @@
-﻿using TickOffList.Services;
-
-namespace TickOffList.Services;
+﻿namespace TickOffList.Services;
 
 public class RouteService : IRouteService
 {

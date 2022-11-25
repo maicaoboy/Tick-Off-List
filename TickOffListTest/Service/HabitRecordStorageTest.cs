@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.VisualStudio.TestPlatform.Utilities;
-using TickOffList.Models;
+﻿using TickOffList.Models;
 using TickOffList.Services; 
 using Xunit;
 using Xunit.Abstractions;

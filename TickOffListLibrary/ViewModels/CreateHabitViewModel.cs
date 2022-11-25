@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Threading.Tasks;
 using TickOffList.Models;
 using TickOffList.Services;
 
@@ -14,7 +13,7 @@ public class CreateHabitViewModel : ObservableObject {
     private string _tickCount;
 
     private IHabitStorage _habitStorage;
-    private IContentNavigationService _contentNavigationService;
+    private IRootNavigationService _rootNavigationService;  
 
     private RelayCommand<string> _selecteIconRelayCommand;
 
@@ -70,13 +69,13 @@ public class CreateHabitViewModel : ObservableObject {
 
         await _habitStorage.AddAsync(habit);
 
-        // await _contentNavigationService.NavigateToAsync(
-        //     RootNavigationConstant.HabitPage);
+        await _rootNavigationService.NavigateToAsync(RootNavigationConstant
+            .HabitPage);
     }
 
-    public CreateHabitViewModel(IHabitStorage habitStorage, IContentNavigationService contentNavigationService) {
+    public CreateHabitViewModel(IHabitStorage habitStorage, IRootNavigationService rootNavigationService) {
         _habitStorage = habitStorage;
-        _contentNavigationService = contentNavigationService;
+        _rootNavigationService = rootNavigationService;
 
         _selectedIcon = "paobu.png";
         _isCheckedList =
