@@ -20,6 +20,7 @@ public class HabitViewModel : ObservableObject {
     private string[] _dayOfMonthArray;
     private Color[] _dayColorsArray;
     private Color[] _dayTextColorsArray;
+    private int _dateNum;
 
     private readonly IContentNavigationService _contentNavigationService;
 
@@ -29,6 +30,7 @@ public class HabitViewModel : ObservableObject {
     public RelayCommand<string> ChangeDateCommand =>
         _changeDateCommand ??= new RelayCommand<string>(async dateStr => {
             int dateNum = int.Parse(dateStr);
+            _dateNum = dateNum;
             var dateTime = DateTime.Now.AddDays(-dateNum);
 
             var habitByWeekDay = await HabitStorage.getHabitByWeekDay(Convert
@@ -64,25 +66,39 @@ public class HabitViewModel : ObservableObject {
             DayTextColorsArray = textColors;
         });
 
+    private Lazy<AsyncRelayCommand> _lazyNavigatedToCommand;
 
-    private RelayCommand _testCommand;
+    public AsyncRelayCommand NavigatedToCommand =>
+        _lazyNavigatedToCommand.Value;
 
-    public RelayCommand TestCommand =>
-        _testCommand ??= new RelayCommand(async () => {
-            await _contentNavigationService.NavigateToAsync(
-                ContentNavigationConstant.TickPage, Habits[0]);
-        });
+    public async Task NavigatedToCommandFunction()
+    {
+        var dateTime = DateTime.Now.AddDays(-_dateNum);
+
+        var habitByWeekDay = await HabitStorage.getHabitByWeekDay(Convert
+            .ToInt32(dateTime.DayOfWeek.ToString("d")).ToString());
+        Habits.Clear();
+        foreach (var habit in habitByWeekDay)
+        {
+            habit.Finish = await HabitStorage.isFinish(habit.Id, DateTime.Now.AddDays(-_dateNum));
+            Habits.Add(habit);
+        }
+    }
+
+
 
     private RelayCommand<Habit> _tickCommand;
 
     public RelayCommand<Habit> TickCommand =>
         _tickCommand ??= new RelayCommand<Habit>(async habit => {
+            List<Object> args =  new List<Object>(){habit, (Object)_dateNum};
             await _contentNavigationService.NavigateToAsync(
-                ContentNavigationConstant.TickPage, habit);
+                ContentNavigationConstant.TickPage, args);
         });
 
     public HabitViewModel(IHabitStorage habitStorage, IContentNavigationService contentNavigationService) {
         HabitStorage = habitStorage;
+        _dateNum = 0;
         _contentNavigationService = contentNavigationService;
         string[] Day = new string[] { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
 
@@ -128,12 +144,15 @@ public class HabitViewModel : ObservableObject {
         };
 
         Init();
+
+        _lazyNavigatedToCommand = new Lazy<AsyncRelayCommand>(() =>
+            new AsyncRelayCommand(NavigatedToCommandFunction));
     }
 
     public async void Init() {
         var listAsync = await HabitStorage.ListAsync();
         foreach (var habit in listAsync) {
-            habit.Finish = await HabitStorage.isFinish(habit.Id, DateTime.Now);
+            habit.Finish = await HabitStorage.isFinish(habit.Id, DateTime.Now.AddDays(-_dateNum));
         }
         Habits = new ObservableCollection<Habit>(listAsync);
     }
@@ -141,6 +160,8 @@ public class HabitViewModel : ObservableObject {
 
     //习惯数据库
     public IHabitStorage HabitStorage;
+
+    
 
     //ListView显示的Habit
     private ObservableCollection<Habit> _habits;
@@ -171,5 +192,10 @@ public class HabitViewModel : ObservableObject {
     {
         get => _dayTextColorsArray;
         set => SetProperty(ref _dayTextColorsArray, value);
+    }
+
+    public int DateNum {
+        get => _dateNum;
+        set => _dateNum = value;
     }
 }

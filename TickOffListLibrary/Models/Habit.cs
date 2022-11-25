@@ -1,10 +1,11 @@
 ﻿using System.Data.SqlTypes;
+using CommunityToolkit.Mvvm.ComponentModel;
 using SQLite;
 
 namespace TickOffList.Models;
 
 [SQLite.Table("habit")]
-public class Habit {
+public class Habit : ObservableObject{
     [Column("id"), PrimaryKey, AutoIncrement]
     public int Id { get; set; }
 
@@ -26,6 +27,11 @@ public class Habit {
     [SQLite.Column("recordCount")]
     public int RecordCount { get; set; } = 0;
 
+    private bool _finish;
+
     [SQLite.Ignore]
-    public bool Finish { get; set; } = false;
+    public bool Finish {
+        get => _finish;
+        set => SetProperty(ref _finish, value);
+    }
 }

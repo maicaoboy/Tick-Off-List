@@ -75,4 +75,8 @@ public class HabitStorage : IHabitStorage {
         bool flag = result != 0;
         return flag;
     }
+
+    public async Task updateHabit(Habit habit) {
+        await Connection.UpdateAsync(habit);
+    }
 }

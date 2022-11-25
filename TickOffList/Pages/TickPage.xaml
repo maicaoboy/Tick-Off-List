@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mauiBehaviors="clr-namespace:TheSalLab.MauiBehaviors;assembly=TheSalLab.MauiBehaviors"
+             xmlns:converters="clr-namespace:TickOffList.Converters"
              x:Class="TickOffList.Pages.TickPage"
              BindingContext="{Binding TickViewModelProxy, Source={StaticResource ServiceLocator}}"
              Title="TickPage">
@@ -9,10 +11,63 @@
     <!-- * 创建时间：2022-11-22 -->
     <!-- * @version 1.0 -->
     <!-- * ==============================================================================*/ -->
-    <VerticalStackLayout>
-        <Label 
-            Text="{Binding Habit.Title}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ContentPage.Behaviors>
+        <mauiBehaviors:MauiEventHandlerBehavior EventName="NavigatedTo">
+            <mauiBehaviors:MauiActionCollection>
+                <mauiBehaviors:MauiInvokeCommandAction
+                    Command="{Binding NavigatedToCommand}">
+                </mauiBehaviors:MauiInvokeCommandAction>
+            </mauiBehaviors:MauiActionCollection>
+        </mauiBehaviors:MauiEventHandlerBehavior>
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <converters:HabitIconStateConverter x:Key="HabitStateConverter" />
+        <converters:HabitTickImageButtonIconState x:Key="ImageButtonConverter" />
+    </ContentPage.Resources>
+
+    <!-- <VerticalStackLayout> -->
+    <!--     <Label  -->
+    <!--         Text="{Binding TickHabit.Title}" -->
+    <!--         VerticalOptions="Center"  -->
+    <!--         HorizontalOptions="Center" /> -->
+    <!-- </VerticalStackLayout> -->
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Image
+                Source="{Binding TickHabit, Converter={StaticResource HabitStateConverter}}"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="{Binding TickHabit.Title}"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="{Binding TickHabit.Describe}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
+            <ImageButton
+                Command="{Binding TickCommandLazy}"
+                Aspect="AspectFit "
+                IsEnabled="{Binding Enabled}"
+                SemanticProperties.Hint="Counts the number of times you click"
+                HorizontalOptions="Center" 
+                HeightRequest="80"
+                Source="{Binding TickHabit,Converter={StaticResource ImageButtonConverter}}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -19,6 +19,16 @@
         <converters:HabitPageItemTappedConverter x:Key="HabitTappedConverter" />
     </ContentPage.Resources>
 
+    <ContentPage.Behaviors>
+        <mauiBehaviors:MauiEventHandlerBehavior EventName="NavigatedTo">
+            <mauiBehaviors:MauiActionCollection>
+                <mauiBehaviors:MauiInvokeCommandAction
+                    Command="{Binding NavigatedToCommand}">
+                </mauiBehaviors:MauiInvokeCommandAction>
+            </mauiBehaviors:MauiActionCollection>
+        </mauiBehaviors:MauiEventHandlerBehavior>
+    </ContentPage.Behaviors>
+
     <ContentPage.Content>
 
         <AbsoluteLayout>
@@ -75,14 +85,6 @@
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-
-                    <ListView.Footer>
-                        <StackLayout>
-                            <Button Command="{Binding TestCommand}"
-                                    Text="走">
-                            </Button>
-                        </StackLayout>
-                    </ListView.Footer>
                 </ListView>
 
             </Grid>
