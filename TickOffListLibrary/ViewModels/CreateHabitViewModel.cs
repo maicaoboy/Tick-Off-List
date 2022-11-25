@@ -70,6 +70,7 @@ public class CreateHabitViewModel : ObservableObject {
 
         await _habitStorage.AddAsync(habit);
 
+        //TODO导航回首页崩溃
         // await _contentNavigationService.NavigateToAsync(
         //     RootNavigationConstant.HabitPage);
     }
