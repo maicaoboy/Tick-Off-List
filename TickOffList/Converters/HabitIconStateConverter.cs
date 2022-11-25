@@ -1,7 +1,13 @@
 ﻿using System.Globalization;
 using TickOffList.Models;
 
-namespace TickOffList.Converters; 
+namespace TickOffList.Converters;
+
+/* ==============================================================================
+* 创建人：李宏彬
+* 创建时间：2022-11-25
+* @version 1.0
+* ==============================================================================*/
 
 public class HabitIconStateConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter,

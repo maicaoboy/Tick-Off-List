@@ -3,7 +3,13 @@ using CommunityToolkit.Mvvm.Input;
 using TickOffList.Models;
 using TickOffList.Services;
 
-namespace TickOffList.ViewModels; 
+namespace TickOffList.ViewModels;
+
+/* ==============================================================================
+* 创建人：李宏彬
+* 创建时间：2022-11-25
+* @version 1.0
+* ==============================================================================*/
 
 public class TickViewModel : ObservableObject{
     private List<Object> _args;

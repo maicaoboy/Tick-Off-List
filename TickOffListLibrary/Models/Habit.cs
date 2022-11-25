@@ -4,6 +4,13 @@ using SQLite;
 
 namespace TickOffList.Models;
 
+/* ==============================================================================
+* 创建人：李宏彬
+* 创建时间：2022-11-11
+* @version 1.0
+* ==============================================================================*/
+
+
 [SQLite.Table("habit")]
 public class Habit : ObservableObject{
     [Column("id"), PrimaryKey, AutoIncrement]
