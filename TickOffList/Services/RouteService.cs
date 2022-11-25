@@ -11,6 +11,8 @@ public class RouteService : IRouteService
         [RootNavigationConstant.HabitPage] = RootNavigationConstant.HabitPage,
         [ContentNavigationConstant.TickPage] = 
             $"{RootNavigationConstant.HabitPage}/{ContentNavigationConstant.TickPage}",
+        [ContentNavigationConstant.CreateHabitPage] =
+            $"{RootNavigationConstant.HabitPage}/{ContentNavigationConstant.CreateHabitPage}",
     };
 
     public string GetRoute(string pageKey) => _routeDictionary[pageKey];

@@ -12,4 +12,6 @@ public static class ContentNavigationConstant {
     public const string HabitPage = nameof(HabitPage);
 
     public const string TickPage = nameof(TickPage);
+
+    public const string CreateHabitPage = nameof(CreateHabitPage);
 }

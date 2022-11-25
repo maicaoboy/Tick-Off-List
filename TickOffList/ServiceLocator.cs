@@ -13,6 +13,9 @@ public class ServiceLocator {
     public HabitViewModel HabitViewModel =>
         _serviceProvider.GetService<HabitViewModel>();
 
+    public CreateHabitViewModel CreateHabitViewModel =>
+        _serviceProvider.GetService<CreateHabitViewModel>();
+
     public IRouteService RouteService =>
         _serviceProvider.GetService<IRouteService>();
 
@@ -33,6 +36,8 @@ public class ServiceLocator {
         serviceCollection.AddSingleton<HabitViewModel>();
 
         serviceCollection.AddSingleton<TickViewModelProxy>();
+
+        serviceCollection.AddSingleton<CreateHabitViewModel>();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }

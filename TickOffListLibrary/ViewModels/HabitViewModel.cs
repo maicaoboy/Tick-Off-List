@@ -96,6 +96,14 @@ public class HabitViewModel : ObservableObject {
                 ContentNavigationConstant.TickPage, args);
         });
 
+    private RelayCommand<Habit> _createCommand;
+
+    public RelayCommand<Habit> CreateCommand =>
+        _createCommand ??= new RelayCommand<Habit>(async habit => {
+            await _contentNavigationService.NavigateToAsync(
+                ContentNavigationConstant.CreateHabitPage);
+        });
+
     public HabitViewModel(IHabitStorage habitStorage, IContentNavigationService contentNavigationService) {
         HabitStorage = habitStorage;
         _dateNum = 0;

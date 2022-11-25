@@ -5,7 +5,7 @@
              xmlns:converters="clr-namespace:TickOffList.Converters"
              x:Class="TickOffList.Pages.TickPage"
              BindingContext="{Binding TickViewModelProxy, Source={StaticResource ServiceLocator}}"
-             Title="TickPage">
+             Title="打卡">
     <!-- /* ============================================================================== -->
     <!-- * 创建人：李宏彬 -->
     <!-- * 创建时间：2022-11-22 -->
