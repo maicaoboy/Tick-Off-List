@@ -33,11 +33,12 @@ public class HabitViewModel : ObservableObject {
             _dateNum = dateNum;
             var dateTime = DateTime.Now.AddDays(-dateNum);
 
-            var habitByWeekDay = await HabitStorage.getHabitByWeekDay(Convert
+            var habitByWeekDay = await _habitStorage.getHabitByWeekDay(Convert
                 .ToInt32(dateTime.DayOfWeek.ToString("d")).ToString());
             Habits.Clear();
             foreach (var habit in habitByWeekDay) {
-                habit.Finish = await HabitStorage.isFinish(habit.Id, DateTime.Now.AddDays(-dateNum));
+                habit.Finish = await _habitStorage.isFinish(habit.Id, DateTime.Now.AddDays(-dateNum));
+                habit.QuantityToday = await _habitStorage.TickCount(habit.Id, DateTime.Now.AddDays(-dateNum));
                 Habits.Add(habit);
             }
 
@@ -75,12 +76,14 @@ public class HabitViewModel : ObservableObject {
     {
         var dateTime = DateTime.Now.AddDays(-_dateNum);
 
-        var habitByWeekDay = await HabitStorage.getHabitByWeekDay(Convert
+        var habitByWeekDay = await _habitStorage.getHabitByWeekDay(Convert
             .ToInt32(dateTime.DayOfWeek.ToString("d")).ToString());
         Habits.Clear();
         foreach (var habit in habitByWeekDay)
         {
-            habit.Finish = await HabitStorage.isFinish(habit.Id, DateTime.Now.AddDays(-_dateNum));
+            habit.Finish = await _habitStorage.isFinish(habit.Id, DateTime.Now.AddDays(-_dateNum));
+            habit.QuantityToday = await _habitStorage.TickCount(habit.Id,
+                DateTime.Now.AddDays(-_dateNum));
             Habits.Add(habit);
         }
     }
@@ -105,7 +108,7 @@ public class HabitViewModel : ObservableObject {
         });
 
     public HabitViewModel(IHabitStorage habitStorage, IContentNavigationService contentNavigationService) {
-        HabitStorage = habitStorage;
+        _habitStorage = habitStorage;
         _dateNum = 0;
         _contentNavigationService = contentNavigationService;
         string[] Day = new string[] { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
@@ -158,16 +161,17 @@ public class HabitViewModel : ObservableObject {
     }
 
     public async void Init() {
-        var listAsync = await HabitStorage.ListAsync();
+        var listAsync = await _habitStorage.ListAsync();
         foreach (var habit in listAsync) {
-            habit.Finish = await HabitStorage.isFinish(habit.Id, DateTime.Now.AddDays(-_dateNum));
+            habit.Finish = await _habitStorage.isFinish(habit.Id, DateTime.Now.AddDays(-_dateNum));
+            habit.QuantityToday = await _habitStorage.TickCount(habit.Id, DateTime.Now.AddDays(-_dateNum));
         }
         Habits = new ObservableCollection<Habit>(listAsync);
     }
 
 
     //习惯数据库
-    public IHabitStorage HabitStorage;
+    private IHabitStorage _habitStorage;
 
     
 

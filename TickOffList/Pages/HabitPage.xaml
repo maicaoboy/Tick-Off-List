@@ -75,7 +75,7 @@
                         <DataTemplate>
                             <ViewCell Height="80">
                                 <Grid RowDefinitions="*"
-                                  ColumnDefinitions="*,*,3*,3*,2*,*">
+                                  ColumnDefinitions="*,*,3*,3*,2*,*" Margin="0,5,0,5">
                                     <Image Grid.Row="0" Grid.Column="1" HeightRequest="70" VerticalOptions="Center" Source="{Binding ., Converter={StaticResource HabitStateConverter}}"></Image>
                                     <Label Grid.Row="0" Grid.Column="2" HeightRequest="70" VerticalTextAlignment="Center" FontSize="15" Text="{Binding Title}"></Label>
                                     <Label Grid.Row="0" Grid.Column="3" HeightRequest="70" VerticalTextAlignment="Center" Text="{Binding Describe}"></Label>

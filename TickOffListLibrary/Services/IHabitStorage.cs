@@ -22,4 +22,8 @@ public interface IHabitStorage {
     public Task<bool> isFinish(int hid, DateTime dateTime);
 
     public Task updateHabit(Habit habit);
+
+    public Task<int> TickCount(int hid, DateTime dateTime);
+
+    public Task DeleteHabit(int hid);
 }

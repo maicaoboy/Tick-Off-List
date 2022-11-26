@@ -39,6 +39,8 @@ public class ServiceLocator {
 
         serviceCollection.AddSingleton<CreateHabitViewModel>();
 
+        serviceCollection.AddSingleton<IDialogService, DialogService>();
+
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }
 }

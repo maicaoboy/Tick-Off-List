@@ -14,6 +14,7 @@ public class CreateHabitViewModel : ObservableObject {
 
     private IHabitStorage _habitStorage;
     private IRootNavigationService _rootNavigationService;  
+    private IDialogService _dialogService;
 
     private RelayCommand<string> _selecteIconRelayCommand;
 
@@ -30,6 +31,7 @@ public class CreateHabitViewModel : ObservableObject {
     public async Task SaveHabitCommandFunction()
     {
         if (_title == string.Empty) {
+            // await _dialogService.ShowConfirmationAsync("警告", "请输入习惯名称");
             return;
         }
 
@@ -48,7 +50,7 @@ public class CreateHabitViewModel : ObservableObject {
         }
 
 
-        if (!_tickCount.All(char.IsDigit) && int.Parse(_tickCount) > 0) {
+        if (_tickCount == null || _tickCount == String.Empty || !_tickCount.All(char.IsDigit) || int.Parse(_tickCount) !> 0) {
             return;
         }
 
@@ -73,16 +75,18 @@ public class CreateHabitViewModel : ObservableObject {
             .HabitPage);
     }
 
-    public CreateHabitViewModel(IHabitStorage habitStorage, IRootNavigationService rootNavigationService) {
+    public CreateHabitViewModel(IHabitStorage habitStorage, IRootNavigationService rootNavigationService, IDialogService dialogService)
+    {
         _habitStorage = habitStorage;
         _rootNavigationService = rootNavigationService;
 
         _selectedIcon = "paobu.png";
         _isCheckedList =
-            new[] { true, true, true, true, true, true, true};
+            new[] { true, true, true, true, true, true, true };
 
         _lazySaveHabit = new Lazy<AsyncRelayCommand>(() =>
             new AsyncRelayCommand(SaveHabitCommandFunction));
+        _dialogService = dialogService;
     }
 
     public string Title {
@@ -109,4 +113,6 @@ public class CreateHabitViewModel : ObservableObject {
         get => _tickCount;
         set => SetProperty(ref _tickCount, value);
     }
+
+
 }

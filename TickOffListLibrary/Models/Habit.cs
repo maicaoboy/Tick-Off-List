@@ -40,4 +40,12 @@ public class Habit : ObservableObject{
         get => _finish;
         set => SetProperty(ref _finish, value);
     }
+
+    private int _quantityToday;
+
+    [SQLite.Ignore]
+    public int QuantityToday {
+        get => _quantityToday;
+        set => SetProperty(ref _quantityToday, value);
+    }
 }

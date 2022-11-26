@@ -83,7 +83,7 @@ public class HabitStorageTest {
     }
     
     [Fact]
-    public void TetsHabitFinishPara()
+    public void TestHabitFinishPara()
     {
         // var isFinish = habitStorage.isFinish(1);
         // Assert.Equal(true, isFinish);
@@ -91,6 +91,10 @@ public class HabitStorageTest {
         Assert.Equal(true, isFinish2.Result);
     }
 
-
+    [Fact]
+    public async void TestTickCount() {
+        var tickCount = await habitStorage.TickCount(1, DateTime.Now);
+        Assert.Equal(tickCount, 2);
+    }
 
 }

@@ -18,6 +18,7 @@ public class TickViewModel : ObservableObject{
     private bool _enabled;
     private IHabitStorage _habitStorage;
     private IHabitRecordStorage _habitRecordStorage;
+    private IRootNavigationService _rootNavigationService;
 
     public bool Enabled {
         get => _enabled;
@@ -44,15 +45,19 @@ public class TickViewModel : ObservableObject{
     }
 
 
-    public TickViewModel(IHabitStorage habitStorage, IHabitRecordStorage habitRecordStorage) {
+    public TickViewModel(IHabitStorage habitStorage, IHabitRecordStorage habitRecordStorage, IRootNavigationService rootNavigationService) {
         _habitStorage = habitStorage;
         _habitRecordStorage = habitRecordStorage;
+        _rootNavigationService = rootNavigationService;
 
         _lazyNavigatedToCommand = new Lazy<AsyncRelayCommand>(() =>
             new AsyncRelayCommand(NavigatedToCommandFunction));
 
         _tickCommandLazy = new Lazy<AsyncRelayCommand>(() =>
             new AsyncRelayCommand(TickCommandLazyFunction));
+
+        _deleteHabitCommandLazy = new Lazy<AsyncRelayCommand>( () =>
+            new AsyncRelayCommand(DeleteHabitCommandLazyFunction));
     }
 
 
@@ -80,12 +85,38 @@ public class TickViewModel : ObservableObject{
         };
         await _habitRecordStorage.AddAsync(habitRecord);
         Enabled = false;
+        TickHabit.QuantityToday += 1;
         var isFinish = await _habitStorage.isFinish(TickHabit.Id);
         if (isFinish) {
             TickHabit.RecordCount += 1;
             TickHabit.Finish = true;
             await _habitStorage.updateHabit(TickHabit);
         }
+
+        Habit habit = new Habit() {
+            Id = TickHabit.Id,
+            Title = TickHabit.Title,
+            Describe = TickHabit.Describe,
+            IconName = TickHabit.IconName,
+            Days = TickHabit.Days,
+            Quantity = TickHabit.Quantity,
+            RecordCount = TickHabit.RecordCount,
+            Finish = TickHabit.Finish,
+            QuantityToday = TickHabit.QuantityToday
+        };
+
+        TickHabit = habit;
+    }
+
+    private Lazy<AsyncRelayCommand> _deleteHabitCommandLazy;
+
+    public AsyncRelayCommand DeleteHabit =>
+        _deleteHabitCommandLazy.Value;
+
+    public async Task DeleteHabitCommandLazyFunction() {
+        await _habitStorage.DeleteHabit(TickHabit.Id);
+        await _rootNavigationService.NavigateToAsync(RootNavigationConstant
+            .HabitPage);
     }
 
 }

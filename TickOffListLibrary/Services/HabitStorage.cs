@@ -77,4 +77,16 @@ public class HabitStorage : IHabitStorage {
     public async Task updateHabit(Habit habit) {
         await Connection.UpdateAsync(habit);
     }
+
+    public async Task<int> TickCount(int hid, DateTime dateTime) {
+        var todayBegin = dateTime.Date;
+        var todayEnd = todayBegin.AddMilliseconds(86400000);
+        var countAsync = await Connection.Table<HabitRecord>().Where(hr => hr.Hid == hid && todayBegin <= hr.RecordDate && hr.RecordDate < todayEnd).CountAsync();
+        return countAsync;
+    }
+
+    public async Task DeleteHabit(int hid) {
+        await Connection.Table<Habit>().DeleteAsync(h => h.Id == hid);
+        await Connection.Table<HabitRecord>().DeleteAsync(hr => hr.Id == hid);
+    }
 }

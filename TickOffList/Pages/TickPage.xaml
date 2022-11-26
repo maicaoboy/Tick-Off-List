@@ -25,6 +25,7 @@
     <ContentPage.Resources>
         <converters:HabitIconStateConverter x:Key="HabitStateConverter" />
         <converters:HabitTickImageButtonIconState x:Key="ImageButtonConverter" />
+        <converters:TickNumberConverter x:Key="TickNumberConverter" />
     </ContentPage.Resources>
 
     <!-- <VerticalStackLayout> -->
@@ -42,7 +43,6 @@
 
             <Image
                 Source="{Binding TickHabit, Converter={StaticResource HabitStateConverter}}"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="200"
                 HorizontalOptions="Center" />
 
@@ -55,7 +55,6 @@
             <Label
                 Text="{Binding TickHabit.Describe}"
                 SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
                 FontSize="18"
                 HorizontalOptions="Center" />
 
@@ -63,10 +62,22 @@
                 Command="{Binding TickCommandLazy}"
                 Aspect="AspectFit "
                 IsEnabled="{Binding Enabled}"
-                SemanticProperties.Hint="Counts the number of times you click"
                 HorizontalOptions="Center" 
                 HeightRequest="80"
                 Source="{Binding TickHabit,Converter={StaticResource ImageButtonConverter}}"/>
+
+            <Label
+                Text="{Binding TickHabit, Converter={StaticResource TickNumberConverter}}"
+                SemanticProperties.HeadingLevel="Level2"
+                FontSize="10"
+                HorizontalOptions="Center" />
+
+            <Button
+                TextColor="White"
+                Command="{Binding DeleteHabit}"
+                Text="删除习惯"
+                HorizontalOptions="Center"
+                />
 
         </VerticalStackLayout>
     </ScrollView>
