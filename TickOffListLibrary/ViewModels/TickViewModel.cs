@@ -17,7 +17,6 @@ public class TickViewModel : ObservableObject{
     private int _dateNum;
     private bool _enabled;
     private IHabitStorage _habitStorage;
-    private IHabitRecordStorage _habitRecordStorage;
     private IRootNavigationService _rootNavigationService;
 
     public bool Enabled {
@@ -45,9 +44,8 @@ public class TickViewModel : ObservableObject{
     }
 
 
-    public TickViewModel(IHabitStorage habitStorage, IHabitRecordStorage habitRecordStorage, IRootNavigationService rootNavigationService) {
+    public TickViewModel(IHabitStorage habitStorage, IRootNavigationService rootNavigationService) {
         _habitStorage = habitStorage;
-        _habitRecordStorage = habitRecordStorage;
         _rootNavigationService = rootNavigationService;
 
         _lazyNavigatedToCommand = new Lazy<AsyncRelayCommand>(() =>
@@ -83,7 +81,7 @@ public class TickViewModel : ObservableObject{
             Hid = TickHabit.Id,
             RecordDate = DateTime.Now
         };
-        await _habitRecordStorage.AddAsync(habitRecord);
+        await _habitStorage.AddAsync(habitRecord);
         Enabled = false;
         TickHabit.QuantityToday += 1;
         var isFinish = await _habitStorage.isFinish(TickHabit.Id);

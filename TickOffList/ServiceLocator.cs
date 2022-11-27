@@ -23,8 +23,6 @@ public class ServiceLocator {
         var serviceCollection = new ServiceCollection();
 
         serviceCollection.AddSingleton<IHabitStorage, HabitStorage>();
-        serviceCollection
-            .AddSingleton<IHabitRecordStorage, HabitRecordStorage>();
 
         serviceCollection.AddSingleton<IRouteService, RouteService>();
         serviceCollection

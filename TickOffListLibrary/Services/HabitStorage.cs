@@ -24,6 +24,7 @@ public class HabitStorage : IHabitStorage {
         InitializeAsync();
     }
 
+    //初始化数据库
     public async Task InitializeAsync()
     {
         if (!File.Exists(Constants.DatabasePath)) {
@@ -88,5 +89,10 @@ public class HabitStorage : IHabitStorage {
     public async Task DeleteHabit(int hid) {
         await Connection.Table<Habit>().DeleteAsync(h => h.Id == hid);
         await Connection.Table<HabitRecord>().DeleteAsync(hr => hr.Id == hid);
+    }
+
+    public async Task AddAsync(HabitRecord habitRecord)
+    {
+        await Connection.InsertAsync(habitRecord);
     }
 }

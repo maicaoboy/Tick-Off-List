@@ -10,5 +10,5 @@ namespace TickOffList.ViewModels;
 
 [QueryProperty(nameof(Args), "parameter")]
 public class TickViewModelProxy : TickViewModel{
-    public TickViewModelProxy(IHabitStorage habitStorage, IHabitRecordStorage habitRecordStorage, IRootNavigationService rootNavigationService) : base(habitStorage, habitRecordStorage, rootNavigationService ) { }
+    public TickViewModelProxy(IHabitStorage habitStorage, IRootNavigationService rootNavigationService) : base(habitStorage, rootNavigationService ) { }
 }

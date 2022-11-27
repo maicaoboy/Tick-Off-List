@@ -50,7 +50,8 @@ public class CreateHabitViewModel : ObservableObject {
         }
 
 
-        if (_tickCount == null || _tickCount == String.Empty || !_tickCount.All(char.IsDigit) || int.Parse(_tickCount) !> 0) {
+        if (_tickCount == null || _tickCount == string.Empty || (!_tickCount.All(char.IsDigit)) || !(int.Parse(_tickCount) > 0)) {
+
             return;
         }
 
@@ -70,6 +71,15 @@ public class CreateHabitViewModel : ObservableObject {
         };
 
         await _habitStorage.AddAsync(habit);
+
+        _title = string.Empty;
+        _description = string.Empty;
+        for (var i = 0; i < _isCheckedList.Length; i++) {
+            _isCheckedList[i] = true;
+        }
+
+        _selectedIcon = "paobu.png";
+        _tickCount = string.Empty;
 
         await _rootNavigationService.NavigateToAsync(RootNavigationConstant
             .HabitPage);
