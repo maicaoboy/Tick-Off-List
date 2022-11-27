@@ -49,7 +49,6 @@ public class CreateHabitViewModel : ObservableObject {
             return;
         }
 
-
         if (_tickCount == null || _tickCount == string.Empty || (!_tickCount.All(char.IsDigit)) || !(int.Parse(_tickCount) > 0)) {
 
             return;
@@ -84,7 +83,7 @@ public class CreateHabitViewModel : ObservableObject {
         await _rootNavigationService.NavigateToAsync(RootNavigationConstant
             .HabitPage);
     }
-
+    
     public CreateHabitViewModel(IHabitStorage habitStorage, IRootNavigationService rootNavigationService, IDialogService dialogService)
     {
         _habitStorage = habitStorage;

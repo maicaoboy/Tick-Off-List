@@ -68,7 +68,8 @@ public class HabitStorage : IHabitStorage {
         // Connection.ta
         var todayBegin = dateTime.Date;
         var todayEnd = todayBegin.AddMilliseconds(86400000);
-        var countAsync = await Connection.Table<HabitRecord>().Where(hr => hr.Hid == hid && todayBegin <= hr.RecordDate && hr.RecordDate < todayEnd).CountAsync();
+        var countAsync = await Connection.Table<HabitRecord>().
+            Where(hr => hr.Hid == hid && todayBegin <= hr.RecordDate && hr.RecordDate < todayEnd).CountAsync();
         var result = await Connection.Table<Habit>()
             .Where(h => h.Id == hid && h.Quantity == countAsync).CountAsync();
         bool flag = result != 0;

@@ -28,73 +28,58 @@ public class HabitStorageTest {
         enumerator.MoveNext();
         var habit = enumerator.Current;
         // Assert.Equal(habit.Id, 1);
-        Assert.Equal(habit.Quantity, 1);
+        int i = habit.RecordCount;
 
 
-        habit.Quantity = 2;
+        habit.RecordCount = i + 1;
         habitStorage.updateHabit(habit);
 
         var listAsync1 = await habitStorage.ListAsync();
         var enumerator1 = listAsync1.GetEnumerator();
         enumerator1.MoveNext();
         var habit1 = enumerator1.Current;
-        Assert.Equal(habit1.Quantity, 2);
+        Assert.Equal(habit1.RecordCount, i + 1);
 
     }
 
-    [Fact]
-    public void StorageAndReadTest()
-    {
-        var habitStorage = new HabitStorage();
-        // habitStorage.InitializeAsync();
-        var habit = new Habit();
-        habit.Title = "haha";
-        habitStorage.AddAsync(habit);
-        var listAsync = habitStorage.ListAsync();
-        var iter = listAsync.Result.GetEnumerator();
-        iter.MoveNext();
-        var habitGet = iter.Current;
-        Assert.Equal("背单词", habitGet.Title);
-    }
     
-    [Fact]
-    public async void testList()
-    {
-        var storage = new HabitStorage();
-        var listAsync = await habitStorage.ListAsync();
-        var habits = listAsync.ToList();
-        for (var i = 0; i < habits.Count; i++) {
-            output.WriteLine(habits[i].Title);
-        }
-    }
     
     [Fact]
     public void GetHabitByDayOfWeekTest() {
-        var habitByWeekDay = habitStorage.getHabitByWeekDay("6").Result;
-        output.WriteLine("{0}-{1}", habitByWeekDay[0].Title, habitByWeekDay[1].Title);
+        var habitByWeekDay = habitStorage.getHabitByWeekDay("5").Result;
+        Assert.Equal(habitByWeekDay[0].IconName, "paobu.png");
+        var habitByWeekDay1 = habitStorage.getHabitByWeekDay("6").Result;
+        Assert.Equal(0, habitByWeekDay1.Count);
     }
-    
+
     [Fact]
-    public void TetsHabitFinish() {
-        // var isFinish = habitStorage.isFinish(1);
-        // Assert.Equal(true, isFinish);
-        var isFinish2 = habitStorage.isFinish(2);
+    public async void TetsHabitFinish() {
+        var finish1 = await habitStorage.isFinish(1);
+        if (!finish1) {
+            var habitRecord = new HabitRecord() {Hid = 1, RecordDate = DateTime.Now};
+            habitStorage.AddAsync(habitRecord);
+        }
+        var isFinish2 = habitStorage.isFinish(1);
         Assert.Equal(true, isFinish2.Result);
     }
     
     [Fact]
-    public void TestHabitFinishPara()
+    public async void TestHabitFinishPara()
     {
-        // var isFinish = habitStorage.isFinish(1);
-        // Assert.Equal(true, isFinish);
-        var isFinish2 = habitStorage.isFinish(2, DateTime.Now);
+        var finish1 = await habitStorage.isFinish(1, DateTime.Now);
+        if (!finish1)
+        {
+            var habitRecord = new HabitRecord() { Hid = 1, RecordDate = DateTime.Now };
+            habitStorage.AddAsync(habitRecord);
+        }
+        var isFinish2 = habitStorage.isFinish(1, DateTime.Now);
         Assert.Equal(true, isFinish2.Result);
     }
 
     [Fact]
     public async void TestTickCount() {
         var tickCount = await habitStorage.TickCount(1, DateTime.Now);
-        Assert.Equal(tickCount, 2);
+        Assert.Equal(1, tickCount);
     }
 
 }
