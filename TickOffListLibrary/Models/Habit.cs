@@ -48,4 +48,6 @@ public class Habit : ObservableObject{
         get => _quantityToday;
         set => SetProperty(ref _quantityToday, value);
     }
+
+
 }

@@ -9,7 +9,8 @@ namespace TickOffList.Services;
 * 创建时间：2022-11-10
 * @version 1.0
 * ==============================================================================*/
-public class HabitStorage : IHabitStorage {
+public class HabitStorage : IHabitStorage
+{
     private static SQLiteAsyncConnection Database;
 
     private SQLiteAsyncConnection? _connection;
@@ -49,6 +50,9 @@ public class HabitStorage : IHabitStorage {
 
     public async Task<IEnumerable<Habit>> ListAsync() =>
         await Connection.Table<Habit>().ToListAsync();
+
+    public async Task<IEnumerable<HabitRecord>> ListRecordAsync(DateTime starTime, DateTime endTime) =>
+        await Connection.Table<HabitRecord>().Where(p => p.RecordDate < endTime && p.RecordDate > starTime).ToListAsync();
 
     public async Task<List<Habit>> getHabitByWeekDay(string dayOfWeek) {
         return await Connection.Table<Habit>().Where(h => h.Days.Contains(dayOfWeek)).ToListAsync();
@@ -96,4 +100,5 @@ public class HabitStorage : IHabitStorage {
     {
         await Connection.InsertAsync(habitRecord);
     }
+
 }

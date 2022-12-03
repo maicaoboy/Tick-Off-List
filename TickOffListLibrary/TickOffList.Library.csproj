@@ -9,15 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
     <Folder Include="Constant\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0-preview1" />
-    <PackageReference Include="Microsoft.Maui.Graphics" Version="6.0.501" />
+    <PackageReference Include="Microsoft.Maui.Graphics" Version="7.0.49" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.2" />
+    <PackageReference Include="Syncfusion.Maui.Scheduler" Version="20.3.59" />
   </ItemGroup>
 
 </Project>

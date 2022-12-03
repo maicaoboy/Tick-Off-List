@@ -7,6 +7,7 @@ public class RouteService : IRouteService
     {
         [RootNavigationConstant.MainPage] = RootNavigationConstant.MainPage,
         [RootNavigationConstant.HabitPage] = RootNavigationConstant.HabitPage,
+        [RootNavigationConstant.CalendarPage] = RootNavigationConstant.CalendarPage,
         [ContentNavigationConstant.TickPage] = 
             $"{RootNavigationConstant.HabitPage}/{ContentNavigationConstant.TickPage}",
         [ContentNavigationConstant.CreateHabitPage] =

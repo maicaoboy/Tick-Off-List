@@ -10,4 +10,5 @@ public interface IRootNavigationService
 public static class RootNavigationConstant {
     public const string MainPage = nameof(MainPage);
     public const string HabitPage = nameof(HabitPage);
+    public const string CalendarPage = nameof(CalendarPage);
 }

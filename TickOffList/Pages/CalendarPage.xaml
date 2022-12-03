@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:scheduler="http://schemas.syncfusion.com/maui"
+             xmlns:mauiBehaviors="clr-namespace:TheSalLab.MauiBehaviors;assembly=TheSalLab.MauiBehaviors"
+             x:Class="TickOffList.Pages.CalendarPage"
+             BindingContext="{Binding CalendarViewModel, Source={StaticResource ServiceLocator }}"
+             Title="CalendarPage">
+
+    <ContentPage.Behaviors>
+        <mauiBehaviors:MauiEventHandlerBehavior EventName="NavigatedTo">
+            <mauiBehaviors:MauiActionCollection>
+                <mauiBehaviors:MauiInvokeCommandAction
+                    Command="{Binding NavigatedToCommand}">
+                </mauiBehaviors:MauiInvokeCommandAction>
+            </mauiBehaviors:MauiActionCollection>
+        </mauiBehaviors:MauiEventHandlerBehavior>
+    </ContentPage.Behaviors>
+
+    <Grid ColumnDefinitions="*"
+          RowDefinitions="*">
+        <scheduler:SfScheduler x:Name="Scheduler" 
+                               View="Agenda" 
+                               AppointmentsSource="{Binding Meetings}"
+                               MinimumDateTime="{Binding MinDateTime}"
+                               MaximumDateTime="{Binding MaxDateTime}"
+                               DisplayDate="{Binding DisplayDate}"  
+                               ShowWeekNumber="True">
+            <scheduler:SfScheduler.MonthView>
+                <scheduler:SchedulerMonthView 
+                    AppointmentDisplayMode="Indicator"/>
+            </scheduler:SfScheduler.MonthView>
+            <scheduler:SfScheduler.AppointmentMapping>
+                <scheduler:SchedulerAppointmentMapping
+                    Subject="EventName"
+                    StartTime="From"
+                    EndTime="To"
+                    Background="Background"
+                    IsAllDay="IsAllDay"
+                    StartTimeZone="StartTimeZone"
+                    EndTimeZone="EndTimeZone"/>
+            </scheduler:SfScheduler.AppointmentMapping>
+        </scheduler:SfScheduler>
+    </Grid>
+
+</ContentPage>

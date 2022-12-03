@@ -37,7 +37,16 @@ public partial class AppShell : Shell
             routeService.GetRoute(ContentNavigationConstant.CreateHabitPage),
             typeof(CreateHabitPage));
 
-
+        Items.Add(new FlyoutItem
+        {
+            Title = nameof(CalendarPage),
+            Route = routeService.GetRoute(RootNavigationConstant.CalendarPage),
+            Items = {
+                new ShellContent {
+                    ContentTemplate = new DataTemplate(typeof(CalendarPage))
+                }
+            }
+        });
 
     }
 }

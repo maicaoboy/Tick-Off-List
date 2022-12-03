@@ -1,10 +1,15 @@
-﻿using TickOffList.Services;
+﻿using TickOffList.Converters;
+using TickOffList.Services;
 using TickOffList.ViewModels;
 
 namespace TickOffList; 
 
 public class ServiceLocator {
     private IServiceProvider _serviceProvider;
+
+    public CalendarViewModel CalendarViewModel =>
+        _serviceProvider.GetService<CalendarViewModel>();
+
 
     public TickViewModelProxy TickViewModelProxy =>
         _serviceProvider.GetService<TickViewModelProxy>();
@@ -37,7 +42,13 @@ public class ServiceLocator {
 
         serviceCollection.AddSingleton<CreateHabitViewModel>();
 
+        serviceCollection.AddSingleton<CalendarViewModel>();
+
         serviceCollection.AddSingleton<IDialogService, DialogService>();
+
+        serviceCollection.AddSingleton<IMeetingService, MeetingService>();
+
+        serviceCollection.AddSingleton<IMeetingColorConverter, MeetingColorConverter>();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }

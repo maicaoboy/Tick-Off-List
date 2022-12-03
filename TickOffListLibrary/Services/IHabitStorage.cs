@@ -16,11 +16,16 @@ public interface IHabitStorage {
     public Task AddAsync(Habit poetry);
 
 
-    //获取今日所有习惯
+    //获取所有习惯
     public Task<IEnumerable<Habit>> ListAsync();
+
 
     //获取一周内某天所有习惯
     public Task<List<Habit>> getHabitByWeekDay(string dayOfWeek);
+
+    //获取一段时间内的打卡记录
+    public Task<IEnumerable<HabitRecord>> ListRecordAsync(
+        DateTime starTime, DateTime endTime);
 
     //根据Habit的Id查询今日是否已经打卡
     public Task<bool> isFinish(int hid);
