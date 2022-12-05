@@ -49,5 +49,13 @@ public partial class AppShell : Shell
                 }
             }
         });
+
+        Routing.RegisterRoute(
+            routeService.GetRoute(ContentNavigationConstant.TickPage),
+            typeof(TickPage));
+
+        Routing.RegisterRoute(
+            routeService.GetRoute(ContentNavigationConstant.CreateHabitPage),
+            typeof(CreateHabitPage));
     }
 }

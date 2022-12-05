@@ -15,6 +15,12 @@ public class ServiceLocator {
     public HabitViewModel HabitViewModel =>
         _serviceProvider.GetService<HabitViewModel>();
 
+    public TickViewModelProxy TickViewModelProxy =>
+        _serviceProvider.GetService<TickViewModelProxy>();
+
+    public CreateHabitViewModel CreateHabitViewModel =>
+        _serviceProvider.GetService<CreateHabitViewModel>();
+
     public IRouteService RouteService =>
         _serviceProvider.GetService<IRouteService>();
 
@@ -30,11 +36,15 @@ public class ServiceLocator {
         serviceCollection.AddSingleton<IAlertService, AlertService>();
 
         serviceCollection.AddSingleton<CountdownPageViewModel>();
+        serviceCollection.AddSingleton<ICountdownService, CountdownService>();
         serviceCollection.AddSingleton<IAudioPlayService, AudioPlayService>();
 
         serviceCollection.AddSingleton<IHabitStorage, HabitStorage>();
-        serviceCollection.AddSingleton<IHabitRecordStorage, HabitRecordStorage>();
         serviceCollection.AddSingleton<HabitViewModel>();
+
+        serviceCollection.AddSingleton<TickViewModelProxy>();
+        serviceCollection.AddSingleton<CreateHabitViewModel>();
+        serviceCollection.AddSingleton<IDialogService, DialogService>();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }
