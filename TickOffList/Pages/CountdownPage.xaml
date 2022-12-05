@@ -11,7 +11,7 @@
         <!--time-->
         <Label
             x:Name="timeLabel"
-            Text="{Binding LastTime}"
+            Text="{Binding Time}"
             FontSize="Header"
             TextColor="Black"
             HorizontalTextAlignment="Center">
@@ -23,7 +23,6 @@
             HorizontalOptions="Center"
             Spacing="60"
             Margin="0,60,0,0">
-
             <Picker x:Name="HourPicker"
                     Title="时"
                     SelectedItem="{Binding SelectedHour}"
@@ -78,7 +77,6 @@
             HorizontalOptions="Center"
             Spacing="60"
             Margin="0,60,0,0">
-
             <!--start stop-->
             <ImageButton
                 x:Name="startStopButton"
@@ -87,11 +85,10 @@
                 WidthRequest="30"
                 Command="{Binding StartStopCommand}">
             </ImageButton>
-
             <!--reset-->
             <ImageButton
                 x:Name="resetButton"
-                Source="reset.png"
+                Source="{Binding ResetButtonImage}"
                 HeightRequest="30"
                 WidthRequest="30"
                 Command="{Binding ResetCommand}">

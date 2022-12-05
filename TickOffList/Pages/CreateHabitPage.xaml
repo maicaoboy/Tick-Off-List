@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TickOffList.Pages.CreateHabitPage"
+             BindingContext="{Binding CreateHabitViewModel, Source={StaticResource ServiceLocator}}"
+             Title="添加习惯">
+    <ScrollView>
+        <StackLayout 
+            Margin="20,20,20,20"
+            Padding="5,5,5,5">
+            <Label
+                Margin="5"
+                FontSize="24"
+                Text="习惯名称"
+                VerticalOptions="Center"
+                HorizontalOptions="Start" />
+            <Entry
+                Margin="5,15,0,10"
+                Placeholder="请输入习惯名称"
+                Text="{Binding Title}"></Entry>
+            <Label
+                Margin="5"
+                FontSize="24"
+                Text="习惯鼓励语"
+                VerticalOptions="Center"
+                HorizontalOptions="Start" />
+            <Entry
+                Margin="5"
+                Placeholder="请输入习惯名称"
+                Text="{Binding Description}"></Entry>
+            <HorizontalStackLayout >
+                <Label
+                    Margin="5"
+                    FontSize="24"
+                    Text="选择习惯图标"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start" />
+                <Image  HeightRequest="80" VerticalOptions="Center" Source="{Binding SelectedIcon}"></Image>
+            </HorizontalStackLayout>
+            <ScrollView Orientation="Horizontal">
+                <HorizontalStackLayout >
+                    <ImageButton HeightRequest="70" Source="changge.png" Command="{Binding SelectIconCommand}" CommandParameter="changge.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="chenxi.png" Command="{Binding SelectIconCommand}" CommandParameter="chenxi.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="chishucai.png" Command="{Binding SelectIconCommand}" CommandParameter="chishucai.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="chishuiguo.png" Command="{Binding SelectIconCommand}" CommandParameter="chishuiguo.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="chizaocan.png" Command="{Binding SelectIconCommand}" CommandParameter="chizaocan.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="chouyan.png" Command="{Binding SelectIconCommand}" CommandParameter="chouyan.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="dadianhua.png" Command="{Binding SelectIconCommand}" CommandParameter="dadianhua.png"></ImageButton>
+                </HorizontalStackLayout>
+            </ScrollView>
+
+            <ScrollView Orientation="Horizontal">
+                <HorizontalStackLayout>
+                    <ImageButton HeightRequest="70" Source="hejiu.png" Command="{Binding SelectIconCommand}" CommandParameter="hejiu.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="heshui.png" Command="{Binding SelectIconCommand}" CommandParameter="heshui.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="huahua.png" Command="{Binding SelectIconCommand}" CommandParameter="huahua.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="jianfei.png" Command="{Binding SelectIconCommand}" CommandParameter="jianfei.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="jianshen.png" Command="{Binding SelectIconCommand}" CommandParameter="jianshen.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="jiejiu.png" Command="{Binding SelectIconCommand}" CommandParameter="jiejiu.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="jieyan.png" Command="{Binding SelectIconCommand}" CommandParameter="jieyan.png"></ImageButton>
+                </HorizontalStackLayout>
+            </ScrollView>
+            <ScrollView Orientation="Horizontal">
+                <HorizontalStackLayout>
+                    <ImageButton HeightRequest="70" Source="kanshu.png" Command="{Binding SelectIconCommand}" CommandParameter="kanshu.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="kaoyan.png" Command="{Binding SelectIconCommand}" CommandParameter="kaoyan.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="lianzi.png" Command="{Binding SelectIconCommand}" CommandParameter="lianzi.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="licai.png" Command="{Binding SelectIconCommand}" CommandParameter="licai.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="paobu.png" Command="{Binding SelectIconCommand}" CommandParameter="paobu.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="peihaizi.png" Command="{Binding SelectIconCommand}" CommandParameter="peihaizi.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="sheying.png" Command="{Binding SelectIconCommand}" CommandParameter="sheying.png"></ImageButton>
+                </HorizontalStackLayout>
+            </ScrollView>
+            <ScrollView Orientation="Horizontal">
+                <HorizontalStackLayout>
+                    <ImageButton HeightRequest="70" Source="shuaya.png" Command="{Binding SelectIconCommand}" CommandParameter="shuaya.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="tingge.png" Command="{Binding SelectIconCommand}" CommandParameter="tingge.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="weixiao.png" Command="{Binding SelectIconCommand}" CommandParameter="weixiao.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="yingyu.png" Command="{Binding SelectIconCommand}" CommandParameter="yingyu.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="zaoqi.png" Command="{Binding SelectIconCommand}" CommandParameter="zaoqi.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="zaoshui.png" Command="{Binding SelectIconCommand}" CommandParameter="zaoshui.png"></ImageButton>
+                    <ImageButton HeightRequest="70" Source="zuofan.png" Command="{Binding SelectIconCommand}" CommandParameter="zuofan.png"></ImageButton>
+                </HorizontalStackLayout>
+            </ScrollView>
+
+            <Label
+                Margin="0,15,0,5"
+                FontSize="24"
+                Text="选择每周打卡日期"
+                VerticalOptions="Center"
+                HorizontalOptions="Start" />
+            <HorizontalStackLayout>
+                <Label Text="星期日"></Label>
+                <CheckBox IsChecked="{Binding IsCheckedList[0]}"></CheckBox>
+                <Label Text="星期一"></Label>
+                <CheckBox IsChecked="{Binding IsCheckedList[1]}"></CheckBox>
+                <Label Text="星期二"></Label>
+                <CheckBox IsChecked="{Binding IsCheckedList[2]}"></CheckBox>
+                <Label Text="星期三"></Label>
+                <CheckBox IsChecked="{Binding IsCheckedList[3]}"></CheckBox>
+                <Label Text="星期四"></Label>
+                <CheckBox IsChecked="{Binding IsCheckedList[4]}"></CheckBox>
+                <Label Text="星期五"></Label>
+                <CheckBox IsChecked="{Binding IsCheckedList[5]}"></CheckBox>
+                <Label Text="星期六"></Label>
+                <CheckBox IsChecked="{Binding IsCheckedList[6]}"></CheckBox>
+            </HorizontalStackLayout>
+            <Label
+                Margin="5,15,0,10"
+                FontSize="24"
+                Text="选择每天打卡次数(整数)"
+                VerticalOptions="Center"
+                HorizontalOptions="Start" />
+            <Entry
+                Margin="5"
+                Placeholder="请输入打卡次数"
+                Text="{Binding TickCount}"></Entry>
+            <Button Command="{Binding SaveHabitCommand}" Text="保存" TextColor="White" Background="#512BD4" Margin="30"></Button>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
