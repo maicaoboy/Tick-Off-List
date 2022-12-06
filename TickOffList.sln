@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TickOffList", "TickOffList\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TickOffList.Library", "TickOffListLibrary\TickOffList.Library.csproj", "{BF20A891-DC99-4C02-887B-FACB665CDAA7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TickOffListTest", "TickOffListTest\TickOffListTest.csproj", "{BFEE4E65-6B9F-40B7-BD7C-8805BA37FDC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TickOffList.UnitTest", "TickOffListTest\TickOffList.UnitTest.csproj", "{BFEE4E65-6B9F-40B7-BD7C-8805BA37FDC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
