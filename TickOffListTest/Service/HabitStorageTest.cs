@@ -16,7 +16,7 @@ public class HabitStorageTest {
     public HabitStorageTest(ITestOutputHelper output)
     {
         this.output = output;
-        habitStorage = new HabitStorage();
+        // habitStorage = new HabitStorage();
         this.output.WriteLine("Execute constructor!");
     }
 

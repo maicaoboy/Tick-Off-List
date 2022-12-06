@@ -9,6 +9,9 @@ namespace TickOffList.Services;
 * ==============================================================================*/
 
 public interface IHabitStorage {
+
+    public bool IsInitialized { get; }
+
     //初始化数据库
     public Task InitializeAsync();
 

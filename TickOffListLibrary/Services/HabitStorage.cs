@@ -15,33 +15,18 @@ public class HabitStorage : IHabitStorage
 
     private SQLiteAsyncConnection? _connection;
 
+    private readonly IPreferenceStorage _preferenceStorage;
+
     private SQLiteAsyncConnection Connection =>
-        _connection ??= new SQLiteAsyncConnection(Constants.DatabasePath,Constants.Flags);
+        _connection ??= new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
 
-    public HabitStorage()
+    public HabitStorage(IPreferenceStorage preferenceStorage)
     {
-
         Database = new SQLiteAsyncConnection(Constants.DatabasePath);
-        InitializeAsync();
+        _preferenceStorage = preferenceStorage;
     }
 
-    //初始化数据库
-    public async Task InitializeAsync()
-    {
-        if (!File.Exists(Constants.DatabasePath)) {
-            await Connection.CreateTableAsync<Habit>();
-            await Connection.CreateTableAsync<HabitRecord>();
-            var habit = new Habit {
-                Title = "开始你的第一个习惯吧",
-                Describe = "第一个习惯",
-                IconName = "paobu.png",
-                Days = "12345",
-                Quantity = 1,
-                RecordCount = 0
-            };
-            await AddAsync(habit);
-        }
-    }
+
 
     public async Task AddAsync(Habit poetry)
     {
@@ -93,7 +78,7 @@ public class HabitStorage : IHabitStorage
 
     public async Task DeleteHabit(int hid) {
         await Connection.Table<Habit>().DeleteAsync(h => h.Id == hid);
-        await Connection.Table<HabitRecord>().DeleteAsync(hr => hr.Id == hid);
+        await Connection.Table<HabitRecord>().DeleteAsync(hr => hr.Hid == hid);
     }
 
     public async Task AddAsync(HabitRecord habitRecord)
@@ -101,4 +86,35 @@ public class HabitStorage : IHabitStorage
         await Connection.InsertAsync(habitRecord);
     }
 
+    public bool IsInitialized =>
+        _preferenceStorage.Get(HabitStorageConstant.VersionKey,
+            default(int)) == HabitStorageConstant.Version;
+
+    //初始化数据库
+    public async Task InitializeAsync()
+    {
+        await Connection.CreateTableAsync<Habit>();
+        await Connection.CreateTableAsync<HabitRecord>();
+        var habit = new Habit
+        {
+            Title = "开始你的第一个习惯吧",
+            Describe = "第一个习惯",
+            IconName = "paobu.png",
+            Days = "12345",
+            Quantity = 1,
+            RecordCount = 0
+        };
+        await AddAsync(habit);
+        _preferenceStorage.Set(HabitStorageConstant.VersionKey,
+            HabitStorageConstant.Version);
+    }
+
+}
+
+public static class HabitStorageConstant
+{
+    public const string VersionKey =
+        nameof(HabitStorageConstant) + "." + nameof(Version);
+
+    public const int Version = 1;
 }

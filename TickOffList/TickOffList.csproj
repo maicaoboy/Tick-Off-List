@@ -110,6 +110,9 @@
 	  <MauiXaml Update="Pages\HabitPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\InitializationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\MainPages.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

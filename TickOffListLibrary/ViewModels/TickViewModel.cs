@@ -18,6 +18,7 @@ public class TickViewModel : ObservableObject{
     private bool _enabled;
     private IHabitStorage _habitStorage;
     private IRootNavigationService _rootNavigationService;
+    private IAlertService _alertService;
 
     public bool Enabled {
         get => _enabled;
@@ -44,9 +45,10 @@ public class TickViewModel : ObservableObject{
     }
 
 
-    public TickViewModel(IHabitStorage habitStorage, IRootNavigationService rootNavigationService) {
+    public TickViewModel(IHabitStorage habitStorage, IRootNavigationService rootNavigationService, IAlertService alertService) {
         _habitStorage = habitStorage;
         _rootNavigationService = rootNavigationService;
+        _alertService = alertService;
 
         _lazyNavigatedToCommand = new Lazy<AsyncRelayCommand>(() =>
             new AsyncRelayCommand(NavigatedToCommandFunction));
@@ -112,9 +114,12 @@ public class TickViewModel : ObservableObject{
         _deleteHabitCommandLazy.Value;
 
     public async Task DeleteHabitCommandLazyFunction() {
-        await _habitStorage.DeleteHabit(TickHabit.Id);
-        await _rootNavigationService.NavigateToAsync(RootNavigationConstant
-            .HabitPage);
+        var alertResult = await _alertService.Alert("删除", "确认删除此习惯吗？", "确认", "取消");
+        if (alertResult) {
+            await _habitStorage.DeleteHabit(TickHabit.Id);
+            await _rootNavigationService.NavigateToAsync(RootNavigationConstant
+                .HabitPage);
+        } 
     }
 
 }

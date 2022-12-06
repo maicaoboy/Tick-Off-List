@@ -8,9 +8,24 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
-        // MainPage = new NavigationPage(new HabitPage()) {
-        //     BarTextColor = Color.FromRgb(255, 255, 255)
-        // }; ;
+		MainPage = new NavigationPage(new ContentPage());
+
+        var serviceLocatorName = nameof(ServiceLocator);
+        var serviceLocator =
+            (ServiceLocator)Application.Current.Resources.MergedDictionaries
+                .First(p => p.ContainsKey(serviceLocatorName))[
+                    serviceLocatorName];
+
+        var habitStorage = serviceLocator.HabitStorage;
+        var initializationNavigationService = serviceLocator.InitializationNavigationService;
+
+        if (!habitStorage.IsInitialized )
+        {
+            initializationNavigationService.NavigateToInitializationPage();
+        }
+        else
+        {
+            initializationNavigationService.NavigateToAppShell();
+        }
     }
 }

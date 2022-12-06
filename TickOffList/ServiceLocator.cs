@@ -24,9 +24,19 @@ public class ServiceLocator {
     public IRouteService RouteService =>
         _serviceProvider.GetService<IRouteService>();
 
+    public IInitializationNavigationService InitializationNavigationService =>
+        _serviceProvider.GetService<IInitializationNavigationService>();
+
+    public IHabitStorage HabitStorage =>
+        _serviceProvider.GetService<IHabitStorage>();
+
+    public InitializationPageViewModel InitializationPageViewModel =>
+        _serviceProvider.GetService<InitializationPageViewModel>();
+
     public ServiceLocator() {
         var serviceCollection = new ServiceCollection();
 
+        serviceCollection.AddSingleton<IPreferenceStorage, PreferenceStorage>();
         serviceCollection.AddSingleton<IHabitStorage, HabitStorage>();
 
         serviceCollection.AddSingleton<IRouteService, RouteService>();
@@ -44,11 +54,17 @@ public class ServiceLocator {
 
         serviceCollection.AddSingleton<CalendarViewModel>();
 
-        serviceCollection.AddSingleton<IDialogService, DialogService>();
+        serviceCollection.AddSingleton<InitializationPageViewModel>();
 
         serviceCollection.AddSingleton<IMeetingService, MeetingService>();
 
         serviceCollection.AddSingleton<IMeetingColorConverter, MeetingColorConverter>();
+
+        serviceCollection.AddSingleton<IAlertService, AlertService>();
+
+        serviceCollection
+            .AddSingleton<IInitializationNavigationService,
+                InitializationNavigationService>();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }

@@ -13,8 +13,8 @@ public class CreateHabitViewModel : ObservableObject {
     private string _tickCount;
 
     private IHabitStorage _habitStorage;
-    private IRootNavigationService _rootNavigationService;  
-    private IDialogService _dialogService;
+    private IRootNavigationService _rootNavigationService;
+    private IAlertService _alertService;
 
     private RelayCommand<string> _selecteIconRelayCommand;
 
@@ -30,12 +30,13 @@ public class CreateHabitViewModel : ObservableObject {
 
     public async Task SaveHabitCommandFunction()
     {
-        if (_title == string.Empty) {
-            // await _dialogService.ShowConfirmationAsync("警告", "请输入习惯名称");
+        if (_title == null || _title == String.Empty || _title.Length == 0) {
+            _alertService.Alert("警告", "习惯名称未填写", "确定");
             return;
         }
 
-        if (_description == String.Empty) {
+        if (_description == null || _description == String.Empty || _description.Length == 0) {
+            _alertService.Alert("警告", "习惯描述未填写", "确定");
             return;
         }
         bool flag  = false;
@@ -46,11 +47,12 @@ public class CreateHabitViewModel : ObservableObject {
         }
 
         if (!flag) {
+            _alertService.Alert("警告", "请至少选择一个打卡日期", "确定");
             return;
         }
 
         if (_tickCount == null || _tickCount == string.Empty || (!_tickCount.All(char.IsDigit)) || !(int.Parse(_tickCount) > 0)) {
-
+            _alertService.Alert("警告", "打卡次数为空或不为正整数", "确定");
             return;
         }
 
@@ -84,10 +86,11 @@ public class CreateHabitViewModel : ObservableObject {
             .HabitPage);
     }
     
-    public CreateHabitViewModel(IHabitStorage habitStorage, IRootNavigationService rootNavigationService, IDialogService dialogService)
+    public CreateHabitViewModel(IHabitStorage habitStorage, IRootNavigationService rootNavigationService, IAlertService alertService)
     {
         _habitStorage = habitStorage;
         _rootNavigationService = rootNavigationService;
+        _alertService = alertService;
 
         _selectedIcon = "paobu.png";
         _isCheckedList =
@@ -95,7 +98,6 @@ public class CreateHabitViewModel : ObservableObject {
 
         _lazySaveHabit = new Lazy<AsyncRelayCommand>(() =>
             new AsyncRelayCommand(SaveHabitCommandFunction));
-        _dialogService = dialogService;
     }
 
     public string Title {
