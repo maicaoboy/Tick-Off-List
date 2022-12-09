@@ -1,6 +1,8 @@
-﻿using SQLite;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using SQLite;
 using TickOffList.Constant;
 using TickOffList.Models;
+using TickOffList.Services;
 
 namespace TickOffList.Services;
 
@@ -9,46 +11,47 @@ namespace TickOffList.Services;
 * 创建时间：2022-11-10
 * @version 1.0
 * ==============================================================================*/
-public class HabitStorage : IHabitStorage {
+public class HabitStorage : IHabitStorage
+{
     private static SQLiteAsyncConnection Database;
 
     private SQLiteAsyncConnection? _connection;
 
-    public HabitStorage() {
-        Database =
-            new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
-        InitializeAsync();
-    }
+    private readonly IPreferenceStorage _preferenceStorage;
 
     private SQLiteAsyncConnection Connection =>
-        _connection ??= new SQLiteAsyncConnection(Constants.DatabasePath);
+        _connection ??= new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
 
-    public async Task InitializeAsync() {
-        await Connection.CreateTableAsync<Habit>();
+    public HabitStorage(IPreferenceStorage preferenceStorage)
+    {
+        Database = new SQLiteAsyncConnection(Constants.DatabasePath);
+        _preferenceStorage = preferenceStorage;
     }
 
-    public async Task AddAsync(Habit poetry) {
+
+
+    public async Task AddAsync(Habit poetry)
+    {
         await Connection.InsertAsync(poetry);
     }
 
-    public async Task<IEnumerable<Habit>> ListAsync() {
-        return await Connection.Table<Habit>().ToListAsync();
-    }
+    public async Task<IEnumerable<Habit>> ListAsync() =>
+        await Connection.Table<Habit>().ToListAsync();
+
+    public async Task<IEnumerable<HabitRecord>> ListRecordAsync(DateTime starTime, DateTime endTime) =>
+        await Connection.Table<HabitRecord>().Where(p => p.RecordDate < endTime && p.RecordDate > starTime).ToListAsync();
 
     public async Task<List<Habit>> getHabitByWeekDay(string dayOfWeek) {
-        return await Connection.Table<Habit>()
-            .Where(h => h.days.Contains(dayOfWeek)).ToListAsync();
+        return await Connection.Table<Habit>().Where(h => h.Days.Contains(dayOfWeek)).ToListAsync();
     }
 
     public async Task<bool> isFinish(int hid) {
         var todayBegin = DateTime.Now.Date;
         var todayEnd = todayBegin.AddMilliseconds(86400000);
-        var countAsync = await Connection.Table<HabitRecord>().Where(hr =>
-            hr.Hid == hid && todayBegin <= hr.RecordDate &&
-            hr.RecordDate < todayEnd).CountAsync();
+        var countAsync = await Connection.Table<HabitRecord>().Where(hr => hr.Hid == hid && todayBegin <= hr.RecordDate && hr.RecordDate < todayEnd).CountAsync();
         var result = await Connection.Table<Habit>()
-            .Where(h => h.Id == hid && h.quantity == countAsync).CountAsync();
-        var flag = result != 0;
+            .Where(h => h.Id == hid && h.Quantity == countAsync).CountAsync();
+        bool flag = result != 0;
         return flag;
     }
 
@@ -56,12 +59,64 @@ public class HabitStorage : IHabitStorage {
         // Connection.ta
         var todayBegin = dateTime.Date;
         var todayEnd = todayBegin.AddMilliseconds(86400000);
-        var countAsync = await Connection.Table<HabitRecord>().Where(hr =>
-            hr.Hid == hid && todayBegin <= hr.RecordDate &&
-            hr.RecordDate < todayEnd).CountAsync();
+        var countAsync = await Connection.Table<HabitRecord>().
+            Where(hr => hr.Hid == hid && todayBegin <= hr.RecordDate && hr.RecordDate < todayEnd).CountAsync();
         var result = await Connection.Table<Habit>()
-            .Where(h => h.Id == hid && h.quantity == countAsync).CountAsync();
-        var flag = result != 0;
+            .Where(h => h.Id == hid && h.Quantity == countAsync).CountAsync();
+        bool flag = result != 0;
         return flag;
     }
+
+    public async Task updateHabit(Habit habit) {
+        await Connection.UpdateAsync(habit);
+    }
+
+    public async Task<int> TickCount(int hid, DateTime dateTime) {
+        var todayBegin = dateTime.Date;
+        var todayEnd = todayBegin.AddMilliseconds(86400000);
+        var countAsync = await Connection.Table<HabitRecord>().Where(hr => hr.Hid == hid && todayBegin <= hr.RecordDate && hr.RecordDate < todayEnd).CountAsync();
+        return countAsync;
+    }
+
+    public async Task DeleteHabit(int hid) {
+        await Connection.Table<Habit>().DeleteAsync(h => h.Id == hid);
+        await Connection.Table<HabitRecord>().DeleteAsync(hr => hr.Hid == hid);
+    }
+
+    public async Task AddAsync(HabitRecord habitRecord)
+    {
+        await Connection.InsertAsync(habitRecord);
+    }
+
+    public bool IsInitialized =>
+        _preferenceStorage.Get(HabitStorageConstant.VersionKey,
+            default(int)) == HabitStorageConstant.Version;
+
+    //初始化数据库
+    public async Task InitializeAsync()
+    {
+        await Connection.CreateTableAsync<Habit>();
+        await Connection.CreateTableAsync<HabitRecord>();
+        var habit = new Habit
+        {
+            Title = "开始你的第一个习惯吧",
+            Describe = "第一个习惯",
+            IconName = "paobu.png",
+            Days = "12345",
+            Quantity = 1,
+            RecordCount = 0
+        };
+        await AddAsync(habit);
+        _preferenceStorage.Set(HabitStorageConstant.VersionKey,
+            HabitStorageConstant.Version);
+    }
+
+}
+
+public static class HabitStorageConstant
+{
+    public const string VersionKey =
+        nameof(HabitStorageConstant) + "." + nameof(Version);
+
+    public const int Version = 1;
 }

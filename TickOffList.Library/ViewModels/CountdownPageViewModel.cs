@@ -6,7 +6,6 @@ namespace TickOffList.ViewModels;
 
 // Author: 陶静龙
 public class CountdownPageViewModel : ObservableObject {
-    private IAudioPlayService _audioPlayService;
 
     private readonly ICountdownService _countdownService;
 

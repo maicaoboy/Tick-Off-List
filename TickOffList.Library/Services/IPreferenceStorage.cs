@@ -1,6 +1,5 @@
-﻿namespace TickOffList.Services;
+﻿namespace TickOffList.Services; 
 
-// author: 李宏彬
 public interface IPreferenceStorage {
     void Set(string key, int value);
 

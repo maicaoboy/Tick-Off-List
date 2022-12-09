@@ -1,6 +1,7 @@
-﻿namespace TickOffList.Models;
+﻿using SQLite;
 
-// author: 李宏彬
+namespace TickOffList.Models; 
+
 public class HabitPageEntity {
     public int Id { get; set; }
 
@@ -17,4 +18,6 @@ public class HabitPageEntity {
     public int dayA { get; set; }
 
     public int quantityA { get; set; }
+
+
 }

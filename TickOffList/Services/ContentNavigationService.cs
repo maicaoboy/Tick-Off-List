@@ -8,10 +8,13 @@ public class ContentNavigationService : IContentNavigationService {
         _routeService = routeService;
     }
 
-        await Shell.Current.GoToAsync(_routeService.GetRoute(pageKey));
+        
+        public async Task NavigateToAsync(string pageKey) {
+            await Shell.Current.GoToAsync(_routeService.GetRoute(pageKey));
     }
 
+        public async Task NavigateToAsync(string pageKey, object parameter) {
         await Shell.Current.GoToAsync($"{_routeService.GetRoute(pageKey)}",
-            new Dictionary<string, object> {["parameter"] = parameter});
-}
+            new Dictionary<string, object> { ["parameter"] = parameter });
+    }
 }

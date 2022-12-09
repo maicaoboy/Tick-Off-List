@@ -81,6 +81,8 @@ public class CountdownService : ICountdownService {
             };
         } else if (command == "stop") {
             _timer.Stop();
+            _timer.Close();
+            _timer = new Timer(1000);
             Ticked?.Invoke(this,
                 new TimerEventArgs(_hour, _minute, _second, false, false));
         }

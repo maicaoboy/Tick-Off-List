@@ -1,19 +1,17 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.VisualStudio.TestPlatform.Utilities;
 using TickOffList.Models;
-using TickOffList.Services;
+using TickOffList.Services; 
 using Xunit;
 using Xunit.Abstractions;
 
-namespace TickOffList.UnitTest.Services;
-
+namespace TickOffListTest.Service;
 /* ==============================================================================
 * 创建人：李宏彬
 * 创建时间：2022-11-10
 * @version 1.0
 * ==============================================================================*/
-public class HabitRecordStorageTest
-{
+public class HabitRecordStorageTest {
     private readonly ITestOutputHelper output;
 
     public HabitRecordStorageTest(ITestOutputHelper output)
@@ -46,16 +44,17 @@ public class HabitRecordStorageTest
         iter.MoveNext();
         var habitRecordGet = iter.Current;
         // Assert.Equal(DateTime.Now.Day, habitRecordGet.RecordDate.Day + 1);
-        this.output.WriteLine("fefeffes{0}", habitRecord.RecordDate.ToShortDateString());
+        this.output.WriteLine("fefeffes{0}",habitRecord.RecordDate.ToShortDateString());
         var temp = "my class!";
         this.output.WriteLine("This is output from {0}", temp);
     }
 
     [Fact]
-    public void GetRecordByDay()
-    {
+    public void GetRecordByDay() {
         long begin = DateTime.Now.Date.Ticks;
         long end = DateTime.Now.Date.AddMilliseconds(86400000).Ticks;
         Assert.True(begin < DateTime.Now.Ticks && DateTime.Now.Ticks < end);
     }
+
+    
 }

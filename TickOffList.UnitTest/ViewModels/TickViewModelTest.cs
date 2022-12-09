@@ -13,9 +13,9 @@ public class TickViewModelTest {
 
     public TickViewModelTest()
     {
-        habitStorage = new HabitStorage();
-        var IRN = new Mock<IRootNavigationService>();
-        _tickViewModel = new TickViewModel(new HabitStorage(), IRN.Object);
+        // habitStorage = new HabitStorage();
+        // var IRN = new Mock<IRootNavigationService>();
+        // _tickViewModel = new TickViewModel(new HabitStorage(), IRN.Object);
     }
 
     [Fact]

@@ -1,27 +1,53 @@
-﻿using SQLite;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SQLite;
 
 namespace TickOffList.Models;
 
-// author: 李宏彬
-[Table("habit")]
-public class Habit {
-    [Column("id")]
-    [PrimaryKey]
-    [AutoIncrement]
+/* ==============================================================================
+* 创建人：李宏彬
+* 创建时间：2022-11-11
+* @version 1.0
+* ==============================================================================*/
+
+
+[SQLite.Table("habit")]
+public class Habit : ObservableObject{
+    [Column("id"), PrimaryKey, AutoIncrement]
     public int Id { get; set; }
 
-    [Column("title")]
-    public string title { get; set; } = string.Empty;
+    [SQLite.Column("title")]
+    public string Title { get; set; } = string.Empty;
 
-    [Column("describe")]
-    public string describe { get; set; } = string.Empty;
+    [SQLite.Column("describe")]
+    public string Describe { get; set; } = string.Empty;
 
-    [Column("iconName")]
-    public string iconName { get; set; } = string.Empty;
+    [SQLite.Column("iconName")]
+    public string IconName { get; set; } = string.Empty;
 
-    [Column("days")]
-    public string days { get; set; } = string.Empty;
+    [SQLite.Column("days")]
+    public string Days { get; set; } = string.Empty;
 
-    [Column("quantity")]
-    public int quantity { get; set; }
+    [SQLite.Column("quantity")]
+    public int Quantity { get; set; }
+
+    [SQLite.Column("recordCount")]
+    public int RecordCount { get; set; } = 0;
+
+    private bool _finish;
+
+    [SQLite.Ignore]
+    public bool Finish {
+        get => _finish;
+        set => SetProperty(ref _finish, value);
+    }
+
+    private int _quantityToday;
+
+    [SQLite.Ignore]
+    public int QuantityToday {
+        get => _quantityToday;
+        set => SetProperty(ref _quantityToday, value);
+    }
+
+
 }
