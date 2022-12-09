@@ -3,8 +3,7 @@
 namespace TickOffList.Services;
 
 // Author: 陶静龙
-public class AudioPlayService : IAudioPlayService
-{
+public class AudioPlayService : IAudioPlayService {
     private const string AudioName = "finish.wav";
 
     // private static readonly string AudioPath = Path.Combine(
@@ -13,7 +12,7 @@ public class AudioPlayService : IAudioPlayService
 
     private readonly IAudioManager _audioManager = new AudioManager();
 
-    private Stream auAssetStream =
+    private readonly Stream auAssetStream =
         typeof(AudioPlayService).Assembly
             .GetManifestResourceStream(AudioName) ??
         throw new Exception($"找不到名为{AudioName}的资源");
@@ -22,24 +21,17 @@ public class AudioPlayService : IAudioPlayService
     //     new FileStream(AudioPath, FileMode.OpenOrCreate);
 
 
-    public AudioPlayService()
-    {
-        // InitializeAudio();
-    }
-
-    private void InitializeAudio()
-    {
-        // using var auAssetStream =
-        //     typeof(AudioPlayService).Assembly.GetManifestResourceStream(
-        //         AudioName) ?? throw new Exception($"找不到名为{AudioName}的资源");
-        // auAssetStream.CopyToAsync(auFileStream);
-    }
-
-    public async Task PlayAudio()
-    {
+    public async Task PlayAudio() {
         var player = _audioManager.CreatePlayer(auAssetStream);
         player.Play();
         // auAssetStream.Close();
         // FileStream.Close();
+    }
+
+    private void InitializeAudio() {
+        // using var auAssetStream =
+        //     typeof(AudioPlayService).Assembly.GetManifestResourceStream(
+        //         AudioName) ?? throw new Exception($"找不到名为{AudioName}的资源");
+        // auAssetStream.CopyToAsync(auFileStream);
     }
 }

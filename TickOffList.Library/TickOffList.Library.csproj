@@ -1,33 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <RootNamespace>TickOffList</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>TickOffList</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="finish.wav" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="finish.wav" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="finish.wav">
-      <LogicalName>finish.wav</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="finish.wav">
+			<LogicalName>finish.wav</LogicalName>
+		</EmbeddedResource>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Services\" />
+		<Folder Include="ViewModels\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
-    <PackageReference Include="Plugin.Maui.Audio" Version="0.1.0-preview2" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
-    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.2" />
-    <PackageReference Include="TheSalLab.MauiInfiniteScrolling" Version="1.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm"
+		                  Version="8.0.0" />
+		<PackageReference Include="Plugin.Maui.Audio"
+		                  Version="0.1.0-preview2" />
+		<PackageReference Include="sqlite-net-pcl"
+		                  Version="1.8.116" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green"
+		                  Version="2.1.2" />
+		<PackageReference Include="TheSalLab.MauiInfiniteScrolling"
+		                  Version="1.0.1" />
+	</ItemGroup>
 
 </Project>

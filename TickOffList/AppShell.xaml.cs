@@ -3,20 +3,17 @@ using TickOffList.Services;
 
 namespace TickOffList;
 
-public partial class AppShell : Shell
-{
-	public AppShell()
-	{
-		InitializeComponent();
+public partial class AppShell : Shell {
+    public AppShell() {
+        InitializeComponent();
 
         var serviceLocatorName = nameof(ServiceLocator);
         var serviceLocator =
-            (ServiceLocator)Application.Current.Resources.MergedDictionaries
+            (ServiceLocator) Application.Current.Resources.MergedDictionaries
                 .First(p => p.ContainsKey(serviceLocatorName))[
                     serviceLocatorName];
 
-        Items.Add(new FlyoutItem
-        {
+        Items.Add(new FlyoutItem {
             Title = nameof(DailyPage),
             Route = nameof(DailyPage),
             Items = {
@@ -28,8 +25,7 @@ public partial class AppShell : Shell
 
         var routeService = serviceLocator.RouteService;
 
-        Items.Add(new FlyoutItem
-        {
+        Items.Add(new FlyoutItem {
             Title = nameof(CountdownPage),
             Route = routeService.GetRoute(RootNavigationConstant.CountdownPage),
             Items = {
@@ -39,8 +35,7 @@ public partial class AppShell : Shell
             }
         });
 
-        Items.Add(new FlyoutItem
-        {
+        Items.Add(new FlyoutItem {
             Title = nameof(HabitPage),
             Route = routeService.GetRoute(RootNavigationConstant.HabitPage),
             Items = {

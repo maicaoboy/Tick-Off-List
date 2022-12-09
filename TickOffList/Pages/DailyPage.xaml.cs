@@ -1,9 +1,7 @@
 namespace TickOffList.Pages;
 
-public partial class DailyPage : ContentPage
-{
-	public DailyPage()
-	{
-		InitializeComponent();
-	}
+public partial class DailyPage : ContentPage {
+    public DailyPage() {
+        InitializeComponent();
+    }
 }

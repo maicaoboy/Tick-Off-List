@@ -3,8 +3,7 @@
 namespace TickOffList.Services;
 
 // author: 李宏彬
-public interface IHabitStorage
-{
+public interface IHabitStorage {
     public Task InitializeAsync();
 
     public Task AddAsync(Habit poetry);

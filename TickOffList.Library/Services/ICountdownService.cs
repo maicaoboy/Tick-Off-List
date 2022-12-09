@@ -1,8 +1,7 @@
 ﻿namespace TickOffList.Services;
 
 // Author: 陶静龙
-public interface ICountdownService
-{
+public interface ICountdownService {
     public event EventHandler<TimerEventArgs> Ticked;
 
     void SetTime(string hour, string minute, string second);
@@ -10,8 +9,8 @@ public interface ICountdownService
     void Reset();
 }
 
-public class TimerEventArgs : EventArgs
-{
+public class TimerEventArgs : EventArgs {
+
     public string Hour { get; set; }
 
     public string Minute { get; set; }
@@ -22,7 +21,8 @@ public class TimerEventArgs : EventArgs
 
     public bool IsEnabled { get; set; }
 
-    public TimerEventArgs(string hour, string minute, string second, bool isRunning, bool isEnabled)
+    public TimerEventArgs(string hour, string minute, string second,
+        bool isRunning, bool isEnabled)
     {
         Hour = hour;
         Minute = minute;

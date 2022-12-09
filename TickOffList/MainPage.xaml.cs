@@ -1,11 +1,9 @@
 namespace TickOffList;
 
-public partial class MainPage : ContentPage
-{
-    int count = 0;
+public partial class MainPage : ContentPage {
+    private int count = 0;
 
-    public MainPage()
-    {
+    public MainPage() {
         InitializeComponent();
     }
 }

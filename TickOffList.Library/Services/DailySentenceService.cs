@@ -5,6 +5,12 @@ namespace TickOffList.Services;
 
 // author: 朱怡达
 public class DailySentenceService : IDailySentenceService {
+    private readonly IAlertService _alertService;
+
+    public DailySentenceService(IAlertService alertService) {
+        _alertService = alertService;
+    }
+
     public async Task<DailySentence> GetDailySentenceAsync() {
         using var httpClient = new HttpClient();
 
@@ -15,19 +21,14 @@ public class DailySentenceService : IDailySentenceService {
 
         var json = await response.Content.ReadAsStringAsync();
 
-        var hitokotoSentence = JsonSerializer.Deserialize<HitokotoSentence>(json);
+        var hitokotoSentence =
+            JsonSerializer.Deserialize<HitokotoSentence>(json);
 
         return new DailySentence {
             Hitokoto = hitokotoSentence.hitokoto,
             From = hitokotoSentence.from,
             FromWho = hitokotoSentence.from_who
         };
-    }
-
-    private readonly IAlertService _alertService;
-
-    public DailySentenceService(IAlertService alertService) {
-        _alertService = alertService;
     }
 }
 

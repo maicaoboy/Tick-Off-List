@@ -1,27 +1,27 @@
-﻿using System.Data.SqlTypes;
-using SQLite;
+﻿using SQLite;
 
 namespace TickOffList.Models;
 
 // author: 李宏彬
-[SQLite.Table("habit")]
-public class Habit
-{
-    [Column("id"), PrimaryKey, AutoIncrement]
+[Table("habit")]
+public class Habit {
+    [Column("id")]
+    [PrimaryKey]
+    [AutoIncrement]
     public int Id { get; set; }
 
-    [SQLite.Column("title")]
+    [Column("title")]
     public string title { get; set; } = string.Empty;
 
-    [SQLite.Column("describe")]
+    [Column("describe")]
     public string describe { get; set; } = string.Empty;
 
-    [SQLite.Column("iconName")]
+    [Column("iconName")]
     public string iconName { get; set; } = string.Empty;
 
-    [SQLite.Column("days")]
+    [Column("days")]
     public string days { get; set; } = string.Empty;
 
-    [SQLite.Column("quantity")]
+    [Column("quantity")]
     public int quantity { get; set; }
 }
