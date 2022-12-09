@@ -7,11 +7,11 @@ public interface IContentNavigationService
     Task NavigateToAsync(string pageKey, object parameter);
 }
 
-public static class ContentNavigationConstant
-{
-    // public const string TodayDetailPage = nameof(TodayDetailPage);
-    //
-    // public const string DetailPage = nameof(DetailPage);
-    //
-    // public const string ResultPage = nameof(ResultPage);
+public static class ContentNavigationConstant {
+
+    public const string HabitPage = nameof(HabitPage);
+
+    public const string TickPage = nameof(TickPage);
+
+    public const string CreateHabitPage = nameof(CreateHabitPage);
 }

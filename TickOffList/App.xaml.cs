@@ -1,9 +1,31 @@
-﻿namespace TickOffList;
+﻿using TickOffList.Pages;
 
-public partial class App : Application {
-    public App() {
-        InitializeComponent();
+namespace TickOffList;
 
-        MainPage = new AppShell();
+public partial class App : Application
+{
+	public App()
+	{
+		InitializeComponent();
+
+		MainPage = new NavigationPage(new ContentPage());
+
+        var serviceLocatorName = nameof(ServiceLocator);
+        var serviceLocator =
+            (ServiceLocator)Application.Current.Resources.MergedDictionaries
+                .First(p => p.ContainsKey(serviceLocatorName))[
+                    serviceLocatorName];
+
+        var habitStorage = serviceLocator.HabitStorage;
+        var initializationNavigationService = serviceLocator.InitializationNavigationService;
+
+        if (!habitStorage.IsInitialized )
+        {
+            initializationNavigationService.NavigateToInitializationPage();
+        }
+        else
+        {
+            initializationNavigationService.NavigateToAppShell();
+        }
     }
 }

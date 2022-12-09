@@ -1,8 +1,13 @@
 ﻿namespace TickOffList.Constant;
 
+/* ==============================================================================
+* 创建人：李宏彬
+* 创建时间：2022-11-11
+* @version 1.0
+* ==============================================================================*/
 public static class Constants
 {
-    public const string DatabaseFilename = "TickOffListDB1.db3";
+    public const string DatabaseFilename = "TickOffListDB.db3";
 
     public const SQLite.SQLiteOpenFlags Flags =
         SQLite.SQLiteOpenFlags.ReadWrite |

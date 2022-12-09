@@ -1,15 +1,19 @@
 ﻿namespace TickOffList.Services;
 
-// Author: 陶静龙、李宏彬
-public class RouteService : IRouteService {
-    private readonly Dictionary<string, string> _routeDictionary = new() {
-        // pageKey "CountdownPage" -> route "CountdownPage"
-        [RootNavigationConstant.CountdownPage] =
-            RootNavigationConstant.CountdownPage,
-        [RootNavigationConstant.HabitPage] = RootNavigationConstant.HabitPage
+public class RouteService : IRouteService
+{
+    // pageKey -> route
+    private readonly Dictionary<string, string> _routeDictionary = new()
+    {
+        [RootNavigationConstant.MainPage] = RootNavigationConstant.MainPage,
+        [RootNavigationConstant.HabitPage] = RootNavigationConstant.HabitPage,
+        [RootNavigationConstant.CalendarPage] = RootNavigationConstant.CalendarPage,
+        [RootNavigationConstant.CountdownPage] = RootNavigationConstant.CountdownPage,
+        [ContentNavigationConstant.TickPage] = 
+            $"{RootNavigationConstant.HabitPage}/{ContentNavigationConstant.TickPage}",
+        [ContentNavigationConstant.CreateHabitPage] =
+            $"{RootNavigationConstant.HabitPage}/{ContentNavigationConstant.CreateHabitPage}",
     };
 
-    public string GetRoute(string pageKey) {
-        return _routeDictionary[pageKey];
-    }
+    public string GetRoute(string pageKey) => _routeDictionary[pageKey];
 }
