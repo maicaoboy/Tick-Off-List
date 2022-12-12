@@ -6,7 +6,9 @@ public partial class App : Application
 {
 	public App()
 	{
-		InitializeComponent();
+        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("YOUR LICENSE KEY");
+
+        InitializeComponent();
 
 		MainPage = new NavigationPage(new ContentPage());
 

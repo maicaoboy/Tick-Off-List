@@ -8,6 +8,8 @@ public class CountdownService : ICountdownService {
     private string _hour;
     private string _minute;
     private string _second;
+    private decimal _percentRemain;
+    private decimal _percentInterval;
 
     private decimal _tempNumHour;
     private decimal _tempNumMinute;
@@ -21,6 +23,7 @@ public class CountdownService : ICountdownService {
         _hour = "00";
         _minute = "00";
         _second = "00";
+        _percentRemain = 0;
 
         _timer = new Timer(1000);
     }
@@ -31,17 +34,21 @@ public class CountdownService : ICountdownService {
         _hour = hour;
         _minute = minute;
         _second = second;
+        _percentRemain = 100;
 
         _tempNumHour = Convert.ToDecimal(_hour);
         _tempNumMinute = Convert.ToDecimal(_minute);
         _tempNumSecond = Convert.ToDecimal(_second);
+
+        _percentInterval = 100 /
+            (3600 * _tempNumHour + 60 * _tempNumMinute + _tempNumSecond);
     }
 
     public void StartOrStop(string command) {
         if (command == "start") {
             // 此句是为了让按钮图标立刻改变，而不是1s后再变
             Ticked?.Invoke(this,
-                new TimerEventArgs(_hour, _minute, _second, true, false));
+                new TimerEventArgs(_hour, _minute, _second, _percentRemain, true, false));
 
             _timer.Start();
             _timer.Elapsed += (sender, args) => {
@@ -75,16 +82,16 @@ public class CountdownService : ICountdownService {
                     _tempNumSecond = 59;
                     _second = $"{_tempNumSecond}";
                 }
-
+                _percentRemain -= _percentInterval;
                 Ticked?.Invoke(this,
-                    new TimerEventArgs(_hour, _minute, _second, true, false));
+                    new TimerEventArgs(_hour, _minute, _second, _percentRemain, true, false));
             };
         } else if (command == "stop") {
             _timer.Stop();
             _timer.Close();
             _timer = new Timer(1000);
             Ticked?.Invoke(this,
-                new TimerEventArgs(_hour, _minute, _second, false, false));
+                new TimerEventArgs(_hour, _minute, _second, _percentRemain, false, false));
         }
     }
 
@@ -92,6 +99,6 @@ public class CountdownService : ICountdownService {
         _timer.Stop();
         _timer.Close();
         _timer = new Timer(1000);
-        Ticked?.Invoke(this, new TimerEventArgs("00", "00", "00", false, true));
+        Ticked?.Invoke(this, new TimerEventArgs("00", "00", "00", 0, false, true));
     }
 }

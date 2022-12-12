@@ -4,94 +4,140 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:b="clr-namespace:TheSalLab.MauiBehaviors;assembly=TheSalLab.MauiBehaviors"
+             xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
              x:Class="TickOffList.Pages.CountdownPage"
              BindingContext="{Binding CountdownPageViewModel , Source={StaticResource ServiceLocator}}"
              Title="专注倒计时">
     <!--Author: 陶静龙 -->
-    <StackLayout VerticalOptions="Center">
-        <!--time-->
-        <Label x:Name="timeLabel"
-               Text="{Binding Time}"
-               FontSize="Header"
-               TextColor="Black"
-               HorizontalTextAlignment="Center" />
+    <AbsoluteLayout>
 
-        <!--Picker-->
-        <StackLayout Orientation="Horizontal"
-                     HorizontalOptions="Center"
-                     Spacing="60"
-                     Margin="0,60,0,0">
+        <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
 
-            <Picker x:Name="HourPicker"
-                    Title="时"
-                    SelectedItem="{Binding SelectedHour}"
-                    ItemDisplayBinding="{Binding SelectedHour}"
-                    IsEnabled="{Binding IsEnabled}">
-                <Picker.Behaviors>
-                    <b:MauiEventHandlerBehavior
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <FlexLayout Grid.Row="0" Grid.Column="1" JustifyContent="SpaceAround">
+                <!--Gauge-->
+                <gauge:SfRadialGauge>
+                    <gauge:SfRadialGauge.Axes>
+                        <gauge:RadialAxis Interval="10"
+                                          StartAngle="270"
+                                          EndAngle="270"
+                                          ShowTicks="False"
+                                          ShowLabels="False">
+                            <gauge:RadialAxis.AxisLineStyle>
+                                <gauge:RadialLineStyle Thickness="30"/>
+                            </gauge:RadialAxis.AxisLineStyle>
+                            <gauge:RadialAxis.Pointers>
+                                <gauge:RangePointer Value="{Binding PercentRemain}"
+                                                    PointerWidth="30"
+                                                    Fill="#FFFCE38A"
+                                                    CornerStyle="BothCurve" />
+                            </gauge:RadialAxis.Pointers>
+
+                            <gauge:RadialAxis.Annotations>
+                                <gauge:GaugeAnnotation>
+                                    <gauge:GaugeAnnotation.Content>
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding Time}"
+                                                   FontSize="22"
+                                                   TextColor="Black"
+                                                   FontAttributes="Bold" />
+                                        </VerticalStackLayout>
+                                    </gauge:GaugeAnnotation.Content>
+                                </gauge:GaugeAnnotation>
+                            </gauge:RadialAxis.Annotations>
+
+                        </gauge:RadialAxis>
+                    </gauge:SfRadialGauge.Axes>
+                </gauge:SfRadialGauge>
+            </FlexLayout>
+
+            <!-- <FlexLayout Grid.Row="1" Grid.Column="1" JustifyContent="SpaceAround"> -->
+            <!--     ~1~time@1@ -->
+            <!--     <Label x:Name="timeLabel" -->
+            <!--            Text="{Binding Time}" -->
+            <!--            FontSize="Header" -->
+            <!--            TextColor="Black" -->
+            <!--            HorizontalTextAlignment="Center" /> -->
+            <!-- </FlexLayout> -->
+
+            <FlexLayout Grid.Row="1" Grid.Column="1" JustifyContent="SpaceAround">
+                <!--Picker-->
+                <Picker x:Name="HourPicker"
+                        Title="时"
+                        ItemsSource="{Binding HourItemSource}"
+                        SelectedItem="{Binding SelectedHour}"
+                        IsEnabled="{Binding IsEnabled}">
+                        <Picker.Behaviors>
+                            <b:MauiEventHandlerBehavior
                         EventName="SelectedIndexChanged">
-                        <b:MauiActionCollection>
-                            <b:MauiInvokeCommandAction
+                                <b:MauiActionCollection>
+                                    <b:MauiInvokeCommandAction
                                 Command="{Binding SelectedIndexChangedCommand}" />
-                        </b:MauiActionCollection>
-                    </b:MauiEventHandlerBehavior>
-                </Picker.Behaviors>
-            </Picker>
+                                </b:MauiActionCollection>
+                            </b:MauiEventHandlerBehavior>
+                        </Picker.Behaviors>
+                    </Picker>
 
-            <Picker x:Name="MinutePicker"
+                    <Picker x:Name="MinutePicker"
                     Title="分"
+                    ItemsSource="{Binding MinuteItemSource}"
                     SelectedItem="{Binding SelectedMinute}"
-                    ItemDisplayBinding="{Binding SelectedMinute}"
                     IsEnabled="{Binding IsEnabled}">
-                <Picker.Behaviors>
-                    <b:MauiEventHandlerBehavior
+                        <Picker.Behaviors>
+                            <b:MauiEventHandlerBehavior
                         EventName="SelectedIndexChanged">
-                        <b:MauiActionCollection>
-                            <b:MauiInvokeCommandAction
+                                <b:MauiActionCollection>
+                                    <b:MauiInvokeCommandAction
                                 Command="{Binding SelectedIndexChangedCommand}" />
-                        </b:MauiActionCollection>
-                    </b:MauiEventHandlerBehavior>
-                </Picker.Behaviors>
-            </Picker>
+                                </b:MauiActionCollection>
+                            </b:MauiEventHandlerBehavior>
+                        </Picker.Behaviors>
+                    </Picker>
 
-            <Picker x:Name="SecondPicker"
+                    <Picker x:Name="SecondPicker"
                     Title="秒"
+                    ItemsSource="{Binding SecondItemSource}"
                     SelectedItem="{Binding SelectedSecond}"
-                    ItemDisplayBinding="{Binding SelectedSecond}"
                     IsEnabled="{Binding IsEnabled}">
-                <Picker.Behaviors>
-                    <b:MauiEventHandlerBehavior
+                        <Picker.Behaviors>
+                            <b:MauiEventHandlerBehavior
                         EventName="SelectedIndexChanged">
-                        <b:MauiActionCollection>
-                            <b:MauiInvokeCommandAction
+                                <b:MauiActionCollection>
+                                    <b:MauiInvokeCommandAction
                                 Command="{Binding SelectedIndexChangedCommand}" />
-                        </b:MauiActionCollection>
-                    </b:MauiEventHandlerBehavior>
-                </Picker.Behaviors>
-            </Picker>
+                                </b:MauiActionCollection>
+                            </b:MauiEventHandlerBehavior>
+                        </Picker.Behaviors>
+                    </Picker>
+            </FlexLayout>
 
-        </StackLayout>
+            <FlexLayout Grid.Row="2" Grid.Column="1" JustifyContent="SpaceAround">
+                <!--start stop-->
+                <ImageButton x:Name="startStopButton"
+                             Source="{Binding StartStopButtonImage}"
+                             HeightRequest="30"
+                             WidthRequest="30"
+                             Command="{Binding StartStopCommand}" />
 
-        <StackLayout Orientation="Horizontal"
-                     HorizontalOptions="Center"
-                     Spacing="60"
-                     Margin="0,60,0,0">
+                <!--reset-->
+                <ImageButton x:Name="resetButton"
+                             Source="{Binding ResetButtonImage}"
+                             HeightRequest="30"
+                             WidthRequest="30"
+                             Command="{Binding ResetCommand}" />
 
-            <!--start stop-->
-            <ImageButton x:Name="startStopButton"
-                         Source="{Binding StartStopButtonImage}"
-                         HeightRequest="30"
-                         WidthRequest="30"
-                         Command="{Binding StartStopCommand}" />
+            </FlexLayout>
+        </Grid>
 
-            <!--reset-->
-            <ImageButton x:Name="resetButton"
-                         Source="{Binding ResetButtonImage}"
-                         HeightRequest="30"
-                         WidthRequest="30"
-                         Command="{Binding ResetCommand}" />
-
-        </StackLayout>
-
-    </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>

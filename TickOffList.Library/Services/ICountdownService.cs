@@ -11,22 +11,25 @@ public interface ICountdownService {
 
 public class TimerEventArgs : EventArgs {
 
-    public string Hour { get; set; }
+    public string Hour { get; }
 
-    public string Minute { get; set; }
+    public string Minute { get; }
 
-    public string Second { get; set; }
+    public string Second { get; }
 
-    public bool IsRunning { get; set; }
+    public decimal PercentRemain { get;  }
 
-    public bool IsEnabled { get; set; }
+    public bool IsRunning { get; }
 
-    public TimerEventArgs(string hour, string minute, string second,
+    public bool IsEnabled { get; }
+
+    public TimerEventArgs(string hour, string minute, string second, decimal percentRemain,
         bool isRunning, bool isEnabled)
     {
         Hour = hour;
         Minute = minute;
         Second = second;
+        PercentRemain = percentRemain;
         IsRunning = isRunning;
         IsEnabled = isEnabled;
     }

@@ -126,6 +126,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="SampleBrowser.Maui.Base" Version="20.3.56" />
+	  <PackageReference Include="Syncfusion.Maui.Gauges" Version="20.3.60" />
 	  <PackageReference Include="Syncfusion.Maui.Scheduler" Version="20.3.59" />
 	  <PackageReference Include="TheSalLab.MauiBehaviors" Version="1.0.2" />
 	  <PackageReference Include="TheSalLab.MauiInfiniteScrolling" Version="1.0.1" />

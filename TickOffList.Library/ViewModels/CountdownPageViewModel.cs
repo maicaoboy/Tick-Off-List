@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Dynamic;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TickOffList.Services;
 
@@ -16,6 +17,7 @@ public class CountdownPageViewModel : ObservableObject {
     private string _resetButtonImage;
 
     private readonly Lazy<AsyncRelayCommand> _resetCommand;
+
     private string _selectedHour;
 
     private readonly Lazy<AsyncRelayCommand> _selectedIndexChangedCommand;
@@ -24,21 +26,47 @@ public class CountdownPageViewModel : ObservableObject {
 
     private string _selectedSecond;
 
+    private List<string> _hourItemSource = new ();
+
+    private List<string> _minuteItemSource = new ();
+
+    private List<string> _secondItemSource = new();
+
     private string _startStopButtonImage;
 
     private readonly Lazy<AsyncRelayCommand> _startStopCommand;
 
     private string _time;
 
+    private decimal _percentRemain;
 
     public CountdownPageViewModel(ICountdownService countdownService) {
         _countdownService = countdownService;
 
         Time = "00 : 00 : 00";
+        PercentRemain = 0;
         IsRunning = false;
         IsEnabled = true;
         StartStopButtonImage = CountdownPageSource.StartButtonImage;
         ResetButtonImage = CountdownPageSource.ResetButtonImage;
+
+        for (var i = 0; i <= 99; i++)
+            if (i <= 9)
+            {
+                _hourItemSource.Add($"0{i}");
+                _minuteItemSource.Add($"0{i}");
+                _secondItemSource.Add($"0{i}");
+            }
+            else if (i <= 59)
+            {
+                _minuteItemSource.Add($"{i}");
+                _secondItemSource.Add($"{i}");
+            }
+            else
+            {
+                _hourItemSource.Add($"{i}");
+            }
+        ClearSelections();
 
         _startStopCommand = new Lazy<AsyncRelayCommand>(() =>
             new AsyncRelayCommand(StartStopCommandFunction));
@@ -52,16 +80,22 @@ public class CountdownPageViewModel : ObservableObject {
         // 订阅事件
         _countdownService.Ticked += (sender, args) => {
             Time = $"{args.Hour} : {args.Minute} : {args.Second}";
+            PercentRemain = args.PercentRemain;
             IsRunning = args.IsRunning;
             IsEnabled = args.IsEnabled;
             StartStopButtonImage = IsRunning
                 ? CountdownPageSource.StopButtonImage
                 : CountdownPageSource.StartButtonImage;
-
             if (IsEnabled)
                 ClearSelections();
         };
     }
+
+    public List<string> HourItemSource => _hourItemSource;
+
+    public List<string> MinuteItemSource => _minuteItemSource;
+
+    public List<string> SecondItemSource => _secondItemSource;
 
     public string SelectedHour {
         get => _selectedHour;
@@ -81,6 +115,11 @@ public class CountdownPageViewModel : ObservableObject {
     public string Time {
         get => _time;
         set => SetProperty(ref _time, value);
+    }
+
+    public decimal PercentRemain {
+        get => _percentRemain;
+        set => SetProperty(ref _percentRemain, value);
     }
 
     public bool IsRunning {
@@ -111,19 +150,25 @@ public class CountdownPageViewModel : ObservableObject {
         _selectedIndexChangedCommand.Value;
 
     public async Task StartStopCommandFunction() {
-        var command = IsRunning ? "stop" : "start";
-
-        _countdownService.StartOrStop(command);
+        if (!(SelectedHour == "00" && SelectedMinute == "00" &&
+                SelectedSecond == "00")) {
+            if (IsEnabled)
+                _countdownService.SetTime(SelectedHour, SelectedMinute,
+                    SelectedSecond);
+            var command = IsRunning ? "stop" : "start";
+            _countdownService.StartOrStop(command);
+        }
     }
 
     public async Task ResetCommandFunction() {
-        _countdownService.Reset();
-        ClearSelections();
+        if (!(SelectedHour == "00" && SelectedMinute == "00" &&
+                SelectedSecond == "00")) {
+            _countdownService.Reset();
+        }
     }
 
     public async Task SelectedIndexChangedCommandFunction() {
         Time = $"{SelectedHour} : {SelectedMinute} : {SelectedSecond}";
-        _countdownService.SetTime(SelectedHour, SelectedMinute, SelectedSecond);
     }
 
     private void ClearSelections() {
