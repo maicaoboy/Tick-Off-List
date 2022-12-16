@@ -78,10 +78,13 @@
 	  <None Remove="Resources\Images\paobu.png" />
 	  <None Remove="Resources\Images\peihaizi.png" />
 	  <None Remove="Resources\Images\plus.png" />
+	  <None Remove="Resources\Images\reset.svg" />
 	  <None Remove="Resources\Images\sheying.png" />
 	  <None Remove="Resources\Images\shuaya.png" />
 	  <None Remove="Resources\Images\slide_false.png" />
 	  <None Remove="Resources\Images\slide_true.png" />
+	  <None Remove="Resources\Images\start.svg" />
+	  <None Remove="Resources\Images\stop.svg" />
 	  <None Remove="Resources\Images\tingge.png" />
 	  <None Remove="Resources\Images\weixiao.png" />
 	  <None Remove="Resources\Images\yingyu.png" />
