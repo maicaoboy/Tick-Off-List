@@ -17,16 +17,6 @@ public partial class AppShell : Shell
                     serviceLocatorName];
         var routeService = serviceLocator.RouteService;
 
-        Items.Add(new FlyoutItem
-        {
-            Title = nameof(DailyPage),
-            Route = routeService.GetRoute(RootNavigationConstant.DailyPage),
-            Items = {
-                new ShellContent {
-                    ContentTemplate = new DataTemplate(typeof(DailyPage))
-                }
-            }
-        });
 
         Items.Add(new FlyoutItem
         {
@@ -49,6 +39,17 @@ public partial class AppShell : Shell
 
         Items.Add(new FlyoutItem
         {
+            Title = nameof(CountdownPage),
+            Route = routeService.GetRoute(RootNavigationConstant.CountdownPage),
+            Items = {
+                new ShellContent {
+                    ContentTemplate = new DataTemplate(typeof(CountdownPage))
+                }
+            }
+        });
+
+        Items.Add(new FlyoutItem
+        {
             Title = nameof(CalendarPage),
             Route = routeService.GetRoute(RootNavigationConstant.CalendarPage),
             Items = {
@@ -58,13 +59,15 @@ public partial class AppShell : Shell
             }
         });
 
+
+
         Items.Add(new FlyoutItem
         {
-            Title = nameof(CountdownPage),
-            Route = routeService.GetRoute(RootNavigationConstant.CountdownPage),
+            Title = nameof(DailyPage),
+            Route = routeService.GetRoute(RootNavigationConstant.DailyPage),
             Items = {
                 new ShellContent {
-                    ContentTemplate = new DataTemplate(typeof(CountdownPage))
+                    ContentTemplate = new DataTemplate(typeof(DailyPage))
                 }
             }
         });
