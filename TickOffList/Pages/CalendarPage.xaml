@@ -5,7 +5,7 @@
              xmlns:mauiBehaviors="clr-namespace:TheSalLab.MauiBehaviors;assembly=TheSalLab.MauiBehaviors"
              x:Class="TickOffList.Pages.CalendarPage"
              BindingContext="{Binding CalendarViewModel, Source={StaticResource ServiceLocator }}"
-             Title="CalendarPage">
+             Title="时间线">
 
     <ContentPage.Behaviors>
         <mauiBehaviors:MauiEventHandlerBehavior EventName="NavigatedTo">

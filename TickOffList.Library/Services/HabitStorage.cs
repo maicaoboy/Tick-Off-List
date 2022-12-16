@@ -118,5 +118,5 @@ public static class HabitStorageConstant
     public const string VersionKey =
         nameof(HabitStorageConstant) + "." + nameof(Version);
 
-    public const int Version = 1;
+    public const int Version = 2;
 }
