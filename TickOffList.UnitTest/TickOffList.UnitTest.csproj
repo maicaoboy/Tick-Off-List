@@ -24,6 +24,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TickOffList.Library\TickOffList.Library.csproj" />
+    <Folder Include="Services\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>
