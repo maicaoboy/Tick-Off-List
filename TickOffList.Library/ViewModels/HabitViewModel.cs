@@ -80,6 +80,9 @@ public class HabitViewModel : ObservableObject
 
         var habitByWeekDay = await _habitStorage.getHabitByWeekDay(Convert
             .ToInt32(dateTime.DayOfWeek.ToString("d")).ToString());
+        if (_habits == null) {
+            await Init();
+        }
         Habits.Clear();
         foreach (var habit in habitByWeekDay)
         {
@@ -157,13 +160,12 @@ public class HabitViewModel : ObservableObject
             Colors.Black
         };
 
-        Init();
 
         _lazyNavigatedToCommand = new Lazy<AsyncRelayCommand>(() =>
             new AsyncRelayCommand(NavigatedToCommandFunction));
     }
 
-    public async void Init()
+    public async Task Init()
     {
         var listAsync = await _habitStorage.ListAsync();
         foreach (var habit in listAsync)

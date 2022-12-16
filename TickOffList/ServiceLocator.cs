@@ -10,6 +10,8 @@ public class ServiceLocator {
     public CalendarViewModel CalendarViewModel =>
         _serviceProvider.GetService<CalendarViewModel>();
 
+    public DailySentenceViewModel DailySentenceViewModel =>
+        _serviceProvider.GetService<DailySentenceViewModel>();
 
     public TickViewModelProxy TickViewModelProxy =>
         _serviceProvider.GetService<TickViewModelProxy>();
@@ -72,6 +74,9 @@ public class ServiceLocator {
         serviceCollection.AddSingleton<CountdownPageViewModel>();
         serviceCollection.AddSingleton<ICountdownService, CountdownService>();
         serviceCollection.AddSingleton<IAudioPlayService, AudioPlayService>();
+
+        serviceCollection.AddTransient<IDailySentenceService, DailySentenceService>();
+        serviceCollection.AddSingleton<DailySentenceViewModel>();
 
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }

@@ -5,6 +5,7 @@ public class RouteService : IRouteService
     // pageKey -> route
     private readonly Dictionary<string, string> _routeDictionary = new()
     {
+        [RootNavigationConstant.DailyPage] = RootNavigationConstant.DailyPage,
         [RootNavigationConstant.MainPage] = RootNavigationConstant.MainPage,
         [RootNavigationConstant.HabitPage] = RootNavigationConstant.HabitPage,
         [RootNavigationConstant.CalendarPage] = RootNavigationConstant.CalendarPage,

@@ -12,4 +12,5 @@ public static class RootNavigationConstant {
     public const string HabitPage = nameof(HabitPage);
     public const string CalendarPage = nameof(CalendarPage);
     public const string CountdownPage = nameof(CountdownPage);
+    public const string DailyPage = nameof(DailyPage);
 }
