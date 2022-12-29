@@ -1,48 +1,61 @@
 ﻿using TickOffList.Services;
 using TickOffList.ViewModels;
 
-namespace TickOffList.UnitTest.ViewModels; 
+namespace TickOffList.UnitTest.ViewModels;
 
+// Author: 陶静龙
 public class CountdownPageViewModelTest {
 
     [Fact]
-    public async Task StartTest() {
-        // IAudioPlayService audioPlayService = new AudioPlayService();
-        // var countdownPageViewModel = new CountdownPageViewModel(audioPlayService);
-        // countdownPageViewModel.Hour = "00";
-        // countdownPageViewModel.Minute = "00";
-        // countdownPageViewModel.Second = "01";
-        // await countdownPageViewModel.CountdownTime();
-        // await Task.Delay(1500);
-        // Assert.Equal("00", countdownPageViewModel.Second);
+    public async Task StartCommandTest() {
+        IAudioPlayService audioPlayService = new AudioPlayService();
+        ICountdownService countdownService = new CountdownService(audioPlayService);
+        var countdownPageViewModel =
+            new CountdownPageViewModel(countdownService);
+        countdownPageViewModel.IsEnabled = true;
+        countdownPageViewModel.IsRunning = false;
+        countdownPageViewModel.SelectedHour = "00";
+        countdownPageViewModel.SelectedMinute = "00";
+        countdownPageViewModel.SelectedSecond = "01";
+        await countdownPageViewModel.StartStopCommandFunction();
+        await Task.Delay(2000);
+        Assert.Equal("00 : 00 : 00", countdownPageViewModel.Time);
+        Assert.True(countdownPageViewModel.IsEnabled);
+        Assert.False(countdownPageViewModel.IsRunning);
     }
 
     [Fact]
-    public async Task StopTest() {
-        // IAudioPlayService audioPlayService = new AudioPlayService();
-        // var countdownPageViewModel = new CountdownPageViewModel(audioPlayService);
-        // countdownPageViewModel.Hour = "00";
-        // countdownPageViewModel.Minute = "00";
-        // countdownPageViewModel.Second = "05";
-        // countdownPageViewModel.IsRunning = true;
-        // await countdownPageViewModel.CountdownTime();
-        // Assert.False(countdownPageViewModel.IsRunning);
-        // Assert.Equal("05", countdownPageViewModel.Second);
+    public async Task StopCommandTest() {
+        IAudioPlayService audioPlayService = new AudioPlayService();
+        ICountdownService countdownService = new CountdownService(audioPlayService);
+        var countdownPageViewModel =
+            new CountdownPageViewModel(countdownService);
+        countdownPageViewModel.IsEnabled = true;
+        countdownPageViewModel.IsRunning = true;
+        countdownPageViewModel.SelectedHour = "00";
+        countdownPageViewModel.SelectedMinute = "00";
+        countdownPageViewModel.SelectedSecond = "05";
+        await countdownPageViewModel.StartStopCommandFunction();
+        Assert.Equal("00 : 00 : 05", countdownPageViewModel.Time);
+        Assert.False(countdownPageViewModel.IsEnabled);
+        Assert.False(countdownPageViewModel.IsRunning);
     }
 
     [Fact]
-    public async Task ResetTest() {
-        // IAudioPlayService audioPlayService = new AudioPlayService();
-        // var countdownPageViewModel = new CountdownPageViewModel(audioPlayService);
-        // countdownPageViewModel.Hour = "00";
-        // countdownPageViewModel.Minute = "00";
-        // countdownPageViewModel.Second = "05";
-        // countdownPageViewModel.IsRunning = true;
-        // await countdownPageViewModel.ResetCommandFunction();
-        // Assert.False(countdownPageViewModel.IsRunning);
-        // Assert.True(countdownPageViewModel.IsEnabled);
-        // Assert.Equal("00", countdownPageViewModel.Hour);
-        // Assert.Equal("00", countdownPageViewModel.Minute);
-        // Assert.Equal("00", countdownPageViewModel.Second);
+    public async Task ResetCommandTest() {
+        IAudioPlayService audioPlayService = new AudioPlayService();
+        ICountdownService countdownService = new CountdownService(audioPlayService);
+        var countdownPageViewModel =
+            new CountdownPageViewModel(countdownService);
+        countdownPageViewModel.IsEnabled = true;
+        countdownPageViewModel.IsRunning = true;
+        countdownPageViewModel.SelectedHour = "00";
+        countdownPageViewModel.SelectedMinute = "00";
+        countdownPageViewModel.SelectedSecond = "05";
+        await countdownPageViewModel.StartStopCommandFunction();
+        await countdownPageViewModel.ResetCommandFunction();
+        Assert.Equal("00 : 00 : 00", countdownPageViewModel.Time);
+        Assert.True(countdownPageViewModel.IsEnabled);
+        Assert.False(countdownPageViewModel.IsRunning);
     }
 }
