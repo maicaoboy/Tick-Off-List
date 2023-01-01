@@ -32,7 +32,10 @@ public class DailySentenceService : IDailySentenceService {
 }
 
 public class HitokotoSentence {
+    // 一言正文。编码方式 unicode，使用 utf-8。
     public string hitokoto { get; set; }
+    // 一言的出处
     public string from { get; set; }
+    // 一言的作者
     public string from_who { get; set; }
 }
