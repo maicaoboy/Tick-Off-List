@@ -13,4 +13,3 @@
 ![image text](https://github.com/maicaoboy/Tick-Off-List/blob/master/screenshot/s6.png)
 ![image text](https://github.com/maicaoboy/Tick-Off-List/blob/master/screenshot/s7.png)
 ![image text](https://github.com/maicaoboy/Tick-Off-List/blob/master/screenshot/s8.png)
-![image text](https://github.com/maicaoboy/Tick-Off-List/blob/master/screenshot/s9.png)
